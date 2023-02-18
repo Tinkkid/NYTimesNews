@@ -1,0 +1,9 @@
+// ----------- BODY_THEME ---------
+body {
+  color: $dark-theme;
+  background-color: $light-theme;
+  &.isDark {
+    color: $light-theme;
+    background-color: $dark-theme;
+  }
+}
