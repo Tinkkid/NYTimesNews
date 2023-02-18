@@ -2,7 +2,7 @@
 body.isDark {
   .menu,
   .search__input {
-    background-color: $dark-theme-background;
+    background-color: $dark-theme-bg;
   }
   .disc {
     right: 0;
@@ -14,11 +14,11 @@ body.isDark {
     color: $theme-switcher-color;
   }
   .switcher__thumb:nth-of-type(2) {
-    border-color: $light-theme;
+    border-color: $light-theme-bg;
     background-color: $theme-accent-color;
   }
   .disc {
-    background-color: $light-theme;
+    background-color: $light-theme-bg;
   }
   .header {
     border-bottom: 1px solid rgba(244, 244, 244, 0.2);
@@ -28,13 +28,13 @@ body.isDark {
 .current {
   &.menu__item {
     background-color: $accent-color;
-    color: $main-color;
+    color: $dark-theme-text;
   }
   .menu__arrow {
     stroke: currentColor;
   }
   .menu__thumb {
-    border: 1px solid $main-color;
+    border: 1px solid $dark-theme-text;
   }
   .nav__link {
     border-bottom: 2px solid $accent-color;
@@ -185,7 +185,7 @@ body.isDark {
   width: 100vw;
   height: 100vh;
   transition: transform 0.25s linear;
-  background-color: $light-theme;
+  background-color: $light-theme-bg;
   @include tablet() {
     display: none;
   }
@@ -230,7 +230,7 @@ body.isDark {
 }
 .menu__item__icon {
   fill: $accent-color;
-  stroke: $main-color;
+  stroke: $dark-theme-text;
 }
 .menu__text {
   font-family: 'Manrope';
@@ -270,7 +270,7 @@ body.isDark {
   border: 1px solid $accent-color;
   border-radius: 10px;
   cursor: pointer;
-  background-color: $light-theme;
+  background-color: $light-theme-bg;
   @include desktop() {
     margin-left: 9px;
     margin-right: 9px;
