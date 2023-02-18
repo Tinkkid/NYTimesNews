@@ -27,7 +27,7 @@ export default class NewsApiServes {
       `${NEWS_URL}mostpopular/v2/viewed/1.json?api-key=${NEWS_API_KEY}`
     );
 
-    return response.data;
+    return response;
   }
 
   async requestWeatherApi(lat, lon) {
@@ -35,7 +35,7 @@ export default class NewsApiServes {
       `${WEATHER_URL}lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`
     );
 
-    return response.data;
+    return response;
   }
 
   async searchNewsOnClick() {
@@ -45,7 +45,7 @@ export default class NewsApiServes {
       `${NEWS_URL}news/v3/content/all/${this.categoryQuery}.json?limit=${this.limit}&offset=${this.offset}&api-key=${NEWS_API_KEY}`
     );
 
-    return response.data;
+    return response;
   }
 
   async searchNewsByInputAndDate() {
@@ -53,7 +53,7 @@ export default class NewsApiServes {
       `${NEWS_URL}search/v2/articlesearch.json?q=${this.searchQuery}&fq=&begin_date=${this.setDate}&end_date=${this.setDate}&page=${this.page}&api-key=${NEWS_API_KEY}`
     );
 
-    return response.data;
+    return response;
   }
 
   sizeScreenCompute() {
