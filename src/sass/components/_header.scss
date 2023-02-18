@@ -129,7 +129,8 @@ body.isDark {
     outline: none;
 
     &::placeholder {
-      transform: translateX(-20%);
+      color: inherit;
+      transform: translateX(-13%);
       font-family: 'Poppins';
       @include font(12px, 1.75);
       letter-spacing: 0.02em;
@@ -149,14 +150,17 @@ body.isDark {
 
 .search__btn-submit {
   @extend %absolute-centerY;
-  left: 6px;
+  left: 12px;
+  @include tablet() {
+    left: 15px;
+  }
 }
 .search__btn-input {
   &.js-search-active {
     display: none;
   }
   @extend %absolute-centerY;
-  right: 10;
+  right: 10px;
   @include tablet() {
     display: none;
   }
