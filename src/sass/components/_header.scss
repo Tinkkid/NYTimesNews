@@ -2,7 +2,7 @@
 body.isDark {
   .menu,
   .search__input {
-    background-color: $dark-theme;
+    background-color: $dark-theme-background;
   }
   .disc {
     right: 0;
@@ -85,9 +85,6 @@ body.isDark {
   @include desktop() {
     gap: 57px;
   }
-}
-
-.nav__item {
 }
 
 .nav__link {

@@ -4,6 +4,6 @@ body {
   background-color: $light-theme;
   &.isDark {
     color: $light-theme;
-    background-color: $dark-theme;
+    background-color: $dark-theme-background;
   }
 }
