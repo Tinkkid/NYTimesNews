@@ -1,4 +1,4 @@
-// HEADER
+// -------------------- HEADER --------------------
 body.isDark {
   .menu,
   .search__input {
@@ -49,7 +49,7 @@ body.isDark {
 .header__container,
 .menu__header {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   padding-top: 24px;
   padding-bottom: 24px;
@@ -130,16 +130,16 @@ body.isDark {
     border: 1px solid currentColor;
     border-radius: 15px;
     outline: none;
-  }
 
-  &::placeholder {
-    transform: translateX(-15%);
-    font-family: 'Poppins';
-    @include font(12px, 1.75);
-    letter-spacing: 0.02em;
-    opacity: 0.4;
-    @include tablet() {
-      @include font(14px, 1.71);
+    &::placeholder {
+      transform: translateX(-20%);
+      font-family: 'Poppins';
+      @include font(12px, 1.75);
+      letter-spacing: 0.02em;
+      opacity: 0.4;
+      @include tablet() {
+        @include font(14px, 1.71);
+      }
     }
   }
 }
@@ -159,7 +159,7 @@ body.isDark {
     display: none;
   }
   @extend %absolute-centerY;
-  right: 0;
+  right: 10;
   @include tablet() {
     display: none;
   }
@@ -207,23 +207,8 @@ body.isDark {
 .left-right-paddings {
   padding-left: $padding;
   padding-right: $padding;
-  //   @include tablet() {
-  //     padding-left: 0;
-  //     padding-right: 0;
-  //   }
 }
 
-.menu__container {
-}
-
-.menu__header {
-  //   padding-left: $padding;
-  //   padding-right: $padding;
-  //   width: 100%;
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: flex-end;
-}
 .menu__nav {
   padding: 0;
   margin-top: 44px;
@@ -251,7 +236,6 @@ body.isDark {
   stroke: $main-color;
 }
 .menu__text {
-  //   display: block;
   font-family: 'Manrope';
   @include font(16px, 1.375, 500);
   margin-left: 14px;
