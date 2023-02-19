@@ -1,5 +1,5 @@
 import jsScriptHeader from './js/jsScriptHeader';
-import NewsApiServes from './rest-api';
+import NewsApiServes from './js/rest-api';
 
 const news = new NewsApiServes();
 jsScriptHeader();
