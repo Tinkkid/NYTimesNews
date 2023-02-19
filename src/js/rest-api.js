@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 const NEWS_URL = 'https://api.nytimes.com/svc/';
 const NEWS_API_KEY = '58DF9bTBBQf2RU8WY5JE6TkVJf8iLJ4A';
-const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?';
+const WEATHER_URL = 'https://api.openweathermap.org/';
 const WEATHER_API_KEY = '26ee5cfba4c9a8162c8c1ca031ae1bc4';
 
 export default class NewsApiServes {
@@ -32,10 +32,26 @@ export default class NewsApiServes {
 
   async requestWeatherApi(lat, lon) {
     const response = await axios.get(
-      `${WEATHER_URL}lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`
+      `${WEATHER_URL}data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`
     );
 
-    return response;
+    return response.data;
+  }
+
+  async requestGeoApi(lat, lon) {
+    const response = await axios.get(
+      `${WEATHER_URL}geo/1.0/reverse?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`
+    );
+
+    return response.data;
+  }
+
+  async requestWeatherApiDefault() {
+    const response = await axios.get(
+      `${WEATHER_URL}data/2.5/weather?q=Kyiv&units=metric&appid=${WEATHER_API_KEY}`
+    );
+
+    return response.data;
   }
 
   async searchNewsOnClick() {
