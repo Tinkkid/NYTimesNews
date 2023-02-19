@@ -8,4 +8,7 @@ export const ref = {
   cross: document.querySelector('.menu__btn-cross'),
   menu: document.querySelector('.menu'),
   switcher: document.querySelectorAll('.js-switcher'),
+  main: document.querySelector('[data-site]'),
+  menuNav: document.querySelector('.menu__nav'),
+  siteNav: document.querySelector('.nav__list'),
 };
