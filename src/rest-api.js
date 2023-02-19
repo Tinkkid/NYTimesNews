@@ -57,9 +57,9 @@ export default class NewsApiServes {
   }
 
   sizeScreenCompute() {
-    if (window.matchMedia('(max-width: 768px)').matches) {
+    if (window.matchMedia('(max-width: 767px)').matches) {
       this.limit = 4;
-    } else if (window.matchMedia('(max-width: 1280px)').matches) {
+    } else if (window.matchMedia('(max-width: 1279px)').matches) {
       this.limit = 7;
     } else {
       this.limit = 8;
