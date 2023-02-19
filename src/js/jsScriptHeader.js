@@ -2,6 +2,8 @@ import { ref } from './header/refFunHeader';
 import onSearchSubmit from './onSearchSubmit';
 import onClikSearchBtn from './header/onClikSearchBtn';
 import onClickSwitcher from './header/onClickSwitcher';
+import defineSite from './header/defineSite';
+import setCssClassCurrent from './header/setCssClassCurrent';
 
 // ------- HEADER MAIN SCRIPT ---------
 export default function jsScriptHeader() {
@@ -27,4 +29,8 @@ export default function jsScriptHeader() {
   for (const el of ref.switcher) {
     el.addEventListener('click', onClickSwitcherBinder);
   }
+  // ----- define & set class 'current' to site ------
+
+  const site = defineSite(ref.main);
+  setCssClassCurrent(ref.menuNav, ref.siteNav, site);
 }
