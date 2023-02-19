@@ -226,16 +226,14 @@ body.isDark p, body.isDark h1, body.isDark h2, body.isDark h3 {
   border-radius: 20px;
   border: none;
 }
-.add-news-favorite.is-favorite .icon-heart {
-  display: block;
+.add-news-favorite.liked .icon-heart {
+  display: flex;
 }
-.add-news-favorite.is-favorite .icon-empty-heart {
+.add-news-favorite.liked .icon-empty-heart {
   display: none;
 }
 
 .favorite-icon {
-  width: 16px;
-  height: 16px;
   margin-left: 4px;
   fill: #4440f6;
 }

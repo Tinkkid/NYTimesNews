@@ -121,6 +121,7 @@ body {
     background-color: $chip-bc;
     border-radius: 0px 4px 4px 0px;
   }
+
   .add-news-favorite {
     position: absolute;
     bottom: 12px;
@@ -133,24 +134,20 @@ body {
     border-radius: 20px;
     border: none;
 
-    &.is-favorite .icon-heart {
-        display: block;
+    &.liked .icon-heart {
+        display: flex;
       }
-    &.is-favorite .icon-empty-heart {
+    &.liked .icon-empty-heart {
         display: none;
       }
   }
   .favorite-icon {
-    width: 16px;
-    height: 16px;
     margin-left: 4px;
     fill: $accent-color;
   }
-
-  .icon-heart{
-    display: none;
-  }
- 
+ .icon-heart{
+  display: none;
+ }
   
   .favorite-btn-text,
   .news-chip {

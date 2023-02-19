@@ -12,10 +12,10 @@ export function createCard({section_name, web_url, headline, lead_paragraph, pub
           <p class="news-chip">${section_name}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
-            <svg class="favorite-icon"><use class="icon-empty-heart"
-            href="./images/sprite.svg#heart-empty"></use>
-            <use class="icon-heart"
-            href="./images/sprite.svg#heart-fill"></use></svg>
+            <svg class="favorite-icon" width="16" height="16">
+              <use href="./images/sprite.svg#heart-fill" class="icon-heart"></use>
+              <use href="./images/sprite.svg#heart-empty class="icon-empty-heart"></use>
+            </svg>
           </button>
         </div>
         <div class="news-info">
@@ -57,3 +57,6 @@ function cutText(string){
   return string.length <= quantityChar? string :string.slice(0, quantityChar) + '...'
 }
 
+export function updateMarkup(markup, elem){
+  elem.innerHTML= markup;
+  }
