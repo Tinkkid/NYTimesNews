@@ -1,15 +1,52 @@
 import axios from 'axios';
 
-     const main = document.querySelector('main');
-     const weatherContainer = document.createElement('ul');
-     main.append(weatherContainer);
-     const weatherWidget = document.createElement('li');
-    weatherContainer.append(weatherWidget);
+let refs = {};
+
+function creatMarkupWeather() {
+  const weatherWrap = document.querySelector('.wather-wrap');
+  const weatherContainer = document.createElement('ul');
+  weatherWrap.append(weatherContainer);
+  const weatherWidget = document.createElement('li');
+  weatherContainer.append(weatherWidget);
+  weatherWidget.classList.add('weather__card');
+  weatherWidget.insertAdjacentHTML(
+    'beforeend',
+    `<div class="weather__data">
+          <div class="weather__temp">
+            <span class="weather__temp-deg"></span>
+          <span class="deg">&#176;</span>
+          </div>
+          <div class="weather__info">
+            <span class="weather__condition"></span>
+            <span class="weather__location"><svg class="location-icon" width="27" height="27"><use href="./images/icons.svg#icon-location"></use></svg>
+              <p class="weather__location-place"></p> </span>
+          </div>
+        </div>
+        <img id="icon-weather">
+        <p class="weather__date">
+          <span class="weather__day-week"></span>
+          <span class="weather__month"></span>
+           </p>
+       <div class="weather__link"> <a class="weather__link-site" target="_blank" rel = ”noopener” rel = ”noreferrer”>weather for week</a></div>`
+  );
+  refs = {
+    deg: document.querySelector('.deg'),
+    iconPlace: document.querySelector('#icon-place'),
+    weatherTemp: document.querySelector('.weather__temp-deg'),
+    weatherCondition: document.querySelector('.weather__condition'),
+    weatherLocation: document.querySelector('.weather__location-place'),
+    weatherIcon: document.querySelector('#icon-weather'),
+    weatherDay: document.querySelector('.weather__day-week'),
+    weatherFullDate: document.querySelector('.weather__month'),
+    weatherLinkSite: document.querySelector('.weather__link-site'),
+  };
+  
+  return refs;
+}
 
 // Отримання координат поточного місцязнаходження
 let latitude = +localStorage.getItem('USER_LATITUDE');
 let longitude = +localStorage.getItem('USER_LONGITUDE');
-let refs = {};
 
 function getCurrentLocation() {
   if (navigator.geolocation) {
@@ -84,59 +121,19 @@ function getCurrentFullDate(date) {
   return fullDate;
 }
 
-function markup() {
-  weatherWidget.insertAdjacentHTML(
-    'beforeend',
-    `<div class="weather__data">
-          <div class="weather__temp">
-            <span class="weather__temp-deg"></span>
-          <span class="deg"></span>
-          </div>
-          <div class="weather__info">
-            <span class="weather__condition"></span>
-            <span class="weather__location"><svg class="location-icon" width="27" height="27"><use id="icon-place"></use></svg>
-              <p class="weather__location-place"></p> </span>
-          </div>
-        </div>
-        <img id="icon-weather">
-        <p class="weather__date">
-          <span class="weather__day-week"></span>
-          <span class="weather__month"></span>
-           </p>
-       <div class="weather__link"> <a class="weather__link-site" target="_blank" rel = ”noopener” rel = ”noreferrer”></a></div>`
-  );
-}
 //! Єдина функція для віджету погоди
 
 function getWeatherWidget() {
-  refs = {
-     deg: document.querySelector('.deg'),
-     iconPlace:document.querySelector('#icon-place'),
-    weatherTemp: document.querySelector('.weather__temp-deg'),
-    weatherCondition: document.querySelector('.weather__condition'),
-    weatherLocation: document.querySelector('.weather__location-place'),
-    weatherIcon: document.querySelector('#icon-weather'),
-    weatherDay: document.querySelector('.weather__day-week'),
-    weatherFullDate: document.querySelector('.weather__month'),
-    weatherLinkSite: document.querySelector('.weather__link-site'),
-  };
-
   getCurrentLocation();
   markupWeatherCard();
-  return refs;
 }
-
-markup();
 
 // Функція для дінамичного додавання даних з API до розмітки
 async function markupWeatherCard() {
   const data = await fetchWeatherApi();
-   const geo = await fetchWeatherApiGeo();
-    weatherWidget.classList.add('weather__card');
-  refs.weatherIcon.classList.add('weather__icon');
+  const geo = await fetchWeatherApiGeo();
+  creatMarkupWeather();
   refs.weatherTemp.textContent = Math.floor(data.main.temp);
-   refs.deg.insertAdjacentHTML('afterbegin', '&#176;');
-   refs.iconPlace.setAttribute('href', './images/icons.svg#icon-location');
   refs.weatherLocation.textContent = geo[0].name;
   refs.weatherCondition.textContent = data.weather[0].main;
   refs.weatherIcon.setAttribute(
@@ -145,11 +142,10 @@ async function markupWeatherCard() {
   );
   refs.weatherDay.textContent = getCurrentWeekDay(date);
   refs.weatherFullDate.textContent = getCurrentFullDate(date);
-  refs.weatherLinkSite.textContent = 'weather for week';
   refs.weatherLinkSite.setAttribute(
     'href',
     `https://www.wunderground.com/forecast/${geo[0].country}/${geo[0].name}`
   );
 }
 
-export { getWeatherWidget, markup };
+export { getWeatherWidget};

@@ -6,3 +6,4 @@ import { getWeatherWidget } from './js/weather';
 
 const news = new NewsApiServes();
 jsScriptHeader();
+
