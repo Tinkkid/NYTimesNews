@@ -1,5 +1,7 @@
-export function createCard({section_name, web_url, headline, lead_paragraph, pub_date, multimedia, snippet}) {
-        return `
+import { cutText, cutTitle, formatDate } from "./makkupUtils";
+
+export function createCard({section_name, web_url, headline, lead_paragraph, pub_date, multimedia, snippet, subsection, published_date, title, url, media, des_facet, abstract })
+ {      return `
         <li class="news-item">
         <div class="overlay"></div>
         <div class="img-thumb">
@@ -8,8 +10,8 @@ export function createCard({section_name, web_url, headline, lead_paragraph, pub
         <svg class="icon-done"><use class="icon-arrow-done"
         href="./images/sprite.svg#arrow-down"></use></svg>
           </span>
-          <img src="https://www.nytimes.com/${multimedia[0].url}" loading="lazy" alt="${snippet}" class="news-img" />
-          <p class="news-chip">${section_name}</p>
+          <img src="https://www.nytimes.com/${multimedia[0].url || media.media-metadata[0].url}" loading="lazy" alt="${snippet || des_facet}" class="news-img" />
+          <p class="news-chip">${section_name || subsection}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
             <svg class="favorite-icon" width="16" height="16">
@@ -20,15 +22,15 @@ export function createCard({section_name, web_url, headline, lead_paragraph, pub
         </div>
         <div class="news-info">
           <h2 class="news-title">
-            ${headline.main}
+            ${cutTitle(headline.main) || cutTitle(title)}
           </h2>
           <p class="news-desk">
-          ${cutText(lead_paragraph)}
+          ${cutText(lead_paragraph) || cutText(abstract)}
           </p>
           <div class="adding">
-            <p class="news-date">${formatDate(pub_date)}</p>
+            <p class="news-date">${formatDate(pub_date) || formatDate(published_date)}</p>
             <a
-              href=${web_url}
+              href=${web_url || url}
               class="news-link"
               target="_blank"
               rel="noopener noreferrer"
@@ -36,27 +38,6 @@ export function createCard({section_name, web_url, headline, lead_paragraph, pub
             >
           </div>
         </div>
-      </li>
-          `;
+      </li> `
 } 
 
-function formatDate(string){
-  const pubDate = new Date(string);
-const yyyy = pubDate.getFullYear();
-let mm = pubDate.getMonth() + 1;
-let dd = pubDate.getDate();
-
-if (dd < 10) dd = '0' + dd;
-if (mm < 10) mm = '0' + mm;
-
-return dd + '/' + mm + '/' + yyyy;
-}
-
-function cutText(string){
-  const quantityChar = 120
-  return string.length <= quantityChar? string :string.slice(0, quantityChar) + '...'
-}
-
-export function updateMarkup(markup, elem){
-  elem.innerHTML= markup;
-  }

@@ -174,7 +174,8 @@ body {
     letter-spacing: -0.01em;
     margin-bottom: 20px;
     @include tablet{
-        font-size: 32px;
+      height: 180px;
+      font-size: 32px;
     }
   }
   .news-desk {
