@@ -1,6 +1,6 @@
 import {createCard} from "./cardMarkup"
 import { updateMarkup } from "./makkupUtils";
-import NewsApiServes from '../rest-api';
+import NewsApiServes from "./rest-api";
 const news = new NewsApiServes();
 const newsBoxEl = document.querySelector('.news-container') 
 

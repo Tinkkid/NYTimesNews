@@ -10,7 +10,7 @@ export function createCard({section_name, web_url, headline, lead_paragraph, pub
         <svg class="icon-done"><use class="icon-arrow-done"
         href="./images/sprite.svg#arrow-down"></use></svg>
           </span>
-          <img src="https://www.nytimes.com/${multimedia[0].url || media.media-metadata[0].url}" loading="lazy" alt="${snippet || des_facet}" class="news-img" />
+          <img src="https://www.nytimes.com/${multimedia[0].url || ''}" loading="lazy" alt="${snippet || des_facet}" class="news-img" />
           <p class="news-chip">${section_name || subsection}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>

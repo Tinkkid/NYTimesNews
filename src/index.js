@@ -1,8 +1,15 @@
 import jsScriptHeader from './js/jsScriptHeader';
-import NewsApiServes from './rest-api';
+import NewsApiServes from './js/rest-api';
+import { getWeatherWidget } from './js/weather';
+
+
+
 import renderPopularNews from './js/renderPopularNews';
 const news = new NewsApiServes();
 jsScriptHeader();
+getWeatherWidget();
+
+
 renderPopularNews()
 
 import { onFvBtn }  from "./js/onFavoriteBtn"
