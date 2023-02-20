@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY_NYT = '';
+const API_KEY_NYT = '85VwA43v2JxogoVfbQi2IxsUQyUy8fL7';
 
 
 const categoriesDropdownList = document.querySelector('.categories-dropdown-list-js')
