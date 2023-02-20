@@ -66,7 +66,7 @@ console.log(news.requestWeatherApi(34.1, 11.25));
 
 ```json
 
- news.setDate = '20200218';
+ news.setDate = '20230218';
  news.query = 'you';
  console.log(news.searchNewsByInputAndDate());
  news.pageIncrementPagination();
