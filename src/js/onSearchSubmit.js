@@ -1,5 +1,5 @@
 import { createCard } from './cardMarkup';
-import { updateMarkup } from './makkupUtils';
+import { updateMarkup } from './markupUtils';
 import NewsApiServes from './rest-api';
 import { onError } from './renderPopularNews';
 
@@ -8,8 +8,9 @@ const newsBoxEl = document.querySelector('.news-container');
 
 export default async function onSearchSubmit(e) {
   e.preventDefault();
-  const form = e.currentTarget;
-  news.query = e.target.elements.word.value;
+  const searchEl = e.target.elements.word.value.trim();
+  if(searchEl === '') return
+  news.query = searchEl;
   news.setDate = '20200218'; /////// з календаря?
   try {
     const response = await news.searchNewsByInputAndDate();
