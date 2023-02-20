@@ -67,7 +67,7 @@ export function createCardPop({
   published_date,
   url,
 }) {
-  console.log(media[0]['media-metadata'][['media-metadata'].length - 1].url);
+  // console.log(media[0]['media-metadata'][['media-metadata'].length - 1].url);
   return `
         <li class="news-item">
         <div class="overlay"></div>
@@ -77,9 +77,9 @@ export function createCardPop({
         <svg class="icon-done"><use class="icon-arrow-done"
         href="./images/sprite.svg#arrow-down"></use></svg>
           </span>
-          <img src="${media[0]['media-metadata'][2].url || ''}" loading="lazy" alt="${
-    media[0].caption
-  }" class="news-img" />
+          <img src="${
+            !media[0] ? './images/The_New_York_Times.jpg' : media[0]['media-metadata'][2].url
+          }" loading="lazy" alt="${!media[0] ? 'NYTimes' : media[0].caption}" class="news-img" />
           <p class="news-chip">${section || subsection}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
