@@ -2,6 +2,7 @@ import { createCard } from './cardMarkup';
 import { createCardPop } from './cardMarkup';
 import { updateMarkup } from './makkupUtils';
 import NewsApiServes from './rest-api';
+import { addEvtListOnReadMore } from './onReadLink';
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
 
@@ -21,6 +22,7 @@ export default async function renderPopularNews() {
   const markup = articles.reduce((markup, article) => createCardPop(article) + markup, '');
   updateMarkup(markup, newsBoxEl);
 
+  addEvtListOnReadMore(articles);
   //   } catch{
   //     onError()
   //   }
