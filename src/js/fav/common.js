@@ -24,12 +24,11 @@ const offsetsFavorites = {
     tablet: 8,
     desktop: 9,
 };
-Object.freeze(offsetsFavorites);
-
 const maxWidth = {
     mobile: 320,
     tablet: 768,
 };
+Object.freeze(offsetsFavorites);
 Object.freeze(maxWidth);
 
 function getPagesOffset(offsetsStruct) {
