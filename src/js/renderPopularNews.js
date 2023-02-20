@@ -6,6 +6,12 @@ const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
 
 export default async function renderPopularNews() {
+  if (
+    document.title === 'NYTimes News: Your Favorites' ||
+    document.title === 'NYTimes News: Read By Yourself'
+  ) {
+    return;
+  }
   console.log('happend');
   // try{
   const response = await news.requestPopularNews();
