@@ -39,6 +39,7 @@ function addEvtListOnReadMore(articles) {
 // Слухач, на відкриття сторінки
 window.addEventListener('DOMContentLoaded', addAllReadOnPage);
 
+//функція, яка додає статті зі сховища на сторінку
 function addAllReadOnPage() {
   const storageItems = load(STORAGE_KEY);
   //   console.log(storageItems);
@@ -69,6 +70,7 @@ function addAllReadOnPage() {
   addEvtLisOnArrowBtn();
 }
 
+//функція, яка створює розмітку заголовка
 function createTitleMarcup({ pub_date, published_date }) {
   return `
 		 <li class="read__block">
@@ -83,6 +85,7 @@ function createTitleMarcup({ pub_date, published_date }) {
 		 <div class="read__gallery" if='news-gallery-${pub_date || published_date}'>`;
 }
 
+//функція відкриття/звкриття випадаючого списку зі статтями
 function addEvtLisOnArrowBtn() {
   const showButtons = document.querySelectorAll('.show-btn');
 //   console.log(showButtons);
