@@ -1,5 +1,5 @@
 import { createCard } from './cardMarkup';
-import { updateMarkup } from './makkupUtils';
+import { updateMarkup } from './markupUtils';
 import NewsApiServes from './rest-api';
 import { onError } from './renderPopularNews';
 
