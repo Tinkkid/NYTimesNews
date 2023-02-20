@@ -1,9 +1,19 @@
 .in-favorites {
-    background-color: black;
+    fill: #4b48da;
+}
+
+.universe {
+    padding: 40px;
+    background-color: #aaa;
 }
 
 .giga-test-container, .mega-test-container, .super-test-container {
     padding: 40px;
+    background-color: green;
+
+    &.in-favorites {
+        background-color: #4b48da;
+    }
 }
 
 .test-container {

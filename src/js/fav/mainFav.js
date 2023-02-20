@@ -45,8 +45,8 @@ function simpleArrRemover(array, data) {
 // content for mainHome.js and 'fav/common.js', will be relocated later
 
 const classNames = {
-    cardsContainer: 'giga-test-container',
-    card: 'super-test-container',
+    cardsContainer: 'universe',
+    card: 'mega-test-container',
     favLabel: 'info-container',
     inFavorites: 'in-favorites',
 };
