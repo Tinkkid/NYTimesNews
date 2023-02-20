@@ -20,6 +20,6 @@ export default async function renderPopularNews() {
   //   }
 }
 
-function onError() {
+export function onError() {
   newsBoxEl.textContent = 'Not found any articles';
 }
