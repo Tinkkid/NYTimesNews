@@ -78,7 +78,7 @@ export function createCardPop({
         href="./images/sprite.svg#arrow-down"></use></svg>
           </span>
           <img src="${media[0]['media-metadata'][2].url || ''}" loading="lazy" alt="${
-    media.caption
+    media[0].caption
   }" class="news-img" />
           <p class="news-chip">${section || subsection}</p>
           <button type="button" class="add-news-favorite">
