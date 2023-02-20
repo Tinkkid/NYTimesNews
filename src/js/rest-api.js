@@ -18,7 +18,6 @@ export default class NewsApiServes {
     const response = await axios.get(
       `${NEWS_URL}news/v3/content/section-list.json?api-key=${NEWS_API_KEY}`
     );
-
     return response;
   }
 

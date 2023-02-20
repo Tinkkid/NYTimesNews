@@ -55,6 +55,12 @@ body.isDark {
   padding-bottom: 24px;
   @include tablet() {
     align-items: baseline;
+    padding-top: 32px;
+    padding-bottom: 27px;
+  }
+  @include desktop() {
+    padding-top: 28px;
+    padding-bottom: 27px;
   }
 }
 
