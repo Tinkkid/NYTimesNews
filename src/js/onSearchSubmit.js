@@ -15,9 +15,16 @@ export default async function onSearchSubmit(e) {
     const response = await news.searchNewsByInputAndDate();
     const articles = response.data.response.docs;
     if (articles.length === 0) throw new Error('No data');
-    const markup = articles.reduce((markup, article) => createCard(article) + markup, '');
-    updateMarkup(markup, newsBoxEl);
+    renderCardsOnPage();
   } catch {
     onError();
   }
+}
+
+function renderCardsOnPage() {
+  const markup = articles.reduce(
+    (markup, article) => createCard(article) + markup,
+    ''
+  );
+  updateMarkup(markup, newsBoxEl);
 }

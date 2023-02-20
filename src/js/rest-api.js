@@ -12,6 +12,7 @@ export default class NewsApiServes {
     this.offset = 0;
     this.limit = 0;
     this.page = 0;
+    this.cardOrder = 0;
   }
 
   async requestListCategories() {
@@ -74,10 +75,13 @@ export default class NewsApiServes {
   sizeScreenCompute() {
     if (window.matchMedia('(max-width: 767px)').matches) {
       this.limit = 4;
+      this.cardOrder = 0;
     } else if (window.matchMedia('(max-width: 1279px)').matches) {
       this.limit = 7;
+      this.cardOrder = 1;
     } else {
       this.limit = 8;
+      this.cardOrder = 2;
     }
   }
 
@@ -118,6 +122,10 @@ export default class NewsApiServes {
 
   setDate(newDate) {
     this.setDate = newDate;
+  }
+
+  getCardOrder() {
+    return this.cardOrder;
   }
 
   get category() {

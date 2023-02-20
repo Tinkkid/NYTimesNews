@@ -16,6 +16,7 @@ export default async function renderPopularNews() {
   // try{
   const response = await news.requestPopularNews();
   const articles = response.data.results;
+  console.log(articles);
   if (articles.length === 0) throw new Error('No data');
 
   const markup = articles.reduce(
