@@ -1,6 +1,6 @@
 $mobile: 320px;
 $tablet: 768px;
-$desktop: 1200px;
+$desktop: 1280px;
 $padding: 16px;
 
 $light-theme-bg: #f4f4f4;
@@ -13,3 +13,13 @@ $accent-color-weather:#4440F7;
 $theme-switcher-color: #5f6775;
 $theme-accent-color: #4b48db;
 $white-color-text: #fff;
+
+ //cards
+ $primary-white-color: #fff;
+ $chip-bc: rgba(68, 64, 247, 0.7);
+ $hover-text-color: #2f2cc4;
+ $read-text: #00dd73;
+ $mute-color-card: rgba(244, 244, 244, 0.4);
+ $fill-favorite-icon: #4b48da;
+ $transition-duration: 250ms;
+ $timing-function: cubic-bezier(0.4, 0, 0.2, 1);
