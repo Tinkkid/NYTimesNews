@@ -3,23 +3,46 @@ import { touchLocalStorageArr, getPagesOffset } from './common';
 export default class PagesController {
     #offset = 0;
     #pagesNum = 0;
-    #page = 0;
+    #page = 1;
 
     #localStorageKey = '';
     #offsetsStruct = {};
 
+    #localStorageArr = [];
+
     constructor(localStorageKey, offsetsStruct) {
         this.#localStorageKey = localStorageKey;
         this.#offsetsStruct = offsetsStruct;
-        this.refreshSettings();
+        this.refresh();
     }
 
-    refreshSettings() {
+    refresh() {
+        this.#localStorageArr = touchLocalStorageArr(this.#localStorageKey);
         this.#offset = getPagesOffset(this.#offsetsStruct);
-        this.#pagesNum = this.#getPagesNum(this.#localStorageKey);
+        this.#pagesNum = this.#getPagesNum();
     }
 
-    #getPagesNum(localStorageKey) {
-        return Math.ceil(touchLocalStorageArr(localStorageKey).length / this.#offset);
+    #getPagesNum() {
+        return Math.ceil(this.#localStorageArr.length / this.#offset);
+    }
+
+    getPageData() {
+        return this.#localStorageArr.slice((this.#page - 1) * this.#offset, this.#page * this.#offset);
+    };
+
+    increment() {
+        if (this.#page === this.#pagesNum) {
+            return null;
+        }
+        ++this.#page;
+        return this.getPage();
+    }
+
+    decrement() {
+        if (this.#page === 1) {
+            return null;
+        }
+        --this.#page;
+        return this.getPage();
     }
 };

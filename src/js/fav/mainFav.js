@@ -1,6 +1,6 @@
 export { getCardNode };
-
-import { touchLocalStorageArr } from './common';
+import { touchLocalStorageArr} from './common';
+import { FAV_PAGES_KEY, CARD_CLASSES } from './constants';
 
 
 // temporary testing refs and event listeners
@@ -10,8 +10,6 @@ const refs = {
     addBtn: document.querySelector('.add-to-storage'),
     rmBtn: document.querySelector('.delete-from-storage'),
 };
-
-const FAV_PAGES_KEY = 'favPagesData';
 
 
 
@@ -44,25 +42,18 @@ function simpleArrRemover(array, data) {
 
 // content for mainHome.js and 'fav/common.js', will be relocated later
 
-const classNames = {
-    cardsContainer: 'universe',
-    card: 'mega-test-container',
-    favLabel: 'info-container',
-    inFavorites: 'in-favorites',
-};
-
-const cardsContainer = document.querySelector(`.${classNames.cardsContainer}`);
+const cardsContainer = document.querySelector(`.${CARD_CLASSES.container}`);
 
 cardsContainer.addEventListener('click', (event) => {
     event.preventDefault();
-    if (!event.target.classList.contains(classNames.favLabel)) {
+    if (!event.target.classList.contains(CARD_CLASSES.favLabel)) {
         return;
     }
-    const cardNode = getCardNode(classNames.card, event.target);
+    const cardNode = getCardNode(CARD_CLASSES.card, event.target);
     // TODO
     // checkStorage
     // addOrDeleteFromStorage
-    cardNode.classList.toggle(classNames.inFavorites);
+    cardNode.classList.toggle(CARD_CLASSES.inFavorites);
     // target.classList.add('in-favorites');
 });
 
