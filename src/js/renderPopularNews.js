@@ -1,6 +1,8 @@
 import { createCardPop } from './cardMarkup';
 import { updateMarkup } from './markupUtils';
 import NewsApiServes from './rest-api';
+import Notiflix from 'notiflix';
+import 'notiflix/dist/notiflix-3.2.6.min.css';
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
 
@@ -23,5 +25,6 @@ export default async function renderPopularNews() {
 }
 
 export function onError() {
-  newsBoxEl.textContent = 'Not found any articles';
+  Notiflix.Notify.failure("Sorry, we didn't find any articles!")
 }
+
