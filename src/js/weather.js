@@ -6,15 +6,25 @@ const news = new NewsApiServes();
 let refs = {};
 
 function creatMarkupWeather() {
-  const weatherWrap = document.querySelector('.wather-wrap');
-  const weatherContainer = document.createElement('ul');
-  weatherWrap.append(weatherContainer);
-  const weatherWidget = document.createElement('li');
-  weatherContainer.append(weatherWidget);
-  weatherWidget.classList.add('weather__card');
-  weatherWidget.insertAdjacentHTML(
-    'beforeend',
-    `<div class="weather__data">
+  if (document.title !== 'NYTimes News') {
+    return;
+  }
+  refs = {
+    deg: document.querySelector('.deg'),
+    iconPlace: document.querySelector('.icon-location'),
+    weatherTemp: document.querySelector('.weather__temp-deg'),
+    weatherCondition: document.querySelector('.weather__condition'),
+    weatherLocation: document.querySelector('.weather__location-place'),
+    weatherIcon: document.querySelector('#icon-weather'),
+    weatherDay: document.querySelector('.weather__day-week'),
+    weatherFullDate: document.querySelector('.weather__month'),
+    weatherLinkSite: document.querySelector('.weather__link-site'),
+  };
+  return refs;
+}
+
+function weatherTemplate() {
+  return `<li class='weather__card news-item'><div class="weather__data">
           <div class="weather__temp">
             <span class="weather__temp-deg"></span>
           <span class="deg">&#176;</span>
@@ -30,20 +40,7 @@ function creatMarkupWeather() {
           <span class="weather__day-week"></span>
           <span class="weather__month"></span>
            </p>
-       <div class="weather__link"> <a class="weather__link-site" target="_blank" rel = ”noopener” rel = ”noreferrer”>weather for week</a></div>`
-  );
-  refs = {
-    deg: document.querySelector('.deg'),
-    iconPlace: document.querySelector('.icon-location'),
-    weatherTemp: document.querySelector('.weather__temp-deg'),
-    weatherCondition: document.querySelector('.weather__condition'),
-    weatherLocation: document.querySelector('.weather__location-place'),
-    weatherIcon: document.querySelector('#icon-weather'),
-    weatherDay: document.querySelector('.weather__day-week'),
-    weatherFullDate: document.querySelector('.weather__month'),
-    weatherLinkSite: document.querySelector('.weather__link-site'),
-  };
-  return refs;
+       <div class="weather__link"> <a class="weather__link-site" target="_blank" rel = ”noopener” rel = ”noreferrer”>weather for week</a></div></li>`;
 }
 
 // Отримання координат поточного місцязнаходження
@@ -112,6 +109,7 @@ function getCurrentFullDate(date) {
 
 function getWeatherWidget() {
   getCurrentLocation();
+  return weatherTemplate();
 }
 
 // Функція для дінамичного додавання даних з API до розмітки при наданні користувачем своїх координат
