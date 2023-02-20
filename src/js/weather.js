@@ -5,6 +5,9 @@ import 'notiflix/dist/notiflix-3.2.6.min.css';
 let refs = {};
 
 function creatMarkupWeather() {
+  if (document.title !== 'NYTimes News') {
+    return;
+  }
   const weatherWrap = document.querySelector('.wather-wrap');
   const weatherContainer = document.createElement('ul');
   weatherWrap.append(weatherContainer);
@@ -100,9 +103,7 @@ async function fetchWeatherApiGeo() {
 
 // / Запит на сервер для отриманная погоди за замовчуванням (Київ)
 async function fetchWeatherApiDefault() {
-  const res = await axios.get(
-    `${BASE_URL}data/2.5/weather?q=Kyiv&units=metric&appid=${API_KEY}`
-  );
+  const res = await axios.get(`${BASE_URL}data/2.5/weather?q=Kyiv&units=metric&appid=${API_KEY}`);
   console.log(res.data);
   return res.data;
 }
@@ -117,22 +118,8 @@ function getCurrentWeekDay(date) {
 }
 
 function getCurrentFullDate(date) {
-  let months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-  let fullDate =
-    date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+  let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  let fullDate = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
   return fullDate;
 }
 
@@ -144,13 +131,16 @@ function getWeatherWidget() {
 
 // Функція для дінамичного додавання даних з API до розмітки при наданні користувачем своїх координат
 async function markupWeatherCard() {
+  if (document.title !== 'NYTimes News') {
+    return;
+  }
   const data = await fetchWeatherApi();
   const geo = await fetchWeatherApiGeo();
   creatMarkupWeather();
   refs.weatherTemp.textContent = Math.floor(data.main.temp);
   refs.weatherLocation.textContent = geo[0].name;
-   refs.weatherCondition.textContent = data.weather[0].main;
-   refs.iconPlace.setAttribute('href', `./images/sprite.svg#icon-location`);
+  refs.weatherCondition.textContent = data.weather[0].main;
+  refs.iconPlace.setAttribute('href', `./images/sprite.svg#icon-location`);
   refs.weatherIcon.setAttribute(
     'src',
     `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
@@ -169,18 +159,15 @@ async function markupWeatherCardDefault() {
   creatMarkupWeather();
   refs.weatherTemp.textContent = Math.floor(data.main.temp);
   refs.weatherLocation.textContent = data.name;
-   refs.weatherCondition.textContent = data.weather[0].main;
-   refs.iconPlace.setAttribute('href', `./images/sprite.svg#icon-location`);
+  refs.weatherCondition.textContent = data.weather[0].main;
+  refs.iconPlace.setAttribute('href', `./images/sprite.svg#icon-location`);
   refs.weatherIcon.setAttribute(
     'src',
     `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
   );
   refs.weatherDay.textContent = getCurrentWeekDay(date);
   refs.weatherFullDate.textContent = getCurrentFullDate(date);
-  refs.weatherLinkSite.setAttribute(
-    'href',
-    `https://www.wunderground.com/forecast/ua/Kyiv`
-  );
+  refs.weatherLinkSite.setAttribute('href', `https://www.wunderground.com/forecast/ua/Kyiv`);
 }
 
 export { getWeatherWidget };
