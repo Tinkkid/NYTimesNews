@@ -6,7 +6,7 @@ const newsCardsContainer = document.querySelector(`.${NEWS_CARD_CSS_CLASSES.cont
 newsCardsContainer.addEventListener('click', (event) => {
     if (!( 
         event.target.classList.contains(NEWS_CARD_CSS_CLASSES.favButton) ||
-        event.target.parentNode.classList.contains(NEWS_CARD_CSS_CLASSES.favButton)
+        event.target.parentNode.classList.contains(NEWS_CARD_CSS_CLASSES.favButton)             // SVG ????
         )) {
         return;
     }

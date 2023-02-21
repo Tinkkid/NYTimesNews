@@ -51,9 +51,13 @@ function checkAndChangeStorage(newsCardNode) {
     );
     if (idx > -1) {
         localStorageArr.splice(idx, 1);
+        localStorage.setItem(FAV_PAGES_KEY, JSON.stringify(localStorageArr));
+
         // Delete color
     } else {
         localStorageArr.push(collectData(newsCardNode));
+        localStorage.setItem(FAV_PAGES_KEY, JSON.stringify(localStorageArr));
+
         // Add color
     }
 }
@@ -63,4 +67,5 @@ function collectData(newsCardNode) {
     const dataStruct = {
         title: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent,
     };
+    return dataStruct;
 }

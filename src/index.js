@@ -7,7 +7,7 @@ const news = new NewsApiServes();
 jsScriptHeader();
 getWeatherWidget();
 renderPopularNews();
-onFavoriteBtnClick();
+// onFavoriteBtnClick();
 import './js/fav/mainHome';
 
 

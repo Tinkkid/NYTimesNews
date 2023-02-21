@@ -20,6 +20,7 @@ const NEWS_CARD_CSS_CLASSES = {
     card: 'news-item',
     favButton: 'add-news-favorite',
     inFavorites: 'in-favorites',
+    icon: 'favorite-icon',
     //
 
     title: 'news-title',
