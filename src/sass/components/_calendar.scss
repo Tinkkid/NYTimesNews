@@ -22,26 +22,15 @@
 
 }
 
-/* Global */
-/* body {
-
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-
-    background-color: var(--light-theme-bg);
-
-} */
-
 /* Calendar form */
 .calendar__box {
   outline: 1px solid violet;
   position: relative;
   display: flex;
 
-  margin-left: 111px;
+  margin-left: auto;
+
+  z-index: 1000;
 }
 
 .calendar__form-title {
