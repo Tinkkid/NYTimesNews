@@ -8,7 +8,7 @@ export default async function onSearchSubmit(e) {
   e.preventDefault();
   const form = e.currentTarget;
   news.query = e.target.elements.word.value;
-  news.setDate = '20200221'; /////// з календаря?
+  news.date = '20210221'; /////// з календаря?
   try {
     const response = await news.searchNewsByInputAndDate();
     const articles = response.data.response.docs;

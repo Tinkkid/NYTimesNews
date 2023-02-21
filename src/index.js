@@ -24,7 +24,6 @@ if (document.title !== 'NYTimes News: Read By Yourself') {
 
 export default function renderCards(articles, identifier) {
   news.sizeScreenCompute();
-  console.log(articles);
   const markup = articles
     .map((article, idx) => {
       if (identifier === 'search') {
