@@ -53,11 +53,11 @@ function addAllReadOnPage() {
 
     if (Object.keys(storageItems).includes('pub_date')) {
       sortedStorageArr = storageItems.sort((a, b) =>
-        a.pub_date.localeCompare(b.pub_date)
+        b.pub_date.localeCompare(a.pub_date)
       );
     } else {
       sortedStorageArr = storageItems.sort((a, b) =>
-        a.published_date.localeCompare(b.published_date)
+        b.published_date.localeCompare(a.published_date)
       );
     }
     console.log('sorted', sortedStorageArr);
