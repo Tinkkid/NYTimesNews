@@ -12,7 +12,10 @@ const news = new NewsApiServes();
 
 jsScriptHeader();
 popularNews();
-getCategoryList();
+
+if (document.title !== 'NYTimes News: Read By Yourself') {
+  getCategoryList();
+}
 console.log(news.getCardOrder());
 
 export default function renderCards(articles, identifier) {
