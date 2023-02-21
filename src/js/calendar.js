@@ -17,7 +17,6 @@ const calendarDisplayDateRef = document.querySelector('.calendar__form-text');
 calendarFormRef.addEventListener('click', () => {
   calendarWrapperRef.classList.toggle('hidden');
   calendarFormRef.classList.toggle('selected');
-
 })
 
 
@@ -31,6 +30,17 @@ let displayDate = '';// to display on calendar input
 let date = new Date();
 let currYear = date.getFullYear();
 let currMonth = date.getMonth();
+
+// getting current date year and month for API at start
+const currentDate = `${currYear}${addLeadingZero(currMonth + 1)}${addLeadingZero(date.getDate())}`;
+console.log('currentDate :>> ', currentDate);
+
+    news.date = currentDate;
+    const CheckedDate = news.date;
+    console.log('CheckedDate :>> ', CheckedDate);
+
+
+
 
 // storing full name of all months in array
 const months = ["January", "February", "March", "April", "May", "June", "July",
