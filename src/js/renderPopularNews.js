@@ -4,10 +4,7 @@ const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
 
 export default async function () {
-  if (
-    document.title === 'NYTimes News: Your Favorites' ||
-    document.title === 'NYTimes News: Read By Yourself'
-  ) {
+  if (document.title !== 'NYTimes News') {
     return;
   }
 
