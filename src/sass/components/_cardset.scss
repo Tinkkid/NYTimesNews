@@ -97,6 +97,7 @@ body {
   right: 14px;
   opacity: 0;
   z-index: 6;
+  display: flex;
   @include font(14px, 1.4, 700);
   color: $read-text;
   @include tablet {
@@ -105,8 +106,6 @@ body {
   }
 }
 .icon-done {
-  width: 18px;
-  height: 18px;
   fill: $read-text;
   margin-left: 4px;
 }
@@ -121,7 +120,16 @@ body {
   background-color: $chip-bc;
   border-radius: 0px 4px 4px 0px;
 }
-
+.favorite-icon {
+  margin-left: 4px;
+}
+.icon-empty-heart{
+  stroke: $accent-color;
+  fill: $primary-white-color;
+}
+.icon-heart {
+  display: none;
+}
 .add-news-favorite {
   position: absolute;
   bottom: 12px;
@@ -135,18 +143,13 @@ body {
   border: none;
 
   &.liked .icon-heart {
-    display: flex;
+    display: block;
+    fill: $accent-color;
+
   }
   &.liked .icon-empty-heart {
     display: none;
   }
-}
-.favorite-icon {
-  margin-left: 4px;
-  fill: $accent-color;
-}
-.icon-heart {
-  display: none;
 }
 
 .favorite-btn-text,
@@ -172,19 +175,25 @@ body {
   font-weight: 700;
   letter-spacing: -0.01em;
   margin-bottom: 20px;
+  overflow-y: auto;
   @include tablet {
     height: 180px;
     font-size: 32px;
   }
 }
+.disable-scroll{
+  overflow-y: hidden;
+}
+
 .news-desk {
+  height: 68px;
   margin-bottom: 20px;
 }
+
 .adding {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
 }
 
 .news-date {

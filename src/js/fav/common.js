@@ -1,4 +1,4 @@
-export { touchLocalStorageArr, getPagesOffset, getNewsCardNode, isCardInStorage };
+export { touchLocalStorageArr, getPagesOffset, getNewsCardNode, checkAndChangeStorage };
 import { FAV_PAGES_KEY, MAX_WIDTH, NEWS_CARD_CSS_CLASSES } from "./constants";
 
 
@@ -33,19 +33,34 @@ function touchLocalStorageArr(key, incomingData = null, operatingFunc = null) {
 }
 
 
-function getNewsCardNode(newsCardClassName, favLabelNode) {
-    let cardNode = favLabelNode;
-    while (!cardNode.classList.contains(newsCardClassName)) {
-        cardNode = cardNode.parentElement;
+function getNewsCardNode(newsCardClassName, favButtonNode) {
+    let newsCardNode = favButtonNode;
+    while (!newsCardNode.classList.contains(newsCardClassName)) {
+        newsCardNode = newsCardNode.parentElement;
     }
-    return cardNode;
+    return newsCardNode;
 }
 
 
-function isCardInStorage(newsCardNode) {
-    let localStorageContent = touchLocalStorageArr(FAV_PAGES_KEY);
-    const idx = localStorageContent.findIndex(
-        struct => struct.title === newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent
+function checkAndChangeStorage(newsCardNode) {
+    let localStorageArr = touchLocalStorageArr(FAV_PAGES_KEY);
+    const title = newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent;
+
+    const idx = localStorageArr.findIndex(
+        struct => struct.title === title
     );
-    return (idx > -1) ? true : false;
+    if (idx > -1) {
+        localStorageArr.splice(idx, 1);
+        // Delete color
+    } else {
+        localStorageArr.push(collectData(newsCardNode));
+        // Add color
+    }
+}
+
+
+function collectData(newsCardNode) {
+    const dataStruct = {
+        title: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent,
+    };
 }

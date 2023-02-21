@@ -18,9 +18,15 @@ Object.freeze(MAX_WIDTH);
 const NEWS_CARD_CSS_CLASSES = {
     container: 'news-container',
     card: 'news-item',
-    favLabel: 'add-news-favorite',
+    favButton: 'add-news-favorite',
     inFavorites: 'in-favorites',
     //
+
     title: 'news-title',
+    // desk: 'news-desk',
+    // chip: 'news-chip',
+    // img: 'news-img',
+    // date: 'news-date',
+    // link: 'news-link',
 };
 Object.freeze(NEWS_CARD_CSS_CLASSES);

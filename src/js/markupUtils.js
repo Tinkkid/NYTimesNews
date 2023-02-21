@@ -1,16 +1,11 @@
-export function fix(str){
-    const nj = str.replaceAll("-", "/")
-    return nj
-  }
-  
-  export function cutText(string){
-    const quantityChar = 120
+    export function cutText(string){
+    const quantityChar = 115
     return string.length <= quantityChar? string :string.slice(0, quantityChar) + '...'
   }
   
   export function cutTitle(string){
-    const quantityChar = 75
-    return string.length <= quantityChar? string :string.slice(0, quantityChar) + '...'
+    const quantityChar = 72
+    return string.length < quantityChar? string :string.slice(0, quantityChar) + '...'
   }
   
   export function updateMarkup(markup, elem){
