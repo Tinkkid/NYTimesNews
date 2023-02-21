@@ -23,14 +23,15 @@ const NEWS_CARD_CSS_CLASSES = {
     container: 'news-container',
     card: 'news-item',
     favButton: 'add-news-favorite',
-    inFavorites: 'in-favorites',
     icon: 'favorite-icon',
+    
+    inFavorites: 'in-favorites',
 
     title: 'news-title',
-    desk: 'news-desk',
-    chip: 'news-chip',
-    img: 'news-img',
-    date: 'news-date',
-    link: 'news-link',
+    abstract: 'news-desk',
+    section: 'news-chip',
+    media: 'news-img',
+    published_date: 'news-date',
+    url: 'news-link',
 };
 Object.freeze(NEWS_CARD_CSS_CLASSES);

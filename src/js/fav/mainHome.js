@@ -1,15 +1,16 @@
-import { NEWS_CARD_CSS_CLASSES } from "./constants";
-import { getNewsCardNode, checkAndChangeStorage } from "./common";
+export { newsCardsChecker };
+import { FAV_PAGES_KEY, NEWS_CARD_CSS_CLASSES } from "./constants";
+import { isInStorage, markCardFavorite, resolveFavClick } from "./common";
+
 
 const newsCardsContainer = document.querySelector(`.${NEWS_CARD_CSS_CLASSES.container}`);
+newsCardsContainer.addEventListener('click', resolveFavClick);
 
-newsCardsContainer.addEventListener('click', (event) => {
-    if (!( 
-        event.target.classList.contains(NEWS_CARD_CSS_CLASSES.favButton) ||
-        event.target.parentNode.classList.contains(NEWS_CARD_CSS_CLASSES.favButton)             // SVG ????
-        )) {
-        return;
+function newsCardsChecker() {
+    const cards = document.querySelectorAll(`.${NEWS_CARD_CSS_CLASSES.card}`);
+    for (let card of cards) {
+        if (isInStorage(FAV_PAGES_KEY, card) > -1) {
+            markCardFavorite(card);
+        } 
     }
-    const newsCardNode = getNewsCardNode(NEWS_CARD_CSS_CLASSES.card, event.target);
-    checkAndChangeStorage(newsCardNode);
-});
+}

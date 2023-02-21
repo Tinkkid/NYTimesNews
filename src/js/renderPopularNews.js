@@ -2,6 +2,7 @@ import { createCardPop } from './cardMarkup';
 import { updateMarkup } from './markupUtils';
 import NewsApiServes from './rest-api';
 import Notiflix from 'notiflix';
+import { newsCardsChecker } from './fav/mainHome';
 import 'notiflix/dist/notiflix-3.2.6.min.css';
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
@@ -22,6 +23,8 @@ export default async function renderPopularNews() {
     } catch{
       onError()
     }
+
+  newsCardsChecker();
 }
 
 export function onError() {

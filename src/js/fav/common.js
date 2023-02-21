@@ -1,4 +1,4 @@
-export { touchLocalStorageArr, getPagesOffset, getNewsCardNode, checkAndChangeStorage };
+export { touchLocalStorageArr, getPagesOffset, getNewsCardNode, isInStorage, removeCardFromFavorites, addCardToFavorites, markCardFavorite, resolveFavClick };
 import { FAV_PAGES_KEY, MAX_WIDTH, NEWS_CARD_CSS_CLASSES } from "./constants";
 
 
@@ -42,35 +42,68 @@ function getNewsCardNode(newsCardClassName, favButtonNode) {
 }
 
 
-function checkAndChangeStorage(newsCardNode) {
-    let localStorageArr = touchLocalStorageArr(FAV_PAGES_KEY);
+function isInStorage(localStorageKey, newsCardNode) {
     const title = newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent;
-
-    const idx = localStorageArr.findIndex(
+    const idx = touchLocalStorageArr(localStorageKey).findIndex(
         struct => struct.title === title
     );
-    if (idx > -1) {
-        localStorageArr.splice(idx, 1);
-        localStorage.setItem(FAV_PAGES_KEY, JSON.stringify(localStorageArr));
-
-        // Delete color
-    } else {
-        localStorageArr.push(collectData(newsCardNode));
-        localStorage.setItem(FAV_PAGES_KEY, JSON.stringify(localStorageArr));
-
-        // Add color
-    }
+    return idx;
 }
+
+
+function removeCardFromFavorites(localStorageKey, idx, newsCardNode) {
+    touchLocalStorageArr(localStorageKey, idx, removeFromArr);
+    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).textContent = 'Add to favorites';
+}
+function removeFromArr(storageArr, idx) {
+    storageArr.splice(idx, 1);
+}
+
+
+function addCardToFavorites(localStorageKey, newsCardNode) {
+    touchLocalStorageArr(localStorageKey, newsCardNode, addToArr);
+    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).textContent = 'In favorites';
+}
+function addToArr(storageArr, newsCardNode) {
+    storageArr.unshift(collectData(newsCardNode));
+}
+
+
+function markCardFavorite(newsCardNode) {
+    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).textContent = 'In favorites';
+};
 
 
 function collectData(newsCardNode) {
     const dataStruct = {
+        media: [{
+            url: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.media}`).src,
+            caption: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.media}`).alt,
+        }],
         title: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent,
-        desk: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.desk}`).textContent,
-        chip: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.chip}`).textContent,
-        img: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.img}`).src,
-        date: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.date}`).textContent,
-        link: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.link}`).href,
+        section: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.section}`).textContent,
+        subsection: '',
+        abstract: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.abstract}`).textContent,
+        published_date: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.published_date}`).textContent,
+        url: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.url}`).href,
     };
     return dataStruct;
+}
+
+
+function resolveFavClick(event) {
+    if (!( 
+        event.target.classList.contains(NEWS_CARD_CSS_CLASSES.favButton) ||
+        event.target.parentNode.classList.contains(NEWS_CARD_CSS_CLASSES.favButton) ||
+        event.target.tagName === 'use'
+        )) {
+        return;
+    }
+
+    const newsCardNode = getNewsCardNode(NEWS_CARD_CSS_CLASSES.card, event.target);
+
+    const idx = isInStorage(FAV_PAGES_KEY, newsCardNode);
+    idx > -1 ?
+    removeCardFromFavorites(FAV_PAGES_KEY, idx, newsCardNode) :
+    addCardToFavorites(FAV_PAGES_KEY, newsCardNode);
 }

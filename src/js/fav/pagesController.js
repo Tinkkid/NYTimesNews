@@ -1,6 +1,6 @@
 import { touchLocalStorageArr, getPagesOffset } from './common';
 
-export default class PagesController {
+export default class StoragePageController {
     #offset = 0;
     #pagesNum = 0;
     #page = 1;
@@ -35,7 +35,7 @@ export default class PagesController {
             return null;
         }
         ++this.#page;
-        return this.getPage();
+        return this.getPageData();
     }
 
     decrement() {
@@ -43,6 +43,6 @@ export default class PagesController {
             return null;
         }
         --this.#page;
-        return this.getPage();
+        return this.getPageData();
     }
 };

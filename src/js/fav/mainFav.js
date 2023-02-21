@@ -1,41 +1,12 @@
-export { getCardNode };
-import { touchLocalStorageArr} from './common';
-import { FAV_PAGES_KEY } from './constants';
+import { FAV_PAGES_KEY, NEWS_CARD_CSS_CLASSES } from "./constants";
+import { createCardPop } from "../cardMarkup";
+import { touchLocalStorageArr, resolveFavClick } from "./common";
 
+const newsCardsContainer = document.querySelector(`.${NEWS_CARD_CSS_CLASSES.container}`);
+newsCardsContainer.addEventListener('click', resolveFavClick);
 
-// temporary testing refs and event listeners
-const refs = {
-    container: document.querySelector('.container'),
-    inp: document.querySelector('.info-container'),
-    addBtn: document.querySelector('.add-to-storage'),
-    rmBtn: document.querySelector('.delete-from-storage'),
-};
+const localStorageArr = touchLocalStorageArr(FAV_PAGES_KEY);
 
-
-
-refs.addBtn.addEventListener('click', () => {
-    const data = refs.inp.value.trim();
-    if (data) {
-        touchLocalStorageArr(FAV_PAGES_KEY, data, simpleArrPusher);
-    }
-});
-
-refs.rmBtn.addEventListener('click', () => {
-    const data = refs.inp.value.trim();
-    if (data) {
-        touchLocalStorageArr(FAV_PAGES_KEY, data, simpleArrRemover);
-    }
-});
-
-
-
-function simpleArrPusher(array, data) {
-    array.push(data);
-}
-
-function simpleArrRemover(array, data) {
-    const idxToDelete = array.findIndex(el => el === data);
-    if (idxToDelete > -1) {
-        array.splice(idxToDelete, 1);
-    }
-}
+// const markup = localStorageArr.reduce((markup, article) => createCardPop(article) + markup, '');
+// console.log(markup);
+// updateMarkup(markup, newsCardsContainer);
