@@ -5,7 +5,7 @@ import { createCard } from './cardMarkup';
 const readList = document.querySelector('.read');
 const STORAGE_KEY = 'read';
 
-console.log('скрип зі сторінки READ');
+console.log('скрипт зі сторінки READ');
 
 // Фунція додає слухача на лінк 'Read more' на головній сторінці
 function addEvtListOnReadMore(articles) {
