@@ -35,10 +35,11 @@
 }
 
 .filter__btn-desktop {
-  width: 112px;
+  // width: 112px;
+  padding: 7.5px 22px;
 
-  padding-top: 7.5px;
-  padding-bottom: 7.5px;
+  // padding-top: 7.5px;
+  // padding-bottom: 7.5px;
   // padding-left: 13px;
   // padding-right: 37px;
 
@@ -55,10 +56,11 @@
 }
 
 .filter__btn {
-  width: 112px;
+  // width: 112px;
+  padding: 7.5px 22px;
 
-  padding-top: 7.5px;
-  padding-bottom: 7.5px;
+  // padding-top: 7.5px;
+  // padding-bottom: 7.5px;
   // padding-left: 13px;
   // padding-right: 37px;
 
@@ -71,16 +73,12 @@
   cursor: pointer;
 
   @include tablet() {
-    width: 112px;
+    // width: 112px;
 
     // padding-left: 24.5px;
     // padding-right: 48.5px;
 
-    margin-left: 14px;
-  }
-
-  @include desktop() {
-    margin-left: 16px;
+    // margin-left: 14px;
   }
 }
 
