@@ -1,79 +1,84 @@
-/_ short explanation for working with query class_/
+## short explanation for working with query class
 
-// import NewsApiServes from './rest-api';
+```json
 
-// const news = new NewsApiServes();
+import NewsApiServes from './rest-api';
+
+const news = new NewsApiServes();
+
+```
 
 // -------------------------------------------------------------
 
-/_ category list request _/
+# category list request
 
-// console.log(news.requestListCategories());
+```json
+
+console.log(news.requestListCategories());
+
+```
 
 // ---------------------------------------------------------------
 
-/_ popular news list query _/
+# popular news list query
 
-// console.log(news.requestPopularNews());
+```json
 
-// --------------------------------------------------------------
+console.log(news.requestPopularNews());
 
-/_ weather database query _/
-
-// console.log(news.requestWeatherApi(34.1, 11.25));
+```
 
 // --------------------------------------------------------------
 
-/_ search by category with pagination method_/
+# weather database query
 
-// news.category = 'books';
+```json
 
-// console.log(news.searchNewsOnClick());
+console.log(news.requestWeatherApi(34.1, 11.25));
 
-// news.incrementPagination();
+```
 
-// console.log(news.offset);
+// --------------------------------------------------------------
 
-// console.log(news.searchNewsOnClick());
+# search by category with pagination method
 
-// news.incrementPagination();
+```json
 
-// console.log(news.offset);
+ news.category = 'books';
+ console.log(news.searchNewsOnClick());
+ news.incrementPagination();
+ console.log(news.offset);
+ console.log(news.searchNewsOnClick());
+ news.incrementPagination();
+ console.log(news.offset);
+ console.log(news.searchNewsOnClick());
+ news.decrementPagination();
+ console.log(news.offset);
+ console.log(news.searchNewsOnClick());
+ news.decrementPagination();
+ console.log(news.offset);
 
-// console.log(news.searchNewsOnClick());
-
-// news.decrementPagination();
-
-// console.log(news.offset);
-
-// console.log(news.searchNewsOnClick());
-
-// news.decrementPagination();
-
-// console.log(news.offset);
+```
 
 // ----------------------------------------------------------------
 
-/_ search by input and date with pagination method _/
+# search by input and date with pagination method
 
-// news.setDate = '20200218';
+```json
 
-// news.query = 'you';
+ news.setDate = '20230218';
+ news.query = 'you';
+ console.log(news.searchNewsByInputAndDate());
+ news.pageIncrementPagination();
+ console.log(news.searchNewsByInputAndDate());
+ news.pageIncrementPagination();
+ console.log(news.searchNewsByInputAndDate());
+ news.pageDecrementPagination();
+ console.log(news.searchNewsByInputAndDate());
+ news.pageDecrementPagination();
+ console.log(news.searchNewsByInputAndDate());
 
-// console.log(news.searchNewsByInputAndDate());
+``
 
-// news.pageIncrementPagination();
 
-// console.log(news.searchNewsByInputAndDate());
-
-// news.pageIncrementPagination();
-
-// console.log(news.searchNewsByInputAndDate());
-
-// news.pageDecrementPagination();
-
-// console.log(news.searchNewsByInputAndDate());
-
-// news.pageDecrementPagination();
-
-// console.log(news.searchNewsByInputAndDate());
+```
