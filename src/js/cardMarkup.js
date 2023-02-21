@@ -1,4 +1,4 @@
-import { cutText, cutTitle, formatDate } from './makkupUtils';
+import { cutText, cutTitle, formatDate } from './markupUtils';
 
 export function createCard({
   section_name,
@@ -8,13 +8,6 @@ export function createCard({
   pub_date,
   multimedia,
   snippet,
-  subsection,
-  published_date,
-  title,
-  url,
-  media,
-  des_facet,
-  abstract,
 }) {
   return `
         <li class="news-item">
@@ -22,34 +15,32 @@ export function createCard({
         <div class="img-thumb">
         <span class="readable"
         >Already read
-        <svg class="icon-done"><use class="icon-arrow-done"
-        href="./images/sprite.svg#arrow-down"></use></svg>
+        <svg class="icon-done" width="18" height="18"><use
+        href="/sprite.f14d31f7.svg#arrow-done"></use></svg>
           </span>
           <img src="https://www.nytimes.com/${
-            multimedia[0].url || ''
-          }" loading="lazy" alt="${snippet || des_facet}" class="news-img" />
-          <p class="news-chip">${section_name || subsection}</p>
+            multimedia[0].url
+          }" loading="lazy" alt="${snippet}" class="news-img" />
+          <p class="news-chip">${section_name}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
             <svg class="favorite-icon" width="16" height="16">
-              <use href="./images/sprite.svg#heart-fill" class="icon-heart"></use>
-              <use href="./images/sprite.svg#heart-empty class="icon-empty-heart"></use>
-            </svg>
+             <use href="/sprite.f14d31f7.svg#heart-empty" class="icon-empty-heart"></use>  
+             <use href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart"></use>  
+                </svg> 
           </button>
         </div>
         <div class="news-info">
-          <h2 class="news-title">
-            ${cutTitle(headline.main) || cutTitle(title)}
+          <h2 class="news-title disable-scroll">
+            ${cutTitle(headline.main)}
           </h2>
           <p class="news-desk">
-          ${cutText(lead_paragraph) || cutText(abstract)}
+          ${cutText(lead_paragraph)}
           </p>
           <div class="adding">
-            <p class="news-date">${
-              formatDate(pub_date) || formatDate(published_date)
-            }</p>
+            <p class="news-date">${formatDate(pub_date)}</p>
             <a
-              href=${web_url || url}
+              href=${web_url}
               class="news-link"
               target="_blank"
               rel="noopener noreferrer"
@@ -69,15 +60,14 @@ export function createCardPop({
   published_date,
   url,
 }) {
-  // console.log(media[0]['media-metadata'][['media-metadata'].length - 1].url);
   return `
         <li class="news-item">
         <div class="overlay"></div>
         <div class="img-thumb">
         <span class="readable"
         >Already read
-        <svg class="icon-done"><use class="icon-arrow-done"
-        href="./images/sprite.svg#arrow-down"></use></svg>
+        <svg class="icon-done" width="18" height="18"><use
+        href="/sprite.f14d31f7.svg#arrow-done"></use></svg>
           </span>
           <img src="${
             !media[0]
@@ -90,13 +80,13 @@ export function createCardPop({
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
             <svg class="favorite-icon" width="16" height="16">
-              <use href="./images/sprite.svg#heart-fill" class="icon-heart"></use>
-              <use href="./images/sprite.svg#heart-empty class="icon-empty-heart"></use>
-            </svg>
+             <use href="/sprite.f14d31f7.svg#heart-empty" class="icon-empty-heart"></use>  
+             <use href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart"></use>  
+                </svg> 
           </button>
         </div>
         <div class="news-info">
-          <h2 class="news-title">
+          <h2 class="news-title disable-scroll">
             ${cutTitle(title)}
           </h2>
           <p class="news-desk">

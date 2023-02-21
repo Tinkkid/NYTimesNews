@@ -1,5 +1,5 @@
 import NewsApiServes from './rest-api';
-import { onError } from './popularNews';
+import { onError } from './renderPopularNews';
 import renderCards from '../index';
 
 const news = new NewsApiServes();
