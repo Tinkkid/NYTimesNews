@@ -1,10 +1,11 @@
 import jsScriptHeader from './js/jsScriptHeader';
 import { getCategoryList } from './js/category-search';
+import { getWeatherWidget } from './js/weather';
 import popularNews from './js/renderPopularNews';
 import { createCardPop } from './js/cardMarkup';
 import { updateMarkup } from './js/markupUtils';
 import { createCard } from './js/cardMarkup';
-import { getWeatherWidget } from './js/weather';
+
 import NewsApiServes from './js/rest-api';
 import footerJs from './js/footer';
 
