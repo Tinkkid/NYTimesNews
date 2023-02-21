@@ -17,9 +17,11 @@ export default async function renderPopularNews() {
   const articles = response.data.results;
   if (articles.length === 0) throw new Error('No data');
 
-  const markup = articles.reduce((markup, article) => createCardPop(article) + markup, '');
-  updateMarkup(markup, newsBoxEl);
+  console.log(articles);
 
+  const markup = articles.reduce((markup, article) =>  markup + createCardPop(article), '');
+  updateMarkup(markup, newsBoxEl);
+	addEvtListOnReadMore(articles);
     } catch{
       onError()
     }

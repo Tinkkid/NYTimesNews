@@ -18,6 +18,7 @@ export default async function onSearchSubmit(e) {
     if (articles.length === 0) throw new Error('No data');
     const markup = articles.reduce((markup, article) => createCard(article) + markup, '');
     updateMarkup(markup, newsBoxEl);
+	 addEvtListOnReadMore(articles);
   } catch {
     onError();
   }

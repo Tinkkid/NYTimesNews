@@ -1,11 +1,9 @@
-import { formatDate } from './makkupUtils';
+import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
-import { createCard } from './cardMarkup';
+import { createCard, createCardPop } from './cardMarkup';
 
 const readList = document.querySelector('.read');
 const STORAGE_KEY = 'read';
-
-console.log('скрипт зі сторінки READ');
 
 // Фунція додає слухача на лінк 'Read more' на головній сторінці
 function addEvtListOnReadMore(articles) {
@@ -13,12 +11,11 @@ function addEvtListOnReadMore(articles) {
 
   for (let i = 0; i < readMoreLinks.length; i++) {
     let article = articles[i];
+
     let link = readMoreLinks[i];
 
     //функція додає прочитане на Local Storage
     function addReadToStorage() {
-		console.log('додаю прочитане у лс');
-		
       const storageItems = load(STORAGE_KEY);
 
       if (storageItems === undefined) {
@@ -46,26 +43,44 @@ window.addEventListener('DOMContentLoaded', addAllReadOnPage);
 
 //функція, яка додає статті зі сховища на сторінку
 function addAllReadOnPage() {
+  console.log('add All Read On Page');
+
   const storageItems = load(STORAGE_KEY);
   //   console.log(storageItems);
   if (storageItems !== undefined) {
     //сортуємо масив, отриманий з Local Storage по даті
-    const sortedStorageArr = storageItems.sort();
-	//  console.log(sortedStorageArr);
+    let sortedStorageArr = '';
+
+    if (Object.keys(storageItems).includes('pub_date')) {
+      sortedStorageArr = storageItems.sort((a, b) =>
+        a.pub_date.localeCompare(b.pub_date)
+      );
+    } else {
+      sortedStorageArr = storageItems.sort((a, b) =>
+        a.published_date.localeCompare(b.published_date)
+      );
+    }
+    console.log('sorted', sortedStorageArr);
 
     let currentDate = null;
     let markup = '';
 
     sortedStorageArr.forEach(item => {
-      if (currentDate !== item.pub_date || item.published_date) {
+      let date = item.pub_date || item.published_date;
+
+      if (currentDate !== date) {
         if (currentDate !== null) {
           markup += '</div>'; //close current title
         }
-        currentDate = item.pub_date || item.published_date;
-        markup += createTitleMarcup(item);
+        currentDate = date;
+        markup += createTitleMarcup(date);
       }
 
-      markup += createCard(item);
+      if (Object.keys(sortedStorageArr).includes('pub_date')) {
+        markup += createCard(item);
+      } else {
+        markup += createCardPop(item);
+      }
     });
 
     markup += '</div>'; //close the title
@@ -76,33 +91,28 @@ function addAllReadOnPage() {
 }
 
 //функція, яка створює розмітку заголовка
-function createTitleMarcup({ pub_date, published_date }) {
+function createTitleMarcup(date) {
   return `
 		 <li class="read__block">
 			 <div class="read__title">
 				 <div class="read__date">
-					 <span>${formatDate(pub_date) || formatDate(published_date)}</span>
+					 <span class="date">${formatDate(date)}</span>
 				 </div>
-			 <button type="button" class="show-btn show-btn__down" id='${pub_date|| published_date}'>
-		  </button>
+			 	 <button type="button" class="show-btn show-btn__up" id='${date}'></button>
 			 </div>
 		 </li>
-		 <div class="read__gallery" if='news-gallery-${pub_date || published_date}'>`;
+		 <div class="read__gallery" id='read__gallery-${date}'>`;
 }
 
-//функція відкриття/звкриття випадаючого списку зі статтями
+//функція відкриття/закриття випадаючого списку зі статтями
 function addEvtLisOnArrowBtn() {
   const showButtons = document.querySelectorAll('.show-btn');
-//   console.log(showButtons);
 
   showButtons.forEach(button => {
-	const newsGallery = document.getElementById('news-gallery-' + button.id);
-    // const arrowTop = document.getElementById('arrow-top');
-    // const arrowDown = document.getElementById('arrow-down');
+    const newsGallery = document.getElementById('read__gallery-' + button.id);
 
     button.addEventListener('click', event => {
-      // console.log(arrowDown);
-      newsGallery.classList.toggle('visible');
+      newsGallery.classList.toggle('hidden');
 
       button.classList.toggle('show-btn__up');
       button.classList.toggle('show-btn__down');
