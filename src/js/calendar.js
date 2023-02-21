@@ -121,7 +121,12 @@ function onDaysClick(e) { //adding click events on days
 
     selectedApiDate = `${currYear}${addLeadingZero(currMonth + 1)}${addLeadingZero(clickedDate)}`;
     console.log('selectedApiDate :>> ', selectedApiDate);
-  
+
+    news.date = selectedApiDate;
+    const ChosenDate = news.date;
+
+    console.log('ChosenDate :>> ', ChosenDate);
+
   }
 
   // return selectedApiDate;
