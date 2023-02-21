@@ -2,8 +2,8 @@
   padding-top: 24px;
   padding-bottom: 24px;
 
-  font-family: 'Manrope', sans-serif;
-  font-weight: 400px;
+  // font-family: 'Manrope', sans-serif;
+  // font-weight: 400px;
   font-size: 12px;
   line-height: 1.3;
 
@@ -167,11 +167,11 @@
   }
 }
 
-.dropdown__btn:hover,
-.dropdown__btn:focus {
-  color: $white-color-text;
-  background-color: $accent-color;
-}
+// .dropdown__btn:hover,
+// .dropdown__btn:focus {
+//   color: $white-color-text;
+//   background-color: $accent-color;
+// }
 
 .dropdown__btn-icon-arrow-down {
   position: absolute;
@@ -312,3 +312,17 @@
 //     color: $white-color-text;
 //     background-color: $accent-color;
 // }
+
+body.isDark {
+  .filter__btn,
+  .dropdown__btn {
+    background-color: $primary-white-color;
+  }
+  .dropdown__btn:hover,
+  .dropdown__btn:focus,
+  .filter__btn:hover,
+  .filter__btn:focus {
+    color: $white-color-text;
+    background-color: $accent-color;
+  }
+}

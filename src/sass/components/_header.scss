@@ -183,19 +183,16 @@ body.isDark {
     display: block;
   }
 }
-// .menu__btn-burger {
-//   &.js-open {
-//     position: fixed;
-//   }
-// }
 
 //--------- MENU ----------
 
 .menu {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100vw;
+  max-width: 100%;
   height: 100vh;
+  z-index: 100;
   transition: transform 0.25s linear;
   background-color: $light-theme-bg;
   @include tablet() {
