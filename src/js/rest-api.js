@@ -16,6 +16,9 @@ export default class NewsApiServes {
   }
 
   async requestListCategories() {
+    if (document.title !== 'NYTimes News') {
+      return;
+    }
     const response = await axios.get(
       `${NEWS_URL}news/v3/content/section-list.json?api-key=${NEWS_API_KEY}`
     );
