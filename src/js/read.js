@@ -1,4 +1,4 @@
-import { formatDate } from './makkupUtils';
+import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
 
 const readList = document.querySelector('.read');
@@ -19,9 +19,7 @@ function addEvtListOnReadMore(articles) {
       if (storageItems === undefined) {
         save(STORAGE_KEY, [article]);
       } else {
-        const itemIndex = storageItems.findIndex(
-          item => +item.title === +article.title
-        );
+        const itemIndex = storageItems.findIndex(item => +item.title === +article.title);
         console.log('itemIndex', itemIndex);
         if (itemIndex >= 0) {
           storageItems.splice(itemIndex, 1);
@@ -46,7 +44,7 @@ function addAllReadOnPage() {
   if (storageItems !== undefined) {
     //сортуємо масив, отриманий з Local Storage по даті
     const sortedStorageArr = storageItems.sort();
-	//  console.log(sortedStorageArr);
+    //  console.log(sortedStorageArr);
 
     let currentDate = null;
     let markup = '';
@@ -78,7 +76,7 @@ function createTitleMarcup({ pub_date, published_date }) {
 				 <div class="read__date">
 					 <span>${formatDate(pub_date) || formatDate(published_date)}</span>
 				 </div>
-			 <button type="button" class="show-btn show-btn__down" id='${pub_date|| published_date}'>
+			 <button type="button" class="show-btn show-btn__down" id='${pub_date || published_date}'>
 		  </button>
 			 </div>
 		 </li>
@@ -88,10 +86,10 @@ function createTitleMarcup({ pub_date, published_date }) {
 //функція відкриття/звкриття випадаючого списку зі статтями
 function addEvtLisOnArrowBtn() {
   const showButtons = document.querySelectorAll('.show-btn');
-//   console.log(showButtons);
+  //   console.log(showButtons);
 
   showButtons.forEach(button => {
-	const newsGallery = document.getElementById('news-gallery-' + button.id);
+    const newsGallery = document.getElementById('news-gallery-' + button.id);
     // const arrowTop = document.getElementById('arrow-top');
     // const arrowDown = document.getElementById('arrow-down');
 
