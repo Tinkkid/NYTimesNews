@@ -1,20 +1,20 @@
-.container {
-  margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
+// .container {
+//   margin: 0 auto;
+//   padding-left: 16px;
+//   padding-right: 16px;
 
-  @include mobile {
-    width: $mobile;
-  }
+//   @include mobile {
+//     width: $mobile;
+//   }
 
-  @include tablet {
-    width: $tablet;
-  }
+//   @include tablet {
+//     width: $tablet;
+//   }
 
-  @include desktop {
-    width: $desktop;
-  }
-}
+//   @include desktop {
+//     width: $desktop;
+//   }
+// }
 .footer_container {
   background-color: #7a7a7a;
   height: 120px;
