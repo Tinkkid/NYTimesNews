@@ -7,7 +7,7 @@ import { createCard } from './js/cardMarkup';
 import { getWeatherWidget } from './js/weather';
 
 import { onFavoriteBtnClick } from './js/onFavoriteBtn';
-import footerJs from './js/footer';
+// import footerJs from './js/footer';
 
 import NewsApiServes from './js/rest-api';
 
