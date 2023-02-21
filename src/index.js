@@ -30,12 +30,12 @@ export default function renderCards(articles, identifier) {
         if (idx !== news.getCardOrder()) {
           return createCard(article);
         }
-        return getWeatherWidget();
+        return getWeatherWidget() + createCard(article);
       } else if (identifier === 'populate') {
         if (idx !== news.getCardOrder()) {
           return createCardPop(article);
         }
-        return getWeatherWidget();
+        return getWeatherWidget() + createCardPop(article);
       }
     })
     .join('');
