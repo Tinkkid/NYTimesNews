@@ -1,3 +1,6 @@
+import NewsApiServes from './rest-api';
+const news = new NewsApiServes();
+
 const calendarInputRef = document.querySelector('.calendar__form input');
 const currentMonthYearRef = document.querySelector('.calendar__title');
 const daysRef = document.querySelector('.days');
@@ -18,15 +21,11 @@ calendarFormRef.addEventListener('click', () => {
 })
 
 
-
-
-
 let selectedApiDate = '';// to transfer to API request
 let displayDate = '';// to display on calendar input
 
   // calendarInputRef.value = displayDate;
 
-  // calendarInputRef.value = 'kfkfdkhgdkhgd';
 
 // getting new Date, current year and month
 let date = new Date();
@@ -109,29 +108,30 @@ function onArrowsClick(e) {//adding click events on month and year arrows
 
 function onDaysClick(e) { //adding click events on days
   const clickedDate = e.target.innerText;
-  console.log('e :>> ', e);
+  // console.log('e :>> ', e);
 
   if (e.target.className !== 'inactive') {//to exclude selection of inactive dates
 
     // e.target.classList.add('selected');
 
-    let selectedApiDate = `${currYear}/${addLeadingZero(currMonth + 1)}/${addLeadingZero(clickedDate)}`;
-    console.log('selectedApiDate :>> ', selectedApiDate);
 
-    let displayDate = `${addLeadingZero(clickedDate)}/${addLeadingZero(currMonth + 1)}/${currYear}`;
+    displayDate = `${addLeadingZero(clickedDate)}/${addLeadingZero(currMonth + 1)}/${currYear}`;
     console.log('displayDate :>> ', displayDate);
     calendarDisplayDateRef.textContent = displayDate;
+
+    selectedApiDate = `${currYear}${addLeadingZero(currMonth + 1)}${addLeadingZero(clickedDate)}`;
+    console.log('selectedApiDate :>> ', selectedApiDate);
+  
   }
 
-  console.log('selectedApiDate :>> ', selectedApiDate);
-  console.log('displayDate :>> ', displayDate);
-
-  return selectedApiDate;
+  // return selectedApiDate;
 }
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
+  // console.log('selectedApiDate :>> ', selectedApiDate);
+  // console.log('displayDate :>> ', displayDate);
 
-export default selectedApiDate;
+// export default selectedApiDate;
