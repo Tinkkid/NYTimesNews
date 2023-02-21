@@ -10,4 +10,4 @@ jsScriptHeader();
 getWeatherWidget();
 renderPopularNews();
 onFavoriteBtnClick();
-footerJs();
+// footerJs();
