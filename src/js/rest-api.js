@@ -31,6 +31,9 @@ export default class NewsApiServes {
   }
 
   async requestWeatherApi(lat, lon) {
+    if (document.title !== 'NYTimes News') {
+      return;
+    }
     const response = await axios.get(
       `${WEATHER_URL}data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`
     );
@@ -39,6 +42,9 @@ export default class NewsApiServes {
   }
 
   async requestGeoApi(lat, lon) {
+    if (document.title !== 'NYTimes News') {
+      return;
+    }
     const response = await axios.get(
       `${WEATHER_URL}geo/1.0/reverse?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`
     );
@@ -47,6 +53,9 @@ export default class NewsApiServes {
   }
 
   async requestWeatherApiDefault() {
+    if (document.title !== 'NYTimes News') {
+      return;
+    }
     const response = await axios.get(
       `${WEATHER_URL}data/2.5/weather?q=Kyiv&units=metric&appid=${WEATHER_API_KEY}`
     );
