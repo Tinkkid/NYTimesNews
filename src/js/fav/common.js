@@ -66,6 +66,11 @@ function checkAndChangeStorage(newsCardNode) {
 function collectData(newsCardNode) {
     const dataStruct = {
         title: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent,
+        desk: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.desk}`).textContent,
+        chip: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.chip}`).textContent,
+        img: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.img}`).src,
+        date: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.date}`).textContent,
+        link: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.link}`).href,
     };
     return dataStruct;
 }
