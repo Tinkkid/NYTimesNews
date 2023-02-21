@@ -1,4 +1,4 @@
-export { FAV_PAGES_KEY, OFFSETS_FAVORITES, MAX_WIDTH, CARD_CLASSES };
+export { FAV_PAGES_KEY, OFFSETS_FAVORITES, MAX_WIDTH, NEWS_CARD_CSS_CLASSES };
 
 const FAV_PAGES_KEY = 'favPagesData';
 
@@ -15,10 +15,12 @@ const MAX_WIDTH = {
 };
 Object.freeze(MAX_WIDTH);
 
-const CARD_CLASSES = {
-    container: 'universe',
-    card: 'mega-test-container',
-    favLabel: 'info-container',
+const NEWS_CARD_CSS_CLASSES = {
+    container: 'news-container',
+    card: 'news-item',
+    favLabel: 'add-news-favorite',
     inFavorites: 'in-favorites',
+    //
+    title: 'news-title',
 };
-Object.freeze(CARD_CLASSES);
+Object.freeze(NEWS_CARD_CSS_CLASSES);

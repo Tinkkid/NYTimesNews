@@ -1,6 +1,6 @@
 export { getCardNode };
 import { touchLocalStorageArr} from './common';
-import { FAV_PAGES_KEY, CARD_CLASSES } from './constants';
+import { FAV_PAGES_KEY } from './constants';
 
 
 // temporary testing refs and event listeners
@@ -38,29 +38,4 @@ function simpleArrRemover(array, data) {
     if (idxToDelete > -1) {
         array.splice(idxToDelete, 1);
     }
-}
-
-// content for mainHome.js and 'fav/common.js', will be relocated later
-
-const cardsContainer = document.querySelector(`.${CARD_CLASSES.container}`);
-
-cardsContainer.addEventListener('click', (event) => {
-    event.preventDefault();
-    if (!event.target.classList.contains(CARD_CLASSES.favLabel)) {
-        return;
-    }
-    const cardNode = getCardNode(CARD_CLASSES.card, event.target);
-    // TODO
-    // checkStorage
-    // addOrDeleteFromStorage
-    cardNode.classList.toggle(CARD_CLASSES.inFavorites);
-    // target.classList.add('in-favorites');
-});
-
-function getCardNode(cardClassName, favLabelNode) {
-    let cardNode = favLabelNode;
-    while (!cardNode.classList.contains(cardClassName)) {
-        cardNode = cardNode.parentElement;
-    }
-    return cardNode;
 }

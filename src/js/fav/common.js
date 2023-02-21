@@ -1,5 +1,5 @@
-export { touchLocalStorageArr, getPagesOffset};
-import { MAX_WIDTH } from "./constants";
+export { touchLocalStorageArr, getPagesOffset, getNewsCardNode, isCardInStorage };
+import { FAV_PAGES_KEY, MAX_WIDTH, NEWS_CARD_CSS_CLASSES } from "./constants";
 
 
 function getPagesOffset(offsetsStruct) {
@@ -30,4 +30,22 @@ function touchLocalStorageArr(key, incomingData = null, operatingFunc = null) {
         localStorage.setItem(key, JSON.stringify(dataArr));
     }
     return dataArr;
+}
+
+
+function getNewsCardNode(newsCardClassName, favLabelNode) {
+    let cardNode = favLabelNode;
+    while (!cardNode.classList.contains(newsCardClassName)) {
+        cardNode = cardNode.parentElement;
+    }
+    return cardNode;
+}
+
+
+function isCardInStorage(newsCardNode) {
+    let localStorageContent = touchLocalStorageArr(FAV_PAGES_KEY);
+    const idx = localStorageContent.findIndex(
+        struct => struct.title === newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent
+    );
+    return (idx > -1) ? true : false;
 }
