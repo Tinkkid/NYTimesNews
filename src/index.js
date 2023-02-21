@@ -15,6 +15,7 @@ const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
 
 jsScriptHeader();
+jsCalendar();
 popularNews();
 
 footerJs();
