@@ -1,28 +1,25 @@
 import jsScriptHeader from './js/jsScriptHeader';
 import { getCategoryList } from './js/category-search';
-import weatherTemplate from './template/weatherTemplate';
-import { getWeatherWidget } from './js/weather';
 import popularNews from './js/renderPopularNews';
 import { createCardPop } from './js/cardMarkup';
 import { updateMarkup } from './js/markupUtils';
 import { createCard } from './js/cardMarkup';
-import jsCalendar from './js/calendar';
+import { getWeatherWidget } from './js/weather';
+
+import { onFavoriteBtnClick } from './js/onFavoriteBtn';
+// import footerJs from './js/footer';
 
 import NewsApiServes from './js/rest-api';
-import footerJs from './js/footer';
-import './js/fav/mainHome';
 
-const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
 
 jsScriptHeader();
 popularNews();
+getCategoryList();
 
-footerJs();
+// getWeatherWidget();
 
-if (document.title !== 'NYTimes News: Read By Yourself') {
-  getCategoryList();
-}
+console.log(news.getCardOrder());
 
 export default function renderCards(articles, identifier) {
   news.sizeScreenCompute();
@@ -32,16 +29,17 @@ export default function renderCards(articles, identifier) {
         if (idx !== news.getCardOrder()) {
           return createCard(article);
         }
-        return weatherTemplate() + createCard(article);
+        return getWeatherWidget();
       } else if (identifier === 'populate') {
         if (idx !== news.getCardOrder()) {
           return createCardPop(article);
         }
-        return weatherTemplate() + createCardPop(article);
+        return getWeatherWidget();
       }
     })
     .join('');
-
   updateMarkup(markup, newsBoxEl);
-  getWeatherWidget();
 }
+
+onFavoriteBtnClick();
+// footerJs();

@@ -1,39 +1,14 @@
-import axios from 'axios';
 import Notiflix from 'notiflix';
+import NewsApiServes from './rest-api';
 import 'notiflix/dist/notiflix-3.2.6.min.css';
 
+const news = new NewsApiServes();
 let refs = {};
 
 function creatMarkupWeather() {
   if (document.title !== 'NYTimes News') {
     return;
   }
-  const weatherWrap = document.querySelector('.wather-wrap');
-  const weatherContainer = document.createElement('ul');
-  weatherWrap.append(weatherContainer);
-  const weatherWidget = document.createElement('li');
-  weatherContainer.append(weatherWidget);
-  weatherWidget.classList.add('weather__card');
-  weatherWidget.insertAdjacentHTML(
-    'beforeend',
-    `<div class="weather__data">
-          <div class="weather__temp">
-            <span class="weather__temp-deg"></span>
-          <span class="deg">&#176;</span>
-          </div>
-          <div class="weather__info">
-            <span class="weather__condition"></span>
-            <span class="weather__location"><svg class="location-icon" width="27" height="27"><use class="icon-location" ></use></svg>
-              <p class="weather__location-place"></p> </span>
-          </div>
-        </div>
-        <img id="icon-weather" class="weather__image">
-        <p class="weather__date">
-          <span class="weather__day-week"></span>
-          <span class="weather__month"></span>
-           </p>
-       <div class="weather__link"> <a class="weather__link-site" target="_blank" rel = ”noopener” rel = ”noreferrer”>weather for week</a></div>`
-  );
   refs = {
     deg: document.querySelector('.deg'),
     iconPlace: document.querySelector('.icon-location'),
@@ -80,34 +55,7 @@ function findLocation(pos) {
   markupWeatherCard();
 }
 
-const BASE_URL = 'https://api.openweathermap.org/';
-const API_KEY = '26ee5cfba4c9a8162c8c1ca031ae1bc4';
-
-// Запит на сервер погоди
-async function fetchWeatherApi() {
-  const res = await axios.get(
-    `${BASE_URL}data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`
-  );
-  console.log(res.data);
-  return res.data;
-}
-
-// Запит на сервер для отриманная поточної назви міста
-async function fetchWeatherApiGeo() {
-  const res = await axios.get(
-    `${BASE_URL}geo/1.0/reverse?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`
-  );
-  console.log(res.data);
-  return res.data;
-}
-
-// / Запит на сервер для отриманная погоди за замовчуванням (Київ)
-async function fetchWeatherApiDefault() {
-  const res = await axios.get(`${BASE_URL}data/2.5/weather?q=Kyiv&units=metric&appid=${API_KEY}`);
-  console.log(res.data);
-  return res.data;
-}
-fetchWeatherApiDefault();
+news.requestWeatherApiDefault();
 
 // Функції для отримання поточної дати/місяця/року
 let date = new Date();
@@ -131,16 +79,13 @@ function getWeatherWidget() {
 
 // Функція для дінамичного додавання даних з API до розмітки при наданні користувачем своїх координат
 async function markupWeatherCard() {
-  if (document.title !== 'NYTimes News') {
-    return;
-  }
-  const data = await fetchWeatherApi();
-  const geo = await fetchWeatherApiGeo();
+  const data = await news.requestWeatherApi(latitude, longitude);
+  const geo = await news.requestGeoApi(latitude, longitude);
   creatMarkupWeather();
+  console.log(data);
   refs.weatherTemp.textContent = Math.floor(data.main.temp);
   refs.weatherLocation.textContent = geo[0].name;
   refs.weatherCondition.textContent = data.weather[0].main;
-  refs.iconPlace.setAttribute('href', `./images/sprite.svg#icon-location`);
   refs.weatherIcon.setAttribute(
     'src',
     `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
@@ -155,7 +100,7 @@ async function markupWeatherCard() {
 
 // Функція для дінамичного додавання даних з API до розмітки з дефолтним значенням (Київ)
 async function markupWeatherCardDefault() {
-  const data = await fetchWeatherApiDefault();
+  const data = await news.requestWeatherApiDefault();
   creatMarkupWeather();
   refs.weatherTemp.textContent = Math.floor(data.main.temp);
   refs.weatherLocation.textContent = data.name;

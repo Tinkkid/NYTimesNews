@@ -1,24 +1,22 @@
-import { createCard } from './cardMarkup';
-import { updateMarkup } from './markupUtils';
 import NewsApiServes from './rest-api';
 import { onError } from './renderPopularNews';
+import renderCards from '../index';
 
 const news = new NewsApiServes();
-const newsBoxEl = document.querySelector('.news-container');
 
 export default async function onSearchSubmit(e) {
   e.preventDefault();
-  const searchEl = e.target.elements.word.value.trim();
-  if(searchEl === '') return
-  news.query = searchEl;
-  news.setDate = '20200218'; /////// з календаря?
+  const form = e.currentTarget;
+  news.query = e.target.elements.word.value;
+  news.date = '20210221'; /////// з календаря?
   try {
     const response = await news.searchNewsByInputAndDate();
     const articles = response.data.response.docs;
     if (articles.length === 0) throw new Error('No data');
-    const markup = articles.reduce((markup, article) => createCard(article) + markup, '');
-    updateMarkup(markup, newsBoxEl);
-  } catch {
+    renderCards(articles, 'search');
+    // addEvtListOnReadMore(articles);
+  } catch (error) {
+    console.log(error);
     onError();
   }
 }

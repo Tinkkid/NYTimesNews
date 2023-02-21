@@ -1,5 +1,5 @@
-export { touchLocalStorageArr, getPagesOffset, getNewsCardNode, isInStorage, removeCardFromFavorites, addCardToFavorites, markCardFavorite, resolveFavClick };
-import { FAV_PAGES_KEY, MAX_WIDTH, NEWS_CARD_CSS_CLASSES } from "./constants";
+export { touchLocalStorageArr, getPagesOffset, getNewsCardNode, isInStorage, removeCardFromFavorites, addCardToFavorites, markCardFavorite, newsCardsChecker, resolveFavClick };
+import { FAV_PAGES_KEY, MAX_WIDTH, NEWS_CARD_CSS_CLASSES, WEATHER_CARD_CSS_CLASS } from "./constants";
 
 
 function getPagesOffset(offsetsStruct) {
@@ -14,7 +14,7 @@ function getPagesOffset(offsetsStruct) {
     }
 }
 
-
+// The function return data (array) from localStorage and can make changes with it using 'operatingFunc(array, data)' function
 function touchLocalStorageArr(key, incomingData = null, operatingFunc = null) {
     let dataArr = [];
     const storedData = localStorage.getItem(key);
@@ -33,6 +33,7 @@ function touchLocalStorageArr(key, incomingData = null, operatingFunc = null) {
 }
 
 
+// It finds a news card that corresponds to an event ('click') target.
 function getNewsCardNode(newsCardClassName, favButtonNode) {
     let newsCardNode = favButtonNode;
     while (!newsCardNode.classList.contains(newsCardClassName)) {
@@ -42,6 +43,7 @@ function getNewsCardNode(newsCardClassName, favButtonNode) {
 }
 
 
+// May cause problems for the weather widget
 function isInStorage(localStorageKey, newsCardNode) {
     const title = newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent;
     const idx = touchLocalStorageArr(localStorageKey).findIndex(
@@ -106,4 +108,17 @@ function resolveFavClick(event) {
     idx > -1 ?
     removeCardFromFavorites(FAV_PAGES_KEY, idx, newsCardNode) :
     addCardToFavorites(FAV_PAGES_KEY, newsCardNode);
+}
+
+
+function newsCardsChecker() {
+    const cards = document.querySelectorAll(`.${NEWS_CARD_CSS_CLASSES.card}`);
+    for (let card of cards) {
+        if (card.classList.contains(WEATHER_CARD_CSS_CLASS)) {
+            continue;
+        }
+        if (isInStorage(FAV_PAGES_KEY, card) > -1) {
+            markCardFavorite(card);
+        } 
+    }
 }

@@ -7,7 +7,7 @@ export function createCard({
   lead_paragraph,
   pub_date,
   multimedia,
-  snippet
+  snippet,
 }) {
   return `
         <li class="news-item">
@@ -18,8 +18,9 @@ export function createCard({
         <svg class="icon-done" width="18" height="18"><use
         href="/sprite.f14d31f7.svg#arrow-done"></use></svg>
           </span>
-          <img src="https://www.nytimes.com/${multimedia[0].url}" loading="lazy" alt="${snippet
-  }" class="news-img" />
+          <img src="https://www.nytimes.com/${
+            multimedia[0].url
+          }" loading="lazy" alt="${snippet}" class="news-img" />
           <p class="news-chip">${section_name}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
@@ -50,11 +51,6 @@ export function createCard({
       </li> `;
 }
 
-
-
-
-
-
 export function createCardPop({
   media,
   title,
@@ -77,7 +73,9 @@ export function createCardPop({
             !media[0]
               ? 'https://raw.githubusercontent.com/MaxF1996/NYTimesNews/main/src/images/The_New_York_Times.jpg'
               : media[0]['media-metadata'][2].url
-          }" loading="lazy" alt="${!media[0] ? 'NYTimes' : media[0].caption}" class="news-img" />
+          }" loading="lazy" alt="${
+    !media[0] ? 'NYTimes' : media[0].caption
+  }" class="news-img" />
           <p class="news-chip">${section || subsection}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
