@@ -14,6 +14,7 @@ export default async function onSearchSubmit(e) {
     const articles = response.data.response.docs;
     if (articles.length === 0) throw new Error('No data');
     renderCards(articles, 'search');
+	 addEvtListOnReadMore(articles);
   } catch {
     onError();
   }

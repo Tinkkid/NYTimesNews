@@ -13,6 +13,7 @@
     }
   
    export function formatDate(string){
+		if (!string) return null;
       const pubDate = new Date(string);
     const yyyy = pubDate.getFullYear();
     let mm = pubDate.getMonth() + 1;
