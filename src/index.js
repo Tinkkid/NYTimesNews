@@ -15,8 +15,10 @@ const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
 
 jsScriptHeader();
-jsCalendar();
-popularNews();
+if (document.title === 'NYTimes News') {
+  jsCalendar();
+  popularNews();
+}
 
 footerJs();
 
