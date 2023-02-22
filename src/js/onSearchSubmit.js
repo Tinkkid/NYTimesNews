@@ -14,8 +14,9 @@ export default async function onSearchSubmit(e) {
     const response = await news.searchNewsByInputAndDate();
     const articles = response.data.response.docs;
     if (articles.length === 0) throw new Error('No data');
-    renderCards(articles, 'search');
-    addEvtListOnReadMore(articles);
+    new Promise(function (resolve, reject) {
+      renderCards(articles, 'search');
+    }).then(addEvtListOnReadMore(articles));
   } catch (error) {
     console.log(error);
     onError();
