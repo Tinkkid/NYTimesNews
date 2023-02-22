@@ -16,6 +16,9 @@ export default class NewsApiServes {
   }
 
   async requestListCategories() {
+    if (document.title !== 'NYTimes News') {
+      return;
+    }
     const response = await axios.get(
       `${NEWS_URL}news/v3/content/section-list.json?api-key=${NEWS_API_KEY}`
     );
@@ -65,7 +68,7 @@ export default class NewsApiServes {
 
   async searchNewsOnClick() {
     const response = await axios.get(
-      `${NEWS_URL}news/v3/content/all/${this.categoryQuery}.json?limit=${this.limit}&offset=${this.offset}&api-key=${NEWS_API_KEY}`
+      `${NEWS_URL}news/v3/content/all/${this.categoryQuery}.json?&limit=40&api-key=${NEWS_API_KEY}`
     );
 
     return response;
@@ -73,7 +76,7 @@ export default class NewsApiServes {
 
   async searchNewsByInputAndDate() {
     const response = await axios.get(
-      `${NEWS_URL}search/v2/articlesearch.json?q=${this.searchQuery}&fq=&begin_date=${this.setDate}&end_date=${this.setDate}&page=${this.page}&api-key=${NEWS_API_KEY}`
+      `${NEWS_URL}search/v2/articlesearch.json?q=${this.searchQuery}&begin_date=${this.setDate}&end_date=${this.setDate}&page=${this.page}&api-key=${NEWS_API_KEY}`
     );
 
     return response;
@@ -127,12 +130,16 @@ export default class NewsApiServes {
     return this.page;
   }
 
-  setDate(newDate) {
-    this.setDate = newDate;
-  }
-
   getCardOrder() {
     return this.cardOrder;
+  }
+
+  get date() {
+    return this.setDate;
+  }
+
+  set date(newDate) {
+    this.setDate = newDate;
   }
 
   get category() {

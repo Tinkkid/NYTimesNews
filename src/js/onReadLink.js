@@ -2,6 +2,7 @@ import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
 import { createCard, createCardPop } from './cardMarkup';
 
+
 const readList = document.querySelector('.read');
 const STORAGE_KEY = 'read';
 
@@ -27,9 +28,10 @@ function addEvtListOnReadMore(articles) {
         save(STORAGE_KEY, [article]);
       } else {
         const itemIndex = storageItems.findIndex(
-          item => +item.title === +article.title
+          item => item.abstract === article.abstract
         );
         console.log('itemIndex', itemIndex);
+
         if (itemIndex >= 0) {
           storageItems.splice(itemIndex, 1);
         }
@@ -46,32 +48,38 @@ function addEvtListOnReadMore(articles) {
 // Слухач, на відкриття сторінки
 window.addEventListener('DOMContentLoaded', addAllReadOnPage);
 
+function getDate(item) {
+	if (item.published_date)
+		return item.published_date;
+
+	const regexp = /(\d+-\d+-\d+)/g
+	const m =  regexp.exec(item.pub_date);
+	if (m)
+		return m[1];
+	return item.pub_date;
+}
+
 //функція, яка додає статті зі сховища на сторінку
 function addAllReadOnPage() {
   console.log('add All Read On Page');
 
   const storageItems = load(STORAGE_KEY);
-  //   console.log(storageItems);
+     //console.log('items', storageItems);
+
   if (storageItems !== undefined) {
     //сортуємо масив, отриманий з Local Storage по даті
-    let sortedStorageArr = '';
 
-    if (Object.keys(storageItems).includes('pub_date')) {
-      sortedStorageArr = storageItems.sort((a, b) =>
-        a.pub_date.localeCompare(b.pub_date)
-      );
-    } else {
-      sortedStorageArr = storageItems.sort((a, b) =>
-        a.published_date.localeCompare(b.published_date)
-      );
-    }
+	const sortedStorageArr = storageItems.sort((a, b) =>
+		getDate(b).localeCompare(getDate(a))
+  	);
+
     console.log('sorted', sortedStorageArr);
 
     let currentDate = null;
     let markup = '';
 
     sortedStorageArr.forEach(item => {
-      let date = item.pub_date || item.published_date;
+      let date = getDate(item);
 
       if (currentDate !== date) {
         if (currentDate !== null) {
@@ -81,8 +89,9 @@ function addAllReadOnPage() {
         markup += createTitleMarcup(date);
       }
 
-      if (Object.keys(sortedStorageArr).includes('pub_date')) {
+      if (Object.keys(item).includes('pub_date')) {
         markup += createCard(item);
+		
       } else {
         markup += createCardPop(item);
       }
