@@ -8,6 +8,9 @@ const categoriesDropdownList = document.querySelector(
 const othersDropdownList = document.querySelector('.others-dropdown-list-js');
 
 async function getCategoryList() {
+  if (document.title !== 'NYTimes News') {
+    return;
+  }
   const response = await news.requestListCategories();
 
   const markupOthers = response.data.results

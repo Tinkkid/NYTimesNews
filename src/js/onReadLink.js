@@ -2,21 +2,18 @@ import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
 import { createCard, createCardPop } from './cardMarkup';
 
-
 const readList = document.querySelector('.read');
 const STORAGE_KEY = 'read';
+let readMoreLinks;
 
 // Фунція додає слухача на лінк 'Read more' на головній сторінці
 function addEvtListOnReadMore(articles) {
   readMoreLinks = document.querySelectorAll('.news-link');
 
-
   for (let i = 0; i < readMoreLinks.length; i++) {
     let article = articles[i];
 
-
     let link = readMoreLinks[i];
-
 
     //функція додає прочитане на Local Storage
     function addReadToStorage() {
@@ -47,14 +44,12 @@ function addEvtListOnReadMore(articles) {
 window.addEventListener('DOMContentLoaded', addAllReadOnPage);
 
 function getDate(item) {
-	if (item.published_date)
-		return item.published_date;
+  if (item.published_date) return item.published_date;
 
-	const regexp = /(\d+-\d+-\d+)/g
-	const m =  regexp.exec(item.pub_date);
-	if (m)
-		return m[1];
-	return item.pub_date;
+  const regexp = /(\d+-\d+-\d+)/g;
+  const m = regexp.exec(item.pub_date);
+  if (m) return m[1];
+  return item.pub_date;
 }
 
 //функція, яка додає статті зі сховища на сторінку
@@ -62,14 +57,14 @@ function addAllReadOnPage() {
   console.log('add All Read On Page');
 
   const storageItems = load(STORAGE_KEY);
-     //console.log('items', storageItems);
+  //console.log('items', storageItems);
 
   if (storageItems !== undefined) {
     //сортуємо масив, отриманий з Local Storage по даті
 
-	const sortedStorageArr = storageItems.sort((a, b) =>
-		getDate(b).localeCompare(getDate(a))
-  	);
+    const sortedStorageArr = storageItems.sort((a, b) =>
+      getDate(b).localeCompare(getDate(a))
+    );
 
     console.log('sorted', sortedStorageArr);
 
@@ -89,7 +84,6 @@ function addAllReadOnPage() {
 
       if (Object.keys(item).includes('pub_date')) {
         markup += createCard(item);
-		
       } else {
         markup += createCardPop(item);
       }
