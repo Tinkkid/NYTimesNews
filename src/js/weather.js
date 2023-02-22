@@ -101,11 +101,11 @@ async function markupWeatherCard() {
 // Функція для дінамичного додавання даних з API до розмітки з дефолтним значенням (Київ)
 async function markupWeatherCardDefault() {
   const data = await news.requestWeatherApiDefault();
+  console.log(data);
   creatMarkupWeather();
   refs.weatherTemp.textContent = Math.floor(data.main.temp);
   refs.weatherLocation.textContent = data.name;
   refs.weatherCondition.textContent = data.weather[0].main;
-  refs.iconPlace.setAttribute('href', `./images/sprite.svg#icon-location`);
   refs.weatherIcon.setAttribute(
     'src',
     `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
