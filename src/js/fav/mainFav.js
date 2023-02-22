@@ -4,9 +4,7 @@ import StoragePagesController from "./storagePagesController";
 import throttle from "lodash.throttle";
 
 const newsCardsContainer = document.querySelector(`.${NEWS_CARD_CSS_CLASSES.container}`);
-
 newsCardsContainer.addEventListener('click', resolveFavClick);
-
 
 const storagePagesController = new StoragePagesController(FAV_PAGES_KEY, OFFSETS_FAVORITES);
 const firstPage = storagePagesController.getPageData().reduce((markup, article) => createFavCardPop(article) + markup, '');
@@ -56,7 +54,7 @@ function createFavCardPop({
     }" class="news-img" />
             <p class="news-chip">${section || subsection}</p>
             <button type="button" class="add-news-favorite">
-              <p class="favorite-btn-text">In favorites</p>
+              <p class="favorite-btn-text">Remove from favorite</p>
               <svg class="favorite-icon" width="16" height="16">
                <use href="/sprite.f14d31f7.svg#heart-empty" class="icon-empty-heart"></use>  
                <use href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart"></use>  
