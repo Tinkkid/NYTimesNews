@@ -5,20 +5,21 @@ import onClickSwitcher from './header/onClickSwitcher';
 import defineSite from './header/defineSite';
 import setCssClassCurrent from './header/setCssClassCurrent';
 
-
 // ------- HEADER MAIN SCRIPT ---------
 export default function jsScriptHeader() {
   ref.formSearch.addEventListener('submit', onSearchSubmit);
 
   ref.btnSearchInput.addEventListener('click', onClikSearchBtn);
 
-  ref.burger.addEventListener('click', () =>
-    ref.menu.classList.remove('is-hidden')
-  );
+  ref.burger.addEventListener('click', () => {
+    ref.menu.classList.remove('is-hidden');
+    document.querySelector('.calendar__box').style.visibility = 'hidden';
+  });
 
-  ref.cross.addEventListener('click', () =>
-    ref.menu.classList.add('is-hidden')
-  );
+  ref.cross.addEventListener('click', () => {
+    ref.menu.classList.add('is-hidden');
+    document.querySelector('.calendar__box').style.visibility = 'visible';
+  });
 
   // ---- switch handler binder ------
 
