@@ -1,7 +1,7 @@
 import { ref } from './calendar/refs-calendar';
 import todayDate from './calendar/todayDate';
 import onCalendarFormClick from './calendar/onCalendarFormClick';
-import { save } from './localStorageService';
+import { load, save } from './localStorageService';
 import addLeadingZero from './calendar/addLeadingZero';
 
 // ------- CALENDAR MAIN SCRIPT ---------
@@ -13,6 +13,9 @@ export default function jsCalendar() {
   let date = new Date();
   let currYear = date.getFullYear();
   let currMonth = date.getMonth();
+
+  let selectedDate;
+  let selectedMonth;
 
   //main functions start
   ref.calendarForm.addEventListener('click', onCalendarFormClick);
@@ -34,8 +37,8 @@ export default function jsCalendar() {
     const lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay();//getting last day of month
     const lastDateOfPrevMonth = new Date(currYear, currMonth, 0).getDate();//getting last date of previous month
 
-    let liTag = "";
-
+    let liTag = '';
+   
     for (let i = firstDayOfMonth - 1; i > 0; i -= 1) {// creating li for previous month last days
       liTag += `<li class='inactive'>${lastDateOfPrevMonth - i + 1}</li>`;
     }
@@ -45,11 +48,14 @@ export default function jsCalendar() {
       }
     }
     for (let i = 1; i <= lastDateOfMonth; i += 1) {// creating li for all days of current month
-      //adding active class to li if the current day, month and year matched 
-      const isToday = i === date.getDate() && currMonth === new Date().getMonth()
-        && currYear === new Date().getFullYear() ? 'active' : '';
-      liTag += `<li class='${isToday} usual'>${i}</li>`;
+      //adding active class to li if the current day, month and year matched
+
+      const today = i === date.getDate() && currMonth === new Date().getMonth()
+        && currYear === new Date().getFullYear() ? 'today' : '';
+      
+      liTag += `<li class='${today} usual'>${i}</li>`;
     }
+
     if (lastDayOfMonth !== 0) { // if not Sunday
       for (let i = lastDayOfMonth; i < 7; i += 1) {// creating li of next month first days
         liTag += `<li class='inactive'>${i - lastDayOfMonth + 1}</li>`;
@@ -61,7 +67,6 @@ export default function jsCalendar() {
   
   function onArrowsClick(e) {//adding click events on month and year arrows
     const clickedIconRef = e.target;
-    console.log('clickedIconRef :>> ', clickedIconRef);
  
     // if clicked icon is previous icon then decrement current month or year by 1 else increment it by 1
     switch (clickedIconRef.id) {
@@ -78,7 +83,7 @@ export default function jsCalendar() {
         currYear += 1;
         break;
     }
-    console.log('currMonth :>> ', currMonth);
+
     if (currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
       // creating a new date of current year & month and pass it as date value
       date = new Date(currYear, currMonth, new Date().getDate());
@@ -90,21 +95,32 @@ export default function jsCalendar() {
     renderCalendar(); // calling renderCalendar function
   }
 
+
+
   function onDaysClick(e) { //adding click events on days
     const clickedDate = e.target.innerText;
-    console.log('e :>> ', e);
 
-    if (e.target.className === ' usual') {//to exclude selection of inactive dates
+    if (e.target.className !== 'inactive' && e.target.className !== 'days') {//to exclude selection of inactive dates and empty spaces between li elements
 
-      // e.target.classList.add('selected');
+      // remove older selected days 
+      const allSelectedDayEls = document.querySelectorAll('.selected__day');
+      for (const day of allSelectedDayEls) {
+        day.classList.remove('selected__day');
+      }
 
+      e.target.classList.add('selected__day');
 
-      displayDate = `${addLeadingZero(clickedDate)}/${addLeadingZero(currMonth + 1)}/${currYear}`;
+      save('selectedDayKey', clickedDate);//storing selected day in Local Storage
+
+      const displayDate = `${addLeadingZero(clickedDate)}/${addLeadingZero(currMonth + 1)}/${currYear}`;
       ref.calendarDisplayDate.textContent = displayDate;
 
-      const selectedDate = `${currYear}${addLeadingZero(currMonth + 1)}${addLeadingZero(clickedDate)}`;
-      // console.log('selectedDate :>> ', selectedDate);
-      save('selectedDateKey', selectedDate);
+      const selectedDateApi = `${currYear}${addLeadingZero(currMonth + 1)}${addLeadingZero(clickedDate)}`;
+      save('selectedDateKey', selectedDateApi);//storing selected date in Local Storage
+      
+      ref.calendarWrapper.classList.add('closed');//closing calendar
+      ref.calendarForm.classList.remove('selected');//remove selected state
+
     }
   }
 

@@ -133,21 +133,16 @@ body.isDark {
 
 /* CALENDAR */
 .calendar__overlay {
-  // outline: 1px solid tomato;
+  // outline: 1px solid red;
   position: absolute;
   top: 100%;
   right: 0;
 
   width: 250px;
-  height: 250px;
+  height: 285px;
 
   overflow: hidden;
-  // opacity: 0;
-  background-color: transparent;
   pointer-events: none;
-  color: transparent;
-
-  // z-index: -1;
 }
 
 .calendar__wrapper {
@@ -164,31 +159,24 @@ body.isDark {
   color: var(--calendar-maintext-color);
 
   background-color: var(--calendar-bkgd-color);
-  box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
 
-  /* display: block; */
-
-  // opacity: 1;
   pointer-events: all;
-  // z-index: 1;
 
   transform: translateY(0);
   transition: transform 250ms linear;
 
-  // overflow: hidden;
 }
 
 .calendar__wrapper.closed {
-  // opacity: 0;
   pointer-events: none;
   box-shadow: unset;
 
-  transform: translateY(-100%);
+  transform: translateY(-101%);
 }
 
 .calendar__header {
-  /* outline: 1px solid teal; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -196,7 +184,6 @@ body.isDark {
 }
 
 .calendar__title {
-  /* outline: 1px solid red; */
   font-size: 16px;
   line-height: 1.38;
 }
@@ -234,10 +221,6 @@ body.isDark {
   width: 7px;
   height: 12px;
   fill: var(--accent-color);
-}
-
-.calendar {
-  /* outline: 1px solid tomato; */
 }
 
 .calendar ul {
@@ -301,14 +284,17 @@ body.isDark {
   color: var(--calendar-week-color);
 }
 
-.days li.active {
-  color: var(--calendar-selected-color);
+.days li.today {
+  color: var(--accent-color);
+    font-weight: 700;
 }
 
-.days li.active::before {
+.days li.selected__day:hover::before{
   background-color: var(--accent-color);
 }
-
-.days li.active:hover::before {
+.days li.selected__day {
+  color: var(--calendar-selected-color);
+}
+.days li.selected__day::before {
   background-color: var(--accent-color);
 }
