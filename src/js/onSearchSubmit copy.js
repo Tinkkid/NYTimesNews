@@ -1,6 +1,7 @@
 import NewsApiServes from './rest-api';
 import { onError } from './renderPopularNews';
 import renderCards from '../index';
+import { addEvtListOnReadMore } from './onReadLink';
 
 const news = new NewsApiServes();
 
@@ -14,7 +15,7 @@ export default async function onSearchSubmit(e) {
     const articles = response.data.response.docs;
     if (articles.length === 0) throw new Error('No data');
     renderCards(articles, 'search');
-    // addEvtListOnReadMore(articles);
+    addEvtListOnReadMore(articles);
   } catch (error) {
     console.log(error);
     onError();
