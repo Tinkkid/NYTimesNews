@@ -3,6 +3,7 @@ import NewsApiServes from './rest-api';
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
 import { addEvtListOnReadMore } from './onReadLink';
+import { newsCardsFavChecker } from './fav/common';
 
 export default async function () {
   if (document.title !== 'NYTimes News') {
@@ -17,6 +18,8 @@ export default async function () {
   } catch {
     onError();
   }
+
+  newsCardsFavChecker();
 }
 
 export function onError() {
