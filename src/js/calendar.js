@@ -1,8 +1,8 @@
 import { ref } from './calendar/refs-calendar';
 import todayDate from './calendar/todayDate';
-import onCalendarFormClick from './calendar/onCalendarFormClick';
 import { load, save } from './localStorageService';
 import addLeadingZero from './calendar/addLeadingZero';
+import onCalendarFormClick from './calendar/onCalendarFormClick';
 
 // ------- CALENDAR MAIN SCRIPT ---------
 
@@ -14,23 +14,20 @@ export default function jsCalendar() {
   let currYear = date.getFullYear();
   let currMonth = date.getMonth();
 
-  let selectedDate;
-  let selectedMonth;
-
   //main functions start
+  save('selectedDayKey', '');
   ref.calendarForm.addEventListener('click', onCalendarFormClick);
     renderCalendar();
   ref.prevNextArrows.addEventListener('click', onArrowsClick);//listening click on month and year arrows
   ref.days.addEventListener('click', onDaysClick);//listening click on days
 
 
-  //Functions  
-  function renderCalendar() {
+  //Functions 
 
+  function renderCalendar() {
     // storing full name of all months in array
     const months = ["January", "February", "March", "April", "May", "June", "July",
       "August", "September", "October", "November", "December"];
-
 
     const firstDayOfMonth = new Date(currYear, currMonth, 1).getDay();//getting first day of month
     const lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate();//getting last date of month
@@ -61,10 +58,11 @@ export default function jsCalendar() {
         liTag += `<li class='inactive'>${i - lastDayOfMonth + 1}</li>`;
       }
     }
-    ref.currentMonthYear.textContent = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
+    ref.currentMonthYear.textContent = `${months[currMonth]} ${currYear}`; // setting current mon and yr as currentDate text
     ref.days.innerHTML = liTag;
   }
-  
+
+
   function onArrowsClick(e) {//adding click events on month and year arrows
     const clickedIconRef = e.target;
  
@@ -93,7 +91,9 @@ export default function jsCalendar() {
       date = new Date(); // pass the current date as date value
     }
     renderCalendar(); // calling renderCalendar function
+    setStoredDay();
   }
+
 
 
 
@@ -102,18 +102,12 @@ export default function jsCalendar() {
 
     if (e.target.className !== 'inactive' && e.target.className !== 'days') {//to exclude selection of inactive dates and empty spaces between li elements
 
-      // remove older selected days 
-      const allSelectedDayEls = document.querySelectorAll('.selected__day');
-      for (const day of allSelectedDayEls) {
-        day.classList.remove('selected__day');
-      }
-
-      e.target.classList.add('selected__day');
-
+      removeSelectedDays();// remove older selected days 
+      e.target.classList.add('selected__day');//set new selected day
       save('selectedDayKey', clickedDate);//storing selected day in Local Storage
 
       const displayDate = `${addLeadingZero(clickedDate)}/${addLeadingZero(currMonth + 1)}/${currYear}`;
-      ref.calendarDisplayDate.textContent = displayDate;
+      ref.calendarDisplayDate.textContent = displayDate; //display selected date in Calendar form
 
       const selectedDateApi = `${currYear}${addLeadingZero(currMonth + 1)}${addLeadingZero(clickedDate)}`;
       save('selectedDateKey', selectedDateApi);//storing selected date in Local Storage
@@ -125,3 +119,17 @@ export default function jsCalendar() {
   }
 
 }
+  function setStoredDay() {
+    const allrenderedDayEls = document.querySelectorAll('.usual');
+    console.log('    allrenderedDayEls :>> ',     allrenderedDayEls);
+    for (const day of allrenderedDayEls) {
+    if (day.textContent === load('selectedDayKey')) {day.classList.add('selected__day')};
+    }
+  }
+
+  function removeSelectedDays() {
+    const allSelectedDayEls = document.querySelectorAll('.selected__day');
+    for (const day of allSelectedDayEls) {
+    day.classList.remove('selected__day');
+      }
+  }

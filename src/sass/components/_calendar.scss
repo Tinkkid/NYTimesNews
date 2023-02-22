@@ -250,9 +250,7 @@ body.isDark {
 }
 
 .calendar .days li:nth-child(n + 8) {
-  // .calendar .days li {
   margin-top: 12px;
-  // padding: 12px 0px;
 }
 
 .days li.usual:nth-child(7n + 7) {
@@ -261,6 +259,14 @@ body.isDark {
 
 .days li.usual:nth-child(7n + 6) {
   color: var(--theme-switcher-color);
+}
+
+.days li.selected__day.usual:nth-child(7n + 7) {
+  color: var(--calendar-selected-color);
+}
+
+.days li.selected__day.usual:nth-child(7n + 6) {
+  color: var(--calendar-selected-color);
 }
 
 .days li.usual::before {
