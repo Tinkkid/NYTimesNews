@@ -2,6 +2,7 @@ import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
 import { createCard, createCardPop } from './cardMarkup';
 
+
 const readList = document.querySelector('.read');
 const STORAGE_KEY = 'read';
 
@@ -43,10 +44,14 @@ function addEvtListOnReadMore(articles) {
 window.addEventListener('DOMContentLoaded', addAllReadOnPage);
 
 function getDate(item) {
-	if (Object.keys(item).includes('pub_date')) {
-		return item.pub_date;
-	}
-	return item.published_date;
+	if (item.published_date)
+		return item.published_date;
+
+	const regexp = /(\d+-\d+-\d+)/g
+	const m =  regexp.exec(item.pub_date);
+	if (m)
+		return m[1];
+	return item.pub_date;
 }
 
 //функція, яка додає статті зі сховища на сторінку
@@ -54,25 +59,15 @@ function addAllReadOnPage() {
   console.log('add All Read On Page');
 
   const storageItems = load(STORAGE_KEY);
-  //   console.log(storageItems);
+     //console.log('items', storageItems);
 
   if (storageItems !== undefined) {
     //сортуємо масив, отриманий з Local Storage по даті
-    let sortedStorageArr = '';
 
-	sortedStorageArr = storageItems.sort((a, b) =>
-		 getDate(b).localeCompare(getDate(a))
+	const sortedStorageArr = storageItems.sort((a, b) =>
+		getDate(b).localeCompare(getDate(a))
   	);
 
-   //  if (Object.keys(storageItems).includes('pub_date')) {
-   //    sortedStorageArr = storageItems.sort((a, b) =>
-   //      b.pub_date.localeCompare(a.pub_date)
-   //    );
-   //  } else {
-   //    sortedStorageArr = storageItems.sort((a, b) =>
-   //      b.published_date.localeCompare(a.published_date)
-   //    );
-   //  }
     console.log('sorted', sortedStorageArr);
 
     let currentDate = null;
@@ -91,6 +86,7 @@ function addAllReadOnPage() {
 
       if (Object.keys(item).includes('pub_date')) {
         markup += createCard(item);
+		
       } else {
         markup += createCardPop(item);
       }
