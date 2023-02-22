@@ -67,16 +67,18 @@ body {
     margin: 10px 16px;
   }
 }
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 3;
-  background-color: $mute-color-card;
-  pointer-events: none;
+
+.news-item.read-card {
+  .news-info {
+    opacity: 0.65;
+    background-color: #f4f4f4;
+  }
+  .news-img {
+    opacity: 0.65;
+  }
+  .readable {
+    opacity: 1;
+  }
 }
 
 .img-thumb {
@@ -124,7 +126,7 @@ body {
   margin-left: 4px;
   // position: relative;
 }
-.icon-empty-heart{
+.icon-empty-heart {
   stroke: $accent-color;
   fill: $primary-white-color;
 }
@@ -146,7 +148,6 @@ body {
   &.liked .icon-heart {
     display: block;
     fill: $accent-color;
-
   }
   &.liked .icon-empty-heart {
     display: none;
@@ -182,7 +183,7 @@ body {
     font-size: 32px;
   }
 }
-.disable-scroll{
+.disable-scroll {
   overflow-y: hidden;
 }
 
