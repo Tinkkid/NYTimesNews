@@ -1,16 +1,8 @@
 import { ref } from './refs-calendar';
+import { date, currYear, currMonth } from './todayDate';
 
-  let date = new Date();
-  let currYear = date.getFullYear();
-  let currMonth = date.getMonth();
-
-
-export { date, currYear, currMonth };
 
 export default function renderCalendar() {
-
-  // getting new Date, current year and month
-
 
     // storing full name of all months in array
     const months = ["January", "February", "March", "April", "May", "June", "July",

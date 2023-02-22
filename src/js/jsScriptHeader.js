@@ -5,6 +5,7 @@ import onClickSwitcher from './header/onClickSwitcher';
 import defineSite from './header/defineSite';
 import setCssClassCurrent from './header/setCssClassCurrent';
 
+
 // ------- HEADER MAIN SCRIPT ---------
 export default function jsScriptHeader() {
   ref.formSearch.addEventListener('submit', onSearchSubmit);

@@ -1,8 +1,11 @@
-import { date, currYear, currMonth } from './renderCalendar';
+import { date, currYear, currMonth } from './todayDate';
+import renderCalendar from './renderCalendar';
 
+console.log('currMonth :>> ', currMonth);
 
 export default function onArrowsClick(e) {//adding click events on month and year arrows
-    const clickedIconRef = e.target;
+  const clickedIconRef = e.target;
+  console.log('clickedIconRef :>> ', clickedIconRef);
  
     // if clicked icon is previous icon then decrement current month or year by 1 else increment it by 1
     switch (clickedIconRef.id) {
@@ -18,7 +21,8 @@ export default function onArrowsClick(e) {//adding click events on month and yea
       case 'year__next':
         currYear += 1;
         break;
-    }
+  }
+  console.log('currMonth :>> ', currMonth);
     if (currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
       // creating a new date of current year & month and pass it as date value
       date = new Date(currYear, currMonth, new Date().getDate());
@@ -27,5 +31,5 @@ export default function onArrowsClick(e) {//adding click events on month and yea
     } else {
       date = new Date(); // pass the current date as date value
     }
-    renderCalendar(); // calling renderCalendar function
+    renderCalendar(date, currYear, currMonth); // calling renderCalendar function
   }
