@@ -1,6 +1,5 @@
 const footerEl = document.querySelector('footer');
 export default function footerJs() {
-  console.log(footerEl.firstElementChild);
   setInterval(getRandomHexColor, 5000);
 }
 
