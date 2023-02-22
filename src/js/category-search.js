@@ -14,7 +14,7 @@ async function getCategoryList() {
     .map((arr, index) => {
       if (index > 5) {
         return `<li class="dropdown__item">
-            <button class="dropdown__category-btn">${arr.display_name}</button>
+            <button class="dropdown__category-btn category__btn">${arr.display_name}</button>
           </li>`;
       }
     })
@@ -24,7 +24,7 @@ async function getCategoryList() {
   const markupCategories = response.data.results
     .map(
       arr => `<li class="dropdown__item">
-                            <button class="dropdown__category-btn ">${arr.display_name}</button>
+                            <button class="dropdown__category-btn category__btn">${arr.display_name}</button>
                         </li>`
     )
     .join('');
