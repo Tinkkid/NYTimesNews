@@ -7,7 +7,7 @@ const STORAGE_KEY = 'read';
 
 // Фунція додає слухача на лінк 'Read more' на головній сторінці
 function addEvtListOnReadMore(articles) {
-  readMoreLinks = document.querySelectorAll('[class="news-link"]');
+  readMoreLinks = document.querySelectorAll('.news-link');
 
   for (let i = 0; i < readMoreLinks.length; i++) {
     let article = articles[i];
