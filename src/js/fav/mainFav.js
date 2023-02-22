@@ -55,9 +55,8 @@ function createFavCardPop({
             <p class="news-chip">${section || subsection}</p>
             <button type="button" class="add-news-favorite">
               <p class="favorite-btn-text">Remove from favorite</p>
-              <svg class="favorite-icon" width="16" height="16">
-               <use href="/sprite.f14d31f7.svg#heart-empty" class="icon-empty-heart"></use>  
-               <use href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart"></use>  
+              <svg class="favorite-icon" width="16" height="16" style="fill: #4440F6;">
+               <use href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart" style="display: inline;"></use>  
                   </svg> 
             </button>
           </div>

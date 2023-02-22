@@ -55,7 +55,7 @@ function isInStorage(localStorageKey, newsCardNode) {
 
 function removeCardFromFavorites(localStorageKey, idx, newsCardNode) {
     touchLocalStorageArr(localStorageKey, idx, removeFromArr);
-    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).textContent = 'Add to favorite';
+    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).innerHTML = '<p class="favorite-btn-text">Add to favorite</p><svg class="favorite-icon" width="16" height="16"><use href="/sprite.f14d31f7.svg#heart-empty" class="icon-empty-heart"></use></svg>';
 }
 function removeFromArr(storageArr, idx) {
     storageArr.splice(idx, 1);
@@ -64,7 +64,7 @@ function removeFromArr(storageArr, idx) {
 
 function addCardToFavorites(localStorageKey, newsCardNode) {
     touchLocalStorageArr(localStorageKey, newsCardNode, addToArr);
-    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).textContent = 'In favorite';
+    markCardFavorite(newsCardNode);
 }
 function addToArr(storageArr, newsCardNode) {
     storageArr.unshift(collectData(newsCardNode));
@@ -72,7 +72,7 @@ function addToArr(storageArr, newsCardNode) {
 
 
 function markCardFavorite(newsCardNode) {
-    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).textContent = 'In favorite';
+    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).innerHTML = '<p class="favorite-btn-text">In favorite</p><svg class="favorite-icon" style="fill: #4440F6;" width="16" height="16"><use style="display: inline;" href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart"></use></svg>';
 };
 
 
