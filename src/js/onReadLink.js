@@ -22,9 +22,10 @@ function addEvtListOnReadMore(articles) {
         save(STORAGE_KEY, [article]);
       } else {
         const itemIndex = storageItems.findIndex(
-          item => +item.title === +article.title
+          item => item.abstract === article.abstract
         );
         console.log('itemIndex', itemIndex);
+
         if (itemIndex >= 0) {
           storageItems.splice(itemIndex, 1);
         }
