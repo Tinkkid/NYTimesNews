@@ -1,4 +1,4 @@
-import { FAV_PAGES_KEY, NEWS_CARD_CSS_CLASSES, OFFSETS_FAVORITES } from "./constants";
+import { FAV_BUTTON_ICON_FILLED_HTML, FAV_PAGES_KEY, NEWS_CARD_CSS_CLASSES, OFFSETS_FAVORITES, FAV_BUTTON_ICON_FILLED_HTML } from "./constants";
 import { resolveFavClick } from "./common";
 import StoragePagesController from "./storagePagesController";
 import throttle from "lodash.throttle";
@@ -55,9 +55,9 @@ function createFavCardPop({
             <p class="news-chip">${section || subsection}</p>
             <button type="button" class="add-news-favorite">
               <p class="favorite-btn-text">Remove from favorite</p>
-              <svg class="favorite-icon" width="16" height="16" style="fill: #4440F6;">
-               <use href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart" style="display: inline;"></use>  
-                  </svg> 
+              <svg class="favorite-icon" width="16" height="16" viewBox="0 0 32 32" style="fill: #4440F6;">
+                ${FAV_BUTTON_ICON_FILLED_HTML}
+              </svg> 
             </button>
           </div>
           <div class="news-info">

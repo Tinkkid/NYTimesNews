@@ -1,5 +1,5 @@
 export { touchLocalStorageArr, getPagesOffset, newsCardsFavChecker, resolveFavClick };
-import { FAV_PAGES_KEY, MAX_WIDTH, NEWS_CARD_CSS_CLASSES, WEATHER_CARD_CSS_CLASS } from "./constants";
+import { FAV_BUTTON_ICON_EMPTY_HTML, FAV_BUTTON_ICON_FILLED_HTML, FAV_BUTTON_ICON_FILL_COLOR, FAV_PAGES_KEY, MAX_WIDTH, NEWS_CARD_CSS_CLASSES, WEATHER_CARD_CSS_CLASS } from "./constants";
 
 
 function getPagesOffset(offsetsStruct) {
@@ -55,7 +55,8 @@ function isInStorage(localStorageKey, newsCardNode) {
 
 function removeCardFromFavorites(localStorageKey, idx, newsCardNode) {
     touchLocalStorageArr(localStorageKey, idx, removeFromArr);
-    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).innerHTML = '<p class="favorite-btn-text">Add to favorite</p><svg class="favorite-icon" width="16" height="16"><use href="/sprite.f14d31f7.svg#heart-empty" class="icon-empty-heart"></use></svg>';
+    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButtonText}`).textContent = 'Add to favorite';
+    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButtonIcon}`).innerHTML = FAV_BUTTON_ICON_EMPTY_HTML;
 }
 function removeFromArr(storageArr, idx) {
     storageArr.splice(idx, 1);
@@ -72,7 +73,8 @@ function addToArr(storageArr, newsCardNode) {
 
 
 function markCardFavorite(newsCardNode) {
-    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButton}`).innerHTML = '<p class="favorite-btn-text">In favorite</p><svg class="favorite-icon" style="fill: #4440F6;" width="16" height="16"><use style="display: inline;" href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart"></use></svg>';
+    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButtonText}`).textContent = 'In favorite';
+    newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButtonIcon}`).innerHTML = FAV_BUTTON_ICON_FILLED_HTML;
 };
 
 
@@ -97,7 +99,7 @@ function resolveFavClick(event) {
     if (!( 
         event.target.classList.contains(NEWS_CARD_CSS_CLASSES.favButton) ||
         event.target.parentNode.classList.contains(NEWS_CARD_CSS_CLASSES.favButton) ||
-        event.target.tagName === 'use'
+        event.target.tagName === 'path'
         )) {
         return;
     }
@@ -119,6 +121,6 @@ function newsCardsFavChecker() {
         }
         if (isInStorage(FAV_PAGES_KEY, card) > -1) {
             markCardFavorite(card);
-        } 
+        }
     }
 }
