@@ -1,5 +1,10 @@
 export function readLinksStyling() {
+  if (String(localStorage.getItem('read')) === 'null') {
+    return;
+  }
+
   const cardsForCheck = document.querySelectorAll('[class="news-item"]');
+
   const readList = JSON.parse(localStorage.getItem('read'));
   const readLinks = readList.map(newsItem => {
     if (newsItem.url) {

@@ -23,7 +23,7 @@ if (document.title === 'NYTimes News') {
 
 footerJs();
 
-if (document.title !== 'NYTimes News: Read By Yourself') {
+if (document.title === 'NYTimes News') {
   getCategoryList();
 }
 
@@ -47,6 +47,7 @@ export default function renderCards(articles, identifier) {
 
   updateMarkup(markup, newsBoxEl);
   getWeatherWidget();
+
   if (document.title === 'NYTimes News') {
     readLinksStyling();
   }

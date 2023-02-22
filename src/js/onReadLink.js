@@ -1,6 +1,7 @@
 import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
 import { createCard, createCardPop } from './cardMarkup';
+import { readLinksStyling } from './readLinksStyling';
 
 const readList = document.querySelector('.read');
 const STORAGE_KEY = 'read';
@@ -94,6 +95,8 @@ function addAllReadOnPage() {
   }
 
   addEvtLisOnArrowBtn();
+
+  readLinksStyling();
 }
 
 //функція, яка створює розмітку заголовка
