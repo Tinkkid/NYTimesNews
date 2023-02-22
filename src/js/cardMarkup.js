@@ -1,3 +1,4 @@
+import { FAV_BUTTON_ICON_EMPTY_HTML } from './fav/constants';
 import { cutText, cutTitle, formatDate } from './markupUtils';
 
 export function createCard({
@@ -27,10 +28,9 @@ export function createCard({
           <p class="news-chip">${section_name}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
-            <svg class="favorite-icon" width="16" height="16">
-             <use href="/sprite.f14d31f7.svg#heart-empty" class="icon-empty-heart"></use>  
-             <use href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart"></use>  
-                </svg> 
+            <svg class="favorite-icon" width="16" height="16" viewBox="0 0 32 32">
+             ${FAV_BUTTON_ICON_EMPTY_HTML} 
+            </svg> 
           </button>
         </div>
         <div class="news-info">
@@ -81,10 +81,9 @@ export function createCardPop({
           <p class="news-chip">${section || subsection}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
-            <svg class="favorite-icon" width="16" height="16">
-             <use href="/sprite.f14d31f7.svg#heart-empty" class="icon-empty-heart"></use>  
-             <use href="/sprite.f14d31f7.svg#heart-fill" class="icon-heart"></use>  
-                </svg> 
+            <svg class="favorite-icon" width="16" height="16" viewBox="0 0 32 32">
+             ${FAV_BUTTON_ICON_EMPTY_HTML}
+            </svg> 
           </button>
         </div>
         <div class="news-info">

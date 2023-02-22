@@ -124,14 +124,13 @@ body {
 }
 .favorite-icon {
   margin-left: 4px;
-  // position: relative;
 }
 .icon-empty-heart {
   stroke: $accent-color;
   fill: $primary-white-color;
 }
 .icon-heart {
-  display: none;
+  fill: $accent-color;
 }
 .add-news-favorite {
   position: absolute;
