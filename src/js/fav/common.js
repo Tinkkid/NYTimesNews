@@ -1,4 +1,4 @@
-export { touchLocalStorageArr, getPagesOffset, getNewsCardNode, isInStorage, removeCardFromFavorites, addCardToFavorites, markCardFavorite, newsCardsChecker, resolveFavClick };
+export { touchLocalStorageArr, getPagesOffset, newsCardsFavChecker, resolveFavClick };
 import { FAV_PAGES_KEY, MAX_WIDTH, NEWS_CARD_CSS_CLASSES, WEATHER_CARD_CSS_CLASS } from "./constants";
 
 
@@ -43,9 +43,9 @@ function getNewsCardNode(newsCardClassName, favButtonNode) {
 }
 
 
-// May cause problems for the weather widget
+// Checks for a news card in the storage
 function isInStorage(localStorageKey, newsCardNode) {
-    const title = newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent;
+    const title = newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent.trim();
     const idx = touchLocalStorageArr(localStorageKey).findIndex(
         struct => struct.title === title
     );
@@ -82,7 +82,7 @@ function collectData(newsCardNode) {
             url: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.media}`).src,
             caption: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.media}`).alt,
         }],
-        title: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent,
+        title: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.title}`).textContent.trim(),
         section: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.section}`).textContent,
         subsection: '',
         abstract: newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.abstract}`).textContent,
@@ -111,7 +111,7 @@ function resolveFavClick(event) {
 }
 
 
-function newsCardsChecker() {
+function newsCardsFavChecker() {
     const cards = document.querySelectorAll(`.${NEWS_CARD_CSS_CLASSES.card}`);
     for (let card of cards) {
         if (card.classList.contains(WEATHER_CARD_CSS_CLASS)) {

@@ -10,7 +10,6 @@ import jsCalendar from './js/calendar';
 
 import NewsApiServes from './js/rest-api';
 import footerJs from './js/footer';
-import './js/fav/mainHome';
 
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
