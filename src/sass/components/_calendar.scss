@@ -1,5 +1,4 @@
 :root {
-
   --light-theme-bg: #f4f4f4;
   /* $dark-theme-bg: #2e2e2e; */
   --light-theme-text: #111321;
@@ -9,17 +8,14 @@
   --theme-switcher-color: #5f6775;
   /* $theme-accent-color: #4b48db; */
 
-
   /* to add */
-  --calendar-bkgd-color: #F8F8F8;
+  --calendar-bkgd-color: #f8f8f8;
   --calendar-maintext-color: #000000;
-  --calendar-selected-color: #FFFFFF;
+  --calendar-selected-color: #ffffff;
   --calendar-week-color: rgba(60, 60, 67, 0.3);
   --calendar-hover-color: #e7e1e1;
   --calendar-icon-color: #4440f7;
-  --calendar-arrow-color: #A2A2A2;
-
-
+  --calendar-arrow-color: #a2a2a2;
 }
 
 /* Calendar form */
@@ -30,22 +26,23 @@
 
   margin-left: auto;
 
-  z-index: 1000;
+  z-index: 20;
 }
-
 .calendar__form-title {
+  display: none;
   font-weight: 700;
   font-size: 18px;
   line-height: 1.39;
-
   margin-right: 37px;
+  @include desktop {
+    display: block;
+  }
 }
-
 .calendar__form {
   display: flex;
   width: 168px;
   border-radius: 20px;
-
+  background-color: $light-theme-bg;
   align-items: center;
   padding: 0 12px;
   border: 1px solid var(--light-theme-text);
@@ -70,9 +67,13 @@
   /* by Laout 14px */
   line-height: 1.5;
   letter-spacing: 0.02em;
-
   color: var(--light-theme-text);
   opacity: 0.4;
+}
+body.isDark {
+  .calendar__form-text {
+    color: $light-theme-text;
+  }
 }
 
 /* .calendar__form-text.selected{
@@ -102,8 +103,6 @@
   fill: var(--calendar-arrow-color);
   width: 15px;
   height: 9px;
-
-
 }
 
 .calendar__arrow-btn .arrow__up-svg {
@@ -128,10 +127,6 @@
   transform: translateY(100%);
   transition: transform var(--duration) var(--timing-function);
 } */
-
-
-
-
 
 /* Calendar */
 
@@ -167,7 +162,6 @@
   opacity: 0;
   pointer-events: none;
   /* transform: translateY(-100%); */
-
 }
 
 .calendar__header {
@@ -268,7 +262,7 @@
 
 .days li.usual::before {
   position: absolute;
-  content: "";
+  content: '';
   height: 28px;
   width: 28px;
   top: 50%;
