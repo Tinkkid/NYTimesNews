@@ -24,6 +24,7 @@ export async function pagiantePopularNews() {
         n = 2;
     }
     
+    async function randerNews(articles, newsPerPage, curentPage) {
         const newsContainerEl = document.querySelector('.news-container');
         const start = newsPerPage * (curentPage - 1);
         const end = newsPerPage * curentPage;
