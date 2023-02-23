@@ -113,8 +113,8 @@ function createTitleMarcup(date) {
 					 <span class="date">${formatDate(date)}</span>
 				 </div>
 			 	 <button type="button" class="show-btn show-btn__up" id='${date}'>
-				  		<svg class="read__icon read__icon--down hidden" viewBox="0 0 32 32">${ARROW_DOWN_ICON}</svg>
-						<svg class="read__icon read__icon--top" viewBox="0 0 32 32">${ARROW_TOP_ICON}</svg>
+				  		<svg class="icon read__icon--down hidden" viewBox="0 0 32 32">${ARROW_DOWN_ICON}</svg>
+						<svg class="icon read__icon--top" viewBox="0 0 32 32">${ARROW_TOP_ICON}</svg>
 				 </button>
 			 </div>
 		 </li>
