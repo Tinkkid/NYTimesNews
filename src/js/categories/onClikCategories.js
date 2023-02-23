@@ -1,7 +1,7 @@
 import { ref } from './refCaregories';
 import createArrayNews from '../cards/createArrayNews';
-import createCards from '../cards/createCards';
 
+import createCards from '../cards/createCards';
 export default async function onClikCategories(news, e) {
   // if pressed <svg> or <span>
   let btn = e.target.nodeName !== 'BUTTON' ? e.target.parentNode : e.target;
@@ -17,17 +17,14 @@ export default async function onClikCategories(news, e) {
 
     const dataByCategory = await news.getCategory(btn.dataset.category);
 
-    const filterArr = createArrayNews(dataByCategory);
+    // const filterArr = createArrayNews(dataByCategory);
 
-    console.log(filterArr);
+    const strInj = dataByCategory.map(createCards).join('');
 
-    // const strInj = createCards(filterArr, ref.cardsList);
+    // const strInj =  createCards(dataByCategory);
+    document.querySelector('.news-container').innerHTML = strInj;
   }
-  // else {
-  //   document.querySelector('.isActiveCateg')?.classList.remove('isActiveCateg');
-  //   btn.parentNode.classList.toggle('isActiveCateg');
-  //   return;
-  // }
+
   document.querySelector('.isActiveCateg')?.classList.remove('isActiveCateg');
 
   btn.parentNode.classList.add('isActiveCateg');
