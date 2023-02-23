@@ -138,15 +138,16 @@
       line-height: 23px;
     }
   }
-  &__image {
-    width: 128px;
-    height: 121px;
+     &__image { 
+    width: 168px;
+    margin-bottom: 20px;
     display: block;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 
     @include tablet {
-    width: 165px;
-    height: 156px;
+        width: 205px;
+    margin-bottom: 65px;
     }
   }
 }
