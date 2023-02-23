@@ -1,7 +1,10 @@
 import { ref } from './refCaregories';
 import createArrayNews from '../cards/createArrayNews';
-
+import weatherTemplate from '../../template/weatherTemplate';
 import createCards from '../cards/createCards';
+import queueWeather from '../../js/countCard';
+import { getWeatherWidget } from '../../js/weather';
+
 export default async function onClikCategories(news, e) {
   // if pressed <svg> or <span>
   let btn = e.target.nodeName !== 'BUTTON' ? e.target.parentNode : e.target;
@@ -19,10 +22,14 @@ export default async function onClikCategories(news, e) {
 
     // const filterArr = createArrayNews(dataByCategory);
 
-    const strInj = dataByCategory.map(createCards).join('');
+    const queueWeat = queueWeather();
+    const strInj = dataByCategory
+      .map((el, i) => (i === queueWeat ? weatherTemplate() : createCards(el)))
+      .join('');
 
     // const strInj =  createCards(dataByCategory);
     document.querySelector('.news-container').innerHTML = strInj;
+    getWeatherWidget();
   }
 
   document.querySelector('.isActiveCateg')?.classList.remove('isActiveCateg');
