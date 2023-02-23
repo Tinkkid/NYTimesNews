@@ -2,7 +2,6 @@ import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
 import { createCard, createCardPop } from './cardMarkup';
 import { readLinksStyling } from './readLinksStyling';
-// import { getActivePage } from '../index';
 
 const ARROW_DOWN_ICON =
   '<path d="M3.76 6.857 0 10.336l16 14.806 16-14.806-3.76-3.479L16 18.159 3.76 6.857z"/>';
@@ -12,12 +11,7 @@ const readList = document.querySelector('.read');
 const STORAGE_KEY = 'read';
 let readMoreLinks;
 let currentDate = null;
-
 let arrayOffset = 0;
-
-// const activepage = getActivePage();
-// console.log(activepage);
-
 
 // Фунція додає слухача на лінк 'Read more' на головній сторінці
 function addEvtListOnReadMore(articles) {
@@ -69,7 +63,7 @@ function getDate(item) {
 function addAllReadOnPage() {
 
   const storageItems = load(STORAGE_KEY);
-  //console.log('items', storageItems);
+//   console.log('items', storageItems);
 
   if (storageItems !== undefined) {
     //сортуємо масив, отриманий з Local Storage по даті
@@ -100,9 +94,6 @@ function addAllReadOnPage() {
       } else {
         markup += createCardPop(item);
       }
-
-		compareDates();
-
     });
 
     markup += '</div>'; //close the title
@@ -136,7 +127,7 @@ function addEvtLisOnArrowBtn() {
   const showButtons = document.querySelectorAll('.show-btn');
   const iconDown = document.querySelector('.read__icon--down');
   const iconTop = document.querySelector('.read__icon--top');
-  //   console.log('icons', iconDown, iconTop);
+
 
   showButtons.forEach(button => {
     const newsGallery = document.getElementById('read__gallery-' + button.id);
@@ -154,21 +145,24 @@ function addEvtLisOnArrowBtn() {
 
 function compareDates() {
 	const dateToCompare = currentDate.replaceAll('-', '');
-	console.log('dateTpCompare', dateToCompare);
-
+	console.log('dateToCompare', dateToCompare);
 	const dateFromCalendar = load('selectedDateKey');
-	// console.log('dateFromCalen', dateFromCalendar);
-	
-		 if(dateFromCalendar === dateToCompare){
-		  console.log('совпадение дат');
-		  newsGallery.classList.remove('hidden');
-		  iconTop.classList.remove('hidden');
-		 }
+	console.log('dateFromCalen', dateFromCalendar);
+
+	if (dateFromCalendar !== dateToCompare) {
+		console.log('совпадений нет');
+	} else {
+		console.log('совпадение дат');
+		// newsGallery.classList.remove('hidden');
+		// iconTop.classList.remove('hidden');
+	}
 }
+
+
 
 function setCurrentPage(num, newsPerPage) {
 	arrayOffset = (num - 1) * newsPerPage;
-	console.log("offset", arrayOffset);
+	// console.log("offset", arrayOffset);
 }
 
 export { addEvtListOnReadMore, setCurrentPage };
