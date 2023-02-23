@@ -3,8 +3,8 @@ import { createCardPop } from './cardMarkup';
 import { createCard } from './cardMarkup';
 import { updateMarkup } from './markupUtils';
 import { getWeatherWidget } from './weather'
+import weatherTemplate from '../template/weatherTemplate';
 const news = new NewsApiServes();
-
 
 export async function pagiantePopularNews() {
     const response = await news.requestPopularNews();
@@ -13,7 +13,6 @@ export async function pagiantePopularNews() {
     let numResults = articles.length;
     let newsPerPage = 4;
     let n = 0;
-
 
     if (window.innerWidth > 768 && window.innerWidth < 1280) {
         newsPerPage = 7;
@@ -25,20 +24,16 @@ export async function pagiantePopularNews() {
         n = 2;
     }
     
-    function randerNews(articles, newsPerPage, curentPage) {
         const newsContainerEl = document.querySelector('.news-container');
-
         const start = newsPerPage * (curentPage - 1);
         const end = newsPerPage * curentPage;
-
         const paginatedNews = articles.slice(start, end)
-        
         const arrNews = paginatedNews.map(news => {
             return createCardPop(news);
         })
-        arrNews.splice(n,0,getWeatherWidget())
+        arrNews.splice(n, 0, weatherTemplate())
         const markup = arrNews.join('')
-
+        getWeatherWidget();
         updateMarkup(markup, newsContainerEl)
 
     }

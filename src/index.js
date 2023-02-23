@@ -11,6 +11,7 @@ import { readLinksStyling } from './js/readLinksStyling';
 import categories from './js/categories';
 import NewsApiServes from './js/rest-api';
 import footerJs from './js/footer';
+import { pagiantePopularNews} from './js/pagiginatePopNews.js'
 
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
