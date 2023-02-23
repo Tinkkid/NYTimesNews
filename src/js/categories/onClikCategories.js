@@ -1,9 +1,6 @@
 import { ref } from './refCaregories';
 import createArrayNews from '../cards/createArrayNews';
-import weatherTemplate from '../../template/weatherTemplate';
 import createCards from '../cards/createCards';
-import queueWeather from '../../js/countCard';
-import { getWeatherWidget } from '../../js/weather';
 
 export default async function onClikCategories(news, e) {
   // if pressed <svg> or <span>
@@ -20,18 +17,17 @@ export default async function onClikCategories(news, e) {
 
     const dataByCategory = await news.getCategory(btn.dataset.category);
 
-    // const filterArr = createArrayNews(dataByCategory);
+    const filterArr = createArrayNews(dataByCategory);
 
-    const queueWeat = queueWeather();
-    const strInj = dataByCategory
-      .map((el, i) => (i === queueWeat ? weatherTemplate() : createCards(el)))
-      .join('');
+    console.log(filterArr);
 
-    // const strInj =  createCards(dataByCategory);
-    document.querySelector('.news-container').innerHTML = strInj;
-    getWeatherWidget();
+    // const strInj = createCards(filterArr, ref.cardsList);
   }
-
+  // else {
+  //   document.querySelector('.isActiveCateg')?.classList.remove('isActiveCateg');
+  //   btn.parentNode.classList.toggle('isActiveCateg');
+  //   return;
+  // }
   document.querySelector('.isActiveCateg')?.classList.remove('isActiveCateg');
 
   btn.parentNode.classList.add('isActiveCateg');

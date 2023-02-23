@@ -8,15 +8,7 @@ export default function createArrayNews(list) {
   // );
   const arr = [];
   for (let i = 0; i < list.length; i++) {
-    const {
-      multimedia,
-      url,
-      title,
-      abstract,
-      published_date,
-      section,
-      subsection,
-    } = list[i];
+    const { multimedia, url, title, abstract, published_date } = list[i];
     if (
       multimedia &&
       multimedia[0]?.url &&
@@ -26,7 +18,14 @@ export default function createArrayNews(list) {
       abstract &&
       published_date
     )
-      arr.push(list[i]);
+      arr.push({
+        multimedia,
+        url,
+        title,
+        abstract,
+        published_date,
+      });
   }
+  console.log(arr);
   return arr;
 }
