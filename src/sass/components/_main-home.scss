@@ -2,3 +2,11 @@
 @import './weather';
 @import './cardset';
 @import './notFind';
+.tools {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 24px;
+  @include tablet() {
+    padding-top: 28px;
+  }
+}

@@ -8,7 +8,7 @@ import { updateMarkup } from './js/markupUtils';
 import { createCard } from './js/cardMarkup';
 import jsCalendar from './js/calendar';
 import { readLinksStyling } from './js/readLinksStyling';
-
+import categories from './js/categories';
 import NewsApiServes from './js/rest-api';
 import footerJs from './js/footer';
 
@@ -24,7 +24,7 @@ if (document.title === 'NYTimes News') {
 footerJs();
 
 if (document.title === 'NYTimes News') {
-  getCategoryList();
+  categories(news);
 }
 
 export default function renderCards(articles, identifier) {
