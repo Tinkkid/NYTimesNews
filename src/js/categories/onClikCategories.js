@@ -4,8 +4,9 @@ import weatherTemplate from '../../template/weatherTemplate';
 import createCards from '../cards/createCards';
 import queueWeather from '../../js/countCard';
 import { getWeatherWidget } from '../../js/weather';
-import { createCardCategory } from '../cardMarkup';
+import { categoryCard } from '../cardMarkup';
 import { updateMarkup } from '../markupUtils';
+import { onError } from '../renderPopularNews';
 
 export default async function onClikCategories(news, e) {
   // if pressed <svg> or <span>
@@ -28,10 +29,18 @@ export default async function onClikCategories(news, e) {
 
 
 
-     async function pagianteCtegoryNews() {
-   const response = await news.getCategory(btn.dataset.category);
-   
-    const articles = dataByCategory;
+    async function pagianteCtegoryNews() {
+      try {
+        const response = await news.getCategory(btn.dataset.category);
+        if (response.status === 429) {
+          throw new Error();
+        } else
+        if (response.length === 0) {
+          throw new Error('No data');
+        }
+      const paginationEL = document.querySelector('.pagination');
+      paginationEL.innerHTML = "";
+    const articles = response;
     let curentPage = 1;
     let numResults = articles.length;
     let newsPerPage = 4;
@@ -54,7 +63,7 @@ export default async function onClikCategories(news, e) {
       const paginatedNews = articles.slice(start, end)
       
         const arrNews = paginatedNews.map(news => {
-            return createCardCategory(news);
+            return categoryCard(news);
         })
         arrNews.splice(n, 0, weatherTemplate())
       const markup = arrNews.join('')
@@ -67,7 +76,7 @@ export default async function onClikCategories(news, e) {
     const countPage = Math.ceil(numResults / newsPerPage)
 
     function displayPaginator(countPage) {
-        const paginationEL = document.querySelector('.pagination');
+        
         const ulEl = document.createElement("ul"); 
         ulEl.classList.add('pagination__list');
 
@@ -100,34 +109,29 @@ export default async function onClikCategories(news, e) {
     }
     randerNews(articles, newsPerPage, curentPage);
     displayPaginator(countPage);
+        
+      } catch {
+        document.querySelector('.pagination').innerHTML = '';
+        document.querySelector('.news-container').innerHTML = '';
+        onError();
+      }
+  
 
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     // const filterArr = createArrayNews(dataByCategory);
 
-    const queueWeat = queueWeather();
-    const strInj = dataByCategory
-      .map((el, i) => (i === queueWeat ? weatherTemplate() : createCards(el)))
-      .join('');
+    // const queueWeat = queueWeather();
+    // const strInj = dataByCategory
+      // .map((el, i) => (i === queueWeat ? weatherTemplate() : createCards(el)))
+      // .join('');
 
     // const strInj =  createCards(dataByCategory);
     // document.querySelector('.news-container').innerHTML = strInj;
-    getWeatherWidget();
+    // getWeatherWidget();
   }
 
   document.querySelector('.isActiveCateg')?.classList.remove('isActiveCateg');
