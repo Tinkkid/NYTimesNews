@@ -1,4 +1,4 @@
-import renderCards from '../index';
+import {renderCards} from '../index';
 import NewsApiServes from './rest-api';
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
@@ -14,7 +14,7 @@ export default async function () {
     const articles = response.data.results;
     if (articles.length === 0) throw new Error('No data');
     renderCards(articles, 'populate');
-     addEvtListOnReadMore(articles);
+   	addEvtListOnReadMore(articles);
   } catch {
     onError();
   }

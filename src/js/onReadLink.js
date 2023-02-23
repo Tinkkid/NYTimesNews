@@ -3,21 +3,22 @@ import { save, load, remove } from './localStorageService';
 import { createCard, createCardPop } from './cardMarkup';
 import { readLinksStyling } from './readLinksStyling';
 
-const readList = document.querySelector('.read');
-const STORAGE_KEY = 'read';
-let readMoreLinks;
 const ARROW_DOWN_ICON =
   '<path d="M3.76 6.857 0 10.336l16 14.806 16-14.806-3.76-3.479L16 18.159 3.76 6.857z"/>';
 const ARROW_TOP_ICON =
   '<path d="M3.76 25.143 0 21.664 16 6.858l16 14.806-3.76 3.479L16 13.841 3.76 25.143z"/>';
-
+const readList = document.querySelector('.read');
+const STORAGE_KEY = 'read';
+let readMoreLinks;
+let currentDate = null;
+let arrayOffset = 0;
 
 // Фунція додає слухача на лінк 'Read more' на головній сторінці
 function addEvtListOnReadMore(articles) {
   readMoreLinks = document.querySelectorAll('.news-link');
 
   for (let i = 0; i < readMoreLinks.length; i++) {
-    let article = articles[i];
+    let article = articles[i + arrayOffset];
 
     let link = readMoreLinks[i];
 
@@ -31,7 +32,7 @@ function addEvtListOnReadMore(articles) {
         const itemIndex = storageItems.findIndex(
           item => item.abstract === article.abstract
         );
-        console.log('itemIndex', itemIndex);
+        //   console.log('itemIndex', itemIndex);
 
         if (itemIndex >= 0) {
           storageItems.splice(itemIndex, 1);
@@ -50,7 +51,7 @@ function addEvtListOnReadMore(articles) {
 window.addEventListener('DOMContentLoaded', addAllReadOnPage);
 
 function getDate(item) {
-	const pubDate = item.published_date || item.pub_date;
+  const pubDate = item.published_date || item.pub_date;
 
   const regexp = /(\d+-\d+-\d+)/g;
   const m = regexp.exec(pubDate);
@@ -60,10 +61,9 @@ function getDate(item) {
 
 //функція, яка додає статті зі сховища на сторінку
 function addAllReadOnPage() {
-  console.log('add All Read On Page');
 
   const storageItems = load(STORAGE_KEY);
-  //console.log('items', storageItems);
+//   console.log('items', storageItems);
 
   if (storageItems !== undefined) {
     //сортуємо масив, отриманий з Local Storage по даті
@@ -72,9 +72,9 @@ function addAllReadOnPage() {
       getDate(b).localeCompare(getDate(a))
     );
 
-    console.log('sorted', sortedStorageArr);
+    //  console.log('sorted', sortedStorageArr);
 
-    let currentDate = null;
+   
     let markup = '';
 
     sortedStorageArr.forEach(item => {
@@ -85,6 +85,7 @@ function addAllReadOnPage() {
           markup += '</div>'; //close current title
         }
         currentDate = date;
+		  
         markup += createTitleMarcup(date);
       }
 
@@ -113,12 +114,12 @@ function createTitleMarcup(date) {
 					 <span class="date">${formatDate(date)}</span>
 				 </div>
 			 	 <button type="button" class="show-btn show-btn__up" id='${date}'>
-				  		<svg class="icon read__icon--down hidden" viewBox="0 0 32 32">${ARROW_DOWN_ICON}</svg>
-						<svg class="icon read__icon--top" viewBox="0 0 32 32">${ARROW_TOP_ICON}</svg>
+				  		<svg class="icon read__icon--down" viewBox="0 0 32 32">${ARROW_DOWN_ICON}</svg>
+						<svg class="icon read__icon--top hidden" viewBox="0 0 32 32">${ARROW_TOP_ICON}</svg>
 				 </button>
 			 </div>
 		 </li>
-		 <div class="read__gallery" id='read__gallery-${date}'>`;
+		 <div class="read__gallery hidden" id='read__gallery-${date}'>`;
 }
 
 //функція відкриття/закриття випадаючого списку зі статтями
@@ -126,18 +127,42 @@ function addEvtLisOnArrowBtn() {
   const showButtons = document.querySelectorAll('.show-btn');
   const iconDown = document.querySelector('.read__icon--down');
   const iconTop = document.querySelector('.read__icon--top');
-  console.log('icons', iconDown, iconTop);
+
 
   showButtons.forEach(button => {
     const newsGallery = document.getElementById('read__gallery-' + button.id);
 
-    button.addEventListener('click', event => {
-      newsGallery.classList.toggle('hidden');
+	//  compareDates();
 
+    button.addEventListener('click', event => {
+
+      newsGallery.classList.toggle('hidden');
       iconTop.classList.toggle('hidden');
       iconDown.classList.toggle('hidden');
     });
   });
 }
 
-export { addEvtListOnReadMore };
+function compareDates() {
+	const dateToCompare = currentDate.replaceAll('-', '');
+	console.log('dateToCompare', dateToCompare);
+	const dateFromCalendar = load('selectedDateKey');
+	console.log('dateFromCalen', dateFromCalendar);
+
+	if (dateFromCalendar !== dateToCompare) {
+		console.log('совпадений нет');
+	} else {
+		console.log('совпадение дат');
+		// newsGallery.classList.remove('hidden');
+		// iconTop.classList.remove('hidden');
+	}
+}
+
+
+
+function setCurrentPage(num, newsPerPage) {
+	arrayOffset = (num - 1) * newsPerPage;
+	// console.log("offset", arrayOffset);
+}
+
+export { addEvtListOnReadMore, setCurrentPage };

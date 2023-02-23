@@ -28,7 +28,7 @@ if (document.title === 'NYTimes News') {
   categories(news);
 }
 
-export default function renderCards(articles, identifier) {
+export function renderCards(articles, identifier) {
   news.sizeScreenCompute();
   const markup = articles
     .map((article, idx) => {
