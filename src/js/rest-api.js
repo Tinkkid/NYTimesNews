@@ -84,15 +84,17 @@ export default class NewsApiServes {
   }
 
   // new
-  getCategory(category, offset = 1) {
-    return axios
-      .get(
+  async getCategory(category, offset = 1) {
+    try {
+      const req = await axios.get(
         `${NEWS_URL}news/v3/content/all/${encodeURIComponent(
           category
         )}.json?&offset=${offset}&limit=40&api-key=${NEWS_API_KEY}`
-      )
-      .then(x => x.data.results)
-      .catch(error => console.log(error));
+      );
+      return req.data.results;
+    } catch {
+      error => console.log(error);
+    }
   }
 
   async searchNewsByInputAndDate() {
