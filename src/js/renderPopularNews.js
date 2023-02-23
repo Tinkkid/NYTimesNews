@@ -1,4 +1,4 @@
-import renderCards from '../index';
+import {renderCards} from '../index';
 import NewsApiServes from './rest-api';
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();

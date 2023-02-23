@@ -2,6 +2,7 @@ import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
 import { createCard, createCardPop } from './cardMarkup';
 import { readLinksStyling } from './readLinksStyling';
+// import { getActivePage } from '../index';
 
 const ARROW_DOWN_ICON =
   '<path d="M3.76 6.857 0 10.336l16 14.806 16-14.806-3.76-3.479L16 18.159 3.76 6.857z"/>';
@@ -10,13 +11,20 @@ const ARROW_TOP_ICON =
 const readList = document.querySelector('.read');
 const STORAGE_KEY = 'read';
 let readMoreLinks;
+let currentDate = null;
+
+let arrayOffset = 0;
+
+// const activepage = getActivePage();
+// console.log(activepage);
+
 
 // Фунція додає слухача на лінк 'Read more' на головній сторінці
 function addEvtListOnReadMore(articles) {
   readMoreLinks = document.querySelectorAll('.news-link');
 
   for (let i = 0; i < readMoreLinks.length; i++) {
-    let article = articles[i];
+    let article = articles[i + arrayOffset];
 
     let link = readMoreLinks[i];
 
@@ -59,7 +67,6 @@ function getDate(item) {
 
 //функція, яка додає статті зі сховища на сторінку
 function addAllReadOnPage() {
-  //   console.log('add All Read On Page');
 
   const storageItems = load(STORAGE_KEY);
   //console.log('items', storageItems);
@@ -73,7 +80,7 @@ function addAllReadOnPage() {
 
     //  console.log('sorted', sortedStorageArr);
 
-    let currentDate = null;
+   
     let markup = '';
 
     sortedStorageArr.forEach(item => {
@@ -84,6 +91,7 @@ function addAllReadOnPage() {
           markup += '</div>'; //close current title
         }
         currentDate = date;
+		  
         markup += createTitleMarcup(date);
       }
 
@@ -92,6 +100,9 @@ function addAllReadOnPage() {
       } else {
         markup += createCardPop(item);
       }
+
+		compareDates();
+
     });
 
     markup += '</div>'; //close the title
@@ -112,12 +123,12 @@ function createTitleMarcup(date) {
 					 <span class="date">${formatDate(date)}</span>
 				 </div>
 			 	 <button type="button" class="show-btn show-btn__up" id='${date}'>
-				  		<svg class="icon read__icon--down hidden" viewBox="0 0 32 32">${ARROW_DOWN_ICON}</svg>
-						<svg class="icon read__icon--top" viewBox="0 0 32 32">${ARROW_TOP_ICON}</svg>
+				  		<svg class="icon read__icon--down" viewBox="0 0 32 32">${ARROW_DOWN_ICON}</svg>
+						<svg class="icon read__icon--top hidden" viewBox="0 0 32 32">${ARROW_TOP_ICON}</svg>
 				 </button>
 			 </div>
 		 </li>
-		 <div class="read__gallery" id='read__gallery-${date}'>`;
+		 <div class="read__gallery hidden" id='read__gallery-${date}'>`;
 }
 
 //функція відкриття/закриття випадаючого списку зі статтями
@@ -130,7 +141,10 @@ function addEvtLisOnArrowBtn() {
   showButtons.forEach(button => {
     const newsGallery = document.getElementById('read__gallery-' + button.id);
 
+	//  compareDates();
+
     button.addEventListener('click', event => {
+
       newsGallery.classList.toggle('hidden');
       iconTop.classList.toggle('hidden');
       iconDown.classList.toggle('hidden');
@@ -138,4 +152,23 @@ function addEvtLisOnArrowBtn() {
   });
 }
 
-export { addEvtListOnReadMore };
+function compareDates() {
+	const dateToCompare = currentDate.replaceAll('-', '');
+	console.log('dateTpCompare', dateToCompare);
+
+	const dateFromCalendar = load('selectedDateKey');
+	// console.log('dateFromCalen', dateFromCalendar);
+	
+		 if(dateFromCalendar === dateToCompare){
+		  console.log('совпадение дат');
+		  newsGallery.classList.remove('hidden');
+		  iconTop.classList.remove('hidden');
+		 }
+}
+
+function setCurrentPage(num, newsPerPage) {
+	arrayOffset = (num - 1) * newsPerPage;
+	console.log("offset", arrayOffset);
+}
+
+export { addEvtListOnReadMore, setCurrentPage };

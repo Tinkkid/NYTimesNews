@@ -4,6 +4,7 @@ import { createCard } from './cardMarkup';
 import { updateMarkup } from './markupUtils';
 import { getWeatherWidget } from './weather'
 import weatherTemplate from '../template/weatherTemplate';
+import { addEvtListOnReadMore, setCurrentPage } from "./onReadLink";
 const news = new NewsApiServes();
 
 export async function pagiantePopularNews() {
@@ -35,8 +36,8 @@ export async function pagiantePopularNews() {
         arrNews.splice(n, 0, weatherTemplate())
         const markup = arrNews.join('')
         getWeatherWidget();
-        updateMarkup(markup, newsContainerEl)
-
+        updateMarkup(markup, newsContainerEl);
+		  addEvtListOnReadMore(articles);
     }
 
     const countPage = Math.ceil(numResults / newsPerPage)
@@ -65,6 +66,7 @@ export async function pagiantePopularNews() {
 
         liEl.addEventListener("click", () => {
             curentPage = page;
+				setCurrentPage(page, newsPerPage);
             randerNews(articles, newsPerPage, curentPage)
 
             let currentActiveLi = document.querySelector('.pagination__item--active');
@@ -80,5 +82,3 @@ export async function pagiantePopularNews() {
 if (document.title === 'NYTimes News') {
      pagiantePopularNews()
 }
-
-

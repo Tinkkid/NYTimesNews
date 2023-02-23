@@ -8,6 +8,7 @@ import { getWeatherWidget } from './js/weather';
 
 import { onFavoriteBtnClick } from './js/onFavoriteBtn';
 // import footerJs from './js/footer';
+import { addEvtListOnReadMore } from './js/onReadLink';
 
 import NewsApiServes from './js/rest-api';
 
@@ -21,7 +22,7 @@ getCategoryList();
 
 console.log(news.getCardOrder());
 
-export default function renderCards(articles, identifier) {
+export function renderCards(articles, identifier) {
   news.sizeScreenCompute();
   const markup = articles
     .map((article, idx) => {
@@ -42,4 +43,5 @@ export default function renderCards(articles, identifier) {
 }
 
 onFavoriteBtnClick();
+addEvtListOnReadMore();
 // footerJs();
