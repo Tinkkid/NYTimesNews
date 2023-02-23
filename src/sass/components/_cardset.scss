@@ -165,12 +165,16 @@ body {
   border-radius: 20px;
   border: none;
 
-  &.liked .icon-heart {
-    display: block;
-    fill: $accent-color;
-  }
-  &.liked .icon-empty-heart {
-    display: none;
+  // &.liked .icon-heart {
+  //   display: block;
+  //   fill: $accent-color;
+  // }
+  // &.liked .icon-empty-heart {
+  //   display: none;
+  // }
+
+  &:hover {
+    border: 3px solid $accent-color;
   }
 }
 
