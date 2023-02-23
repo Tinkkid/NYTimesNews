@@ -8,9 +8,10 @@ import { updateMarkup } from './js/markupUtils';
 import { createCard } from './js/cardMarkup';
 import jsCalendar from './js/calendar';
 import { readLinksStyling } from './js/readLinksStyling';
-
+import categories from './js/categories';
 import NewsApiServes from './js/rest-api';
 import footerJs from './js/footer';
+import { pagiantePopularNews } from './js/pagiginatePopNews.js';
 
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
@@ -23,8 +24,8 @@ if (document.title === 'NYTimes News') {
 
 footerJs();
 
-if (document.title !== 'NYTimes News: Read By Yourself') {
-  getCategoryList();
+if (document.title === 'NYTimes News') {
+  categories(news);
 }
 
 export default function renderCards(articles, identifier) {
@@ -45,8 +46,9 @@ export default function renderCards(articles, identifier) {
     })
     .join('');
 
-  updateMarkup(markup, newsBoxEl);
+  // updateMarkup(markup, newsBoxEl);
   getWeatherWidget();
+
   if (document.title === 'NYTimes News') {
     readLinksStyling();
   }
