@@ -77,5 +77,7 @@ export async function pagiantePopularNews() {
     displayPaginator(countPage);
 
 }
+if (document.title === 'NYTimes News') {
+     pagiantePopularNews()
+}
 
- pagiantePopularNews()
