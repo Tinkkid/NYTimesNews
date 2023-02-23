@@ -25,6 +25,15 @@ export default class NewsApiServes {
     return response;
   }
 
+  get categories() {
+    return axios
+      .get(
+        `${NEWS_URL}news/v3/content/section-list.json?api-key=${NEWS_API_KEY}`
+      )
+      .then(x => x.data.results)
+      .catch(error => console.log(error));
+  }
+
   async requestPopularNews() {
     const response = await axios.get(
       `${NEWS_URL}mostpopular/v2/viewed/1.json?api-key=${NEWS_API_KEY}`
@@ -72,6 +81,16 @@ export default class NewsApiServes {
     );
 
     return response;
+  }
+
+  // new
+  getCategory(category, offset = 1) {
+    return axios
+      .get(
+        `${NEWS_URL}news/v3/content/all/${category}.json?&offset=${offset}&limit=40&api-key=${NEWS_API_KEY}`
+      )
+      .then(x => x.data.results)
+      .catch(error => console.log(error));
   }
 
   async searchNewsByInputAndDate() {
