@@ -1,5 +1,6 @@
 import { ref } from './refCaregories';
 import createArrayNews from '../cards/createArrayNews';
+import weatherTemplate from '../../template/weatherTemplate';
 import createCards from '../cards/createCards';
 import queueWeather from '../../js/countCard';
 import { getWeatherWidget } from '../../js/weather';
