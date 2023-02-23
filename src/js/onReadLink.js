@@ -3,14 +3,13 @@ import { save, load, remove } from './localStorageService';
 import { createCard, createCardPop } from './cardMarkup';
 import { readLinksStyling } from './readLinksStyling';
 
-const readList = document.querySelector('.read');
-const STORAGE_KEY = 'read';
-let readMoreLinks;
 const ARROW_DOWN_ICON =
   '<path d="M3.76 6.857 0 10.336l16 14.806 16-14.806-3.76-3.479L16 18.159 3.76 6.857z"/>';
 const ARROW_TOP_ICON =
   '<path d="M3.76 25.143 0 21.664 16 6.858l16 14.806-3.76 3.479L16 13.841 3.76 25.143z"/>';
-
+const readList = document.querySelector('.read');
+const STORAGE_KEY = 'read';
+let readMoreLinks;
 
 // Фунція додає слухача на лінк 'Read more' на головній сторінці
 function addEvtListOnReadMore(articles) {
@@ -31,7 +30,7 @@ function addEvtListOnReadMore(articles) {
         const itemIndex = storageItems.findIndex(
           item => item.abstract === article.abstract
         );
-        console.log('itemIndex', itemIndex);
+        //   console.log('itemIndex', itemIndex);
 
         if (itemIndex >= 0) {
           storageItems.splice(itemIndex, 1);
@@ -50,7 +49,7 @@ function addEvtListOnReadMore(articles) {
 window.addEventListener('DOMContentLoaded', addAllReadOnPage);
 
 function getDate(item) {
-	const pubDate = item.published_date || item.pub_date;
+  const pubDate = item.published_date || item.pub_date;
 
   const regexp = /(\d+-\d+-\d+)/g;
   const m = regexp.exec(pubDate);
@@ -60,7 +59,7 @@ function getDate(item) {
 
 //функція, яка додає статті зі сховища на сторінку
 function addAllReadOnPage() {
-  console.log('add All Read On Page');
+  //   console.log('add All Read On Page');
 
   const storageItems = load(STORAGE_KEY);
   //console.log('items', storageItems);
@@ -72,7 +71,7 @@ function addAllReadOnPage() {
       getDate(b).localeCompare(getDate(a))
     );
 
-    console.log('sorted', sortedStorageArr);
+    //  console.log('sorted', sortedStorageArr);
 
     let currentDate = null;
     let markup = '';
@@ -126,14 +125,13 @@ function addEvtLisOnArrowBtn() {
   const showButtons = document.querySelectorAll('.show-btn');
   const iconDown = document.querySelector('.read__icon--down');
   const iconTop = document.querySelector('.read__icon--top');
-  console.log('icons', iconDown, iconTop);
+  //   console.log('icons', iconDown, iconTop);
 
   showButtons.forEach(button => {
     const newsGallery = document.getElementById('read__gallery-' + button.id);
 
     button.addEventListener('click', event => {
       newsGallery.classList.toggle('hidden');
-
       iconTop.classList.toggle('hidden');
       iconDown.classList.toggle('hidden');
     });

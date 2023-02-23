@@ -2,15 +2,16 @@
 	/* фиксированное позиционирование */
 	position: fixed;
 	/* цвет фона */
-	background-color: #4440F7;
+	background-color: #605de7;
 	/* расстояние от правого края окна браузера */
 	right: 30px;
 	/* расстояние от нижнего края окна браузера */
 	bottom: 20px;
 	/* скругление верхнего левого угла */
-	border-top-left-radius: 8px;
+	// border-top-left-radius: 8px;
 	/* скругление верхнего правого угла */
-	border-top-right-radius: 8px;
+	// border-top-right-radius: 8px;
+	border-radius: 45px;
 	/* вид курсора */
 	cursor: pointer;
 	/* отображение элемента как flex */
@@ -22,7 +23,9 @@
 	/* ширина элемента */
 	width: 60px;
 	/* высота элемента */
-	height: 50px;
+	height: 60px;
+
+	z-index: 10;
 
 	@include desktop() {
 		right: 200px;
@@ -37,8 +40,8 @@
  
  .btn-up-icon {
 	content: "";
-	width: 40px;
-	height: 40px;
+	// width: 20px;
+	// height: 20px;
 	background: transparent no-repeat center center;
 	background-size: 100% 100%;
 	fill: $dark-theme-text;
