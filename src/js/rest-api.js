@@ -87,7 +87,9 @@ export default class NewsApiServes {
   getCategory(category, offset = 1) {
     return axios
       .get(
-        `${NEWS_URL}news/v3/content/all/${category}.json?&offset=${offset}&limit=40&api-key=${NEWS_API_KEY}`
+        `${NEWS_URL}news/v3/content/all/${encodeURIComponent(
+          category
+        )}.json?&offset=${offset}&limit=40&api-key=${NEWS_API_KEY}`
       )
       .then(x => x.data.results)
       .catch(error => console.log(error));
