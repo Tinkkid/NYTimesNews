@@ -6,6 +6,11 @@ import { readLinksStyling } from './readLinksStyling';
 const readList = document.querySelector('.read');
 const STORAGE_KEY = 'read';
 let readMoreLinks;
+const ARROW_DOWN_ICON =
+  '<path d="M3.76 6.857 0 10.336l16 14.806 16-14.806-3.76-3.479L16 18.159 3.76 6.857z"/>';
+const ARROW_TOP_ICON =
+  '<path d="M3.76 25.143 0 21.664 16 6.858l16 14.806-3.76 3.479L16 13.841 3.76 25.143z"/>';
+
 
 // Фунція додає слухача на лінк 'Read more' на головній сторінці
 function addEvtListOnReadMore(articles) {
@@ -45,12 +50,12 @@ function addEvtListOnReadMore(articles) {
 window.addEventListener('DOMContentLoaded', addAllReadOnPage);
 
 function getDate(item) {
-  if (item.published_date) return item.published_date;
+	const pubDate = item.published_date || item.pub_date;
 
   const regexp = /(\d+-\d+-\d+)/g;
-  const m = regexp.exec(item.pub_date);
+  const m = regexp.exec(pubDate);
   if (m) return m[1];
-  return item.pub_date;
+  return pubDate;
 }
 
 //функція, яка додає статті зі сховища на сторінку
@@ -107,7 +112,10 @@ function createTitleMarcup(date) {
 				 <div class="read__date">
 					 <span class="date">${formatDate(date)}</span>
 				 </div>
-			 	 <button type="button" class="show-btn show-btn__up" id='${date}'></button>
+			 	 <button type="button" class="show-btn show-btn__up" id='${date}'>
+				  		<svg class="icon read__icon--down hidden" viewBox="0 0 32 32">${ARROW_DOWN_ICON}</svg>
+						<svg class="icon read__icon--top" viewBox="0 0 32 32">${ARROW_TOP_ICON}</svg>
+				 </button>
 			 </div>
 		 </li>
 		 <div class="read__gallery" id='read__gallery-${date}'>`;
@@ -116,6 +124,9 @@ function createTitleMarcup(date) {
 //функція відкриття/закриття випадаючого списку зі статтями
 function addEvtLisOnArrowBtn() {
   const showButtons = document.querySelectorAll('.show-btn');
+  const iconDown = document.querySelector('.read__icon--down');
+  const iconTop = document.querySelector('.read__icon--top');
+  console.log('icons', iconDown, iconTop);
 
   showButtons.forEach(button => {
     const newsGallery = document.getElementById('read__gallery-' + button.id);
@@ -123,8 +134,8 @@ function addEvtLisOnArrowBtn() {
     button.addEventListener('click', event => {
       newsGallery.classList.toggle('hidden');
 
-      button.classList.toggle('show-btn__up');
-      button.classList.toggle('show-btn__down');
+      iconTop.classList.toggle('hidden');
+      iconDown.classList.toggle('hidden');
     });
   });
 }

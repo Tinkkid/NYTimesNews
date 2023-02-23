@@ -8,7 +8,7 @@
 
 .read__title {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	gap: 14px;
 	border-bottom: 1px solid #929292; 
 	padding-bottom: 12px;
@@ -53,22 +53,4 @@
 	height: 9px;
 	width: 14px;
 
-}
-
-.show-btn__up {
-	background-image: url('/src/images/arrow-top-icon.svg');
-}
-
-.show-btn__down {
-	background-image: url('/src/images/arrow-down-icon.svg');
-}
-
-
-.hidden_btn {
-	display: none;
-	pointer-events: none;
-}
-
-.visible_btn {
-	display: block;
 }
