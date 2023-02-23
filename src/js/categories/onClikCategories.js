@@ -1,12 +1,12 @@
 import { ref } from './refCaregories';
 import createArrayNews from '../cards/createArrayNews';
-import weatherTemplate from '../../template/weatherTemplate';
 import createCards from '../cards/createCards';
 import queueWeather from '../../js/countCard';
 import { getWeatherWidget } from '../../js/weather';
 import { categoryCard } from '../cardMarkup';
 import { updateMarkup } from '../markupUtils';
 import { onError } from '../renderPopularNews';
+
 
 export default async function onClikCategories(news, e) {
   // if pressed <svg> or <span>
@@ -122,7 +122,7 @@ export default async function onClikCategories(news, e) {
 
 
 
-    // const filterArr = createArrayNews(dataByCategory);
+ //   const filterArr = createArrayNews(dataByCategory);
 
     // const queueWeat = queueWeather();
     // const strInj = dataByCategory
@@ -132,8 +132,13 @@ export default async function onClikCategories(news, e) {
     // const strInj =  createCards(dataByCategory);
     // document.querySelector('.news-container').innerHTML = strInj;
     // getWeatherWidget();
-  }
 
+  }
+  // else {
+  //   document.querySelector('.isActiveCateg')?.classList.remove('isActiveCateg');
+  //   btn.parentNode.classList.toggle('isActiveCateg');
+  //   return;
+  // }
   document.querySelector('.isActiveCateg')?.classList.remove('isActiveCateg');
 
   btn.parentNode.classList.add('isActiveCateg');
