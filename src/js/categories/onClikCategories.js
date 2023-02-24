@@ -26,7 +26,6 @@ export default async function onClikCategories(news, e) {
     const dataByCategory = await news.getCategory(btn.dataset.category);
     pagianteCtegoryNews()
 
-    console.log('asdas', dataByCategory)
 
 
 
@@ -72,7 +71,7 @@ export default async function onClikCategories(news, e) {
       
         getWeatherWidget();
         updateMarkup(markup, newsContainerEl);
-		  console.log(markup);
+		  // console.log(markup);
 		  addEvtListOnReadMore(articles);
     }
 
