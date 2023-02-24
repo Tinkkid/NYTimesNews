@@ -1,6 +1,6 @@
 import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
-import { createCard, createCardPop,categoryCard } from './cardMarkup';
+import { createCard, createCardPop, categoryCard } from './cardMarkup';
 import { readLinksStyling } from './readLinksStyling';
 
 const ARROW_DOWN_ICON =
@@ -61,9 +61,8 @@ function getDate(item) {
 
 //функція, яка додає статті зі сховища на сторінку
 function addAllReadOnPage() {
-
   const storageItems = load(STORAGE_KEY);
-//   console.log('items', storageItems);
+  //   console.log('items', storageItems);
 
   if (storageItems !== undefined) {
     //сортуємо масив, отриманий з Local Storage по даті
@@ -74,7 +73,6 @@ function addAllReadOnPage() {
 
     //  console.log('sorted', sortedStorageArr);
 
-   
     let markup = '';
 
     sortedStorageArr.forEach(item => {
@@ -85,17 +83,17 @@ function addAllReadOnPage() {
           markup += '</div>'; //close current title
         }
         currentDate = date;
-		  
+
         markup += createTitleMarcup(date);
       }
 
       if (Object.keys(item).includes('pub_date')) {
-			markup += createCard(item);
-		 } else if (Object.keys(item).includes('pub_date') && !id) {
-			markup += createCardPop(item);
-		 } else {
-			 markup += categoryCard(item);
-		 };
+        markup += createCard(item);
+      } else if (Object.keys(item).includes('pub_date') && !id) {
+        markup += createCardPop(item);
+      } else {
+        markup += categoryCard(item);
+      }
     });
 
     markup += '</div>'; //close the title
@@ -109,24 +107,23 @@ function addAllReadOnPage() {
 
 //функція, яка створює розмітку заголовка
 function createTitleMarcup(date) {
-	let readGalleryClass = "hidden";
-	let iconClass = "hidden";
-	let iconAditionalClass = "";
+  let readGalleryClass = 'hidden';
+  let iconClass = 'hidden';
+  let iconAditionalClass = '';
 
-	const dateToCompare = date.replaceAll('-', '');
-	console.log('dateToCompare', dateToCompare);
-	const dateFromCalendar = load('selectedDateKey');
-	console.log('dateFromCalen', dateFromCalendar);
+  const dateToCompare = date.replaceAll('-', '');
+  console.log('dateToCompare', dateToCompare);
+  const dateFromCalendar = load('selectedDateKey');
+  console.log('dateFromCalen', dateFromCalendar);
 
-	if (dateFromCalendar !== dateToCompare) {
-		console.log('совпадений нет');
-
-	} else {
-		console.log('совпадение дат');
-		readGalleryClass = "";
-		iconClass = "";
-		iconAditionalClass = "hidden";
-	}
+  if (dateFromCalendar !== dateToCompare) {
+    console.log('совпадений нет');
+  } else {
+    console.log('совпадение дат');
+    readGalleryClass = '';
+    iconClass = '';
+    iconAditionalClass = 'hidden';
+  }
 
   return `
 		 <li class="read__block">
@@ -146,16 +143,14 @@ function createTitleMarcup(date) {
 //функція відкриття/закриття випадаючого списку зі статтями
 function addEvtLisOnArrowBtn() {
   const showButtons = document.querySelectorAll('.show-btn');
-  
-
 
   showButtons.forEach(button => {
     const newsGallery = document.getElementById('read__gallery-' + button.id);
-	 const iconDown = document.querySelector('.show-btn .read__icon--down');
-  		const iconTop = document.querySelector('.show-btn .read__icon--top');
+    const iconDown = button.firstElementChild;
+    const iconTop = button.lastElementChild;
+   //  console.log(iconTop, iconDown);
 
     button.addEventListener('click', event => {
-
       newsGallery.classList.toggle('hidden');
       iconTop.classList.toggle('hidden');
       iconDown.classList.toggle('hidden');
@@ -163,11 +158,10 @@ function addEvtLisOnArrowBtn() {
   });
 }
 
-
 //функція, яка отримує номер сторінки пагінації
 function setCurrentPage(num, newsPerPage) {
-	arrayOffset = (num - 1) * newsPerPage;
-	// console.log("offset", arrayOffset);
+  arrayOffset = (num - 1) * newsPerPage;
+  // console.log("offset", arrayOffset);
 }
 
 export { addEvtListOnReadMore, setCurrentPage };
