@@ -12,6 +12,7 @@ import categories from './js/categories';
 import NewsApiServes from './js/rest-api';
 import footerJs from './js/footer';
 import { pagiantePopularNews } from './js/pagiginatePopNews.js';
+import { makeHiddenCategories } from './js/categories/isHidden';
 
 const newsBoxEl = document.querySelector('.news-container');
 const news = new NewsApiServes();
@@ -19,37 +20,9 @@ const news = new NewsApiServes();
 jsScriptHeader();
 if (document.title === 'NYTimes News') {
   jsCalendar();
-  popularNews();
+  makeHiddenCategories();
+  categories(news);
+  readLinksStyling();
 }
 
 footerJs();
-
-if (document.title === 'NYTimes News') {
-  categories(news);
-}
-
-export function renderCards(articles, identifier) {
-  news.sizeScreenCompute();
-  const markup = articles
-    .map((article, idx) => {
-      if (identifier === 'search') {
-        if (idx !== news.getCardOrder()) {
-          return createCard(article);
-        }
-        return weatherTemplate() + createCard(article);
-      } else if (identifier === 'populate') {
-        if (idx !== news.getCardOrder()) {
-          return createCardPop(article);
-        }
-        return weatherTemplate() + createCardPop(article);
-      }
-    })
-    .join('');
-
-  // updateMarkup(markup, newsBoxEl);
-  getWeatherWidget();
-
-  if (document.title === 'NYTimes News') {
-    readLinksStyling();
-  }
-}

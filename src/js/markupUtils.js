@@ -20,7 +20,7 @@ export function formatDate(strg) {
   if (!strg) return null;
 
   strg = cutDate(strg);
-	// console.log(strg);
+  // console.log(strg);
 
   const pubDate = new Date(strg);
   const yyyy = pubDate.getFullYear();
