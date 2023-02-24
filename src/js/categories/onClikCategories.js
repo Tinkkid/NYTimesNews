@@ -7,6 +7,7 @@ import { getWeatherWidget } from '../../js/weather';
 import { categoryCard } from '../cardMarkup';
 import { updateMarkup } from '../markupUtils';
 import { onError } from '../renderPopularNews';
+import { addEvtListOnReadMore } from '../onReadLink';
 
 
 export default async function onClikCategories(news, e) {
@@ -70,8 +71,9 @@ export default async function onClikCategories(news, e) {
       const markup = arrNews.join('')
       
         getWeatherWidget();
-        updateMarkup(markup, newsContainerEl)
-
+        updateMarkup(markup, newsContainerEl);
+		  console.log(markup);
+		  addEvtListOnReadMore(articles);
     }
 
     const countPage = Math.ceil(numResults / newsPerPage)

@@ -1,6 +1,6 @@
 import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
-import { createCard, createCardPop } from './cardMarkup';
+import { createCard, createCardPop,categoryCard } from './cardMarkup';
 import { readLinksStyling } from './readLinksStyling';
 
 const ARROW_DOWN_ICON =
@@ -90,10 +90,12 @@ function addAllReadOnPage() {
       }
 
       if (Object.keys(item).includes('pub_date')) {
-        markup += createCard(item);
-      } else {
-        markup += createCardPop(item);
-      }
+			markup += createCard(item);
+		 } else if (Object.keys(item).includes('pub_date') && !id) {
+			markup += createCardPop(item);
+		 } else {
+			 markup += categoryCard(item);
+		 };
     });
 
     markup += '</div>'; //close the title
@@ -143,20 +145,20 @@ function addEvtLisOnArrowBtn() {
   });
 }
 
-function compareDates() {
-	const dateToCompare = currentDate.replaceAll('-', '');
-	console.log('dateToCompare', dateToCompare);
-	const dateFromCalendar = load('selectedDateKey');
-	console.log('dateFromCalen', dateFromCalendar);
+// function compareDates() {
+// 	const dateToCompare = currentDate.replaceAll('-', '');
+// 	console.log('dateToCompare', dateToCompare);
+// 	const dateFromCalendar = load('selectedDateKey');
+// 	console.log('dateFromCalen', dateFromCalendar);
 
-	if (dateFromCalendar !== dateToCompare) {
-		console.log('совпадений нет');
-	} else {
-		console.log('совпадение дат');
-		// newsGallery.classList.remove('hidden');
-		// iconTop.classList.remove('hidden');
-	}
-}
+// 	if (dateFromCalendar !== dateToCompare) {
+// 		console.log('совпадений нет');
+// 	} else {
+// 		console.log('совпадение дат');
+// 		// newsGallery.classList.remove('hidden');
+// 		// iconTop.classList.remove('hidden');
+// 	}
+// }
 
 
 
