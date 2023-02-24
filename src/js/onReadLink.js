@@ -109,6 +109,25 @@ function addAllReadOnPage() {
 
 //функція, яка створює розмітку заголовка
 function createTitleMarcup(date) {
+	let readGalleryClass = "hidden";
+	let iconClass = "hidden";
+	let iconAditionalClass = "";
+
+	const dateToCompare = date.replaceAll('-', '');
+	console.log('dateToCompare', dateToCompare);
+	const dateFromCalendar = load('selectedDateKey');
+	console.log('dateFromCalen', dateFromCalendar);
+
+	if (dateFromCalendar !== dateToCompare) {
+		console.log('совпадений нет');
+
+	} else {
+		console.log('совпадение дат');
+		readGalleryClass = "";
+		iconClass = "";
+		iconAditionalClass = "hidden";
+	}
+
   return `
 		 <li class="read__block">
 			 <div class="read__title">
@@ -116,25 +135,24 @@ function createTitleMarcup(date) {
 					 <span class="date">${formatDate(date)}</span>
 				 </div>
 			 	 <button type="button" class="show-btn show-btn__up" id='${date}'>
-				  		<svg class="icon read__icon--down" viewBox="0 0 32 32">${ARROW_DOWN_ICON}</svg>
-						<svg class="icon read__icon--top hidden" viewBox="0 0 32 32">${ARROW_TOP_ICON}</svg>
+				  		<svg class="icon read__icon--down ${iconAditionalClass}" viewBox="0 0 32 32">${ARROW_DOWN_ICON}</svg>
+						<svg class="icon read__icon--top ${iconClass}" viewBox="0 0 32 32">${ARROW_TOP_ICON}</svg>
 				 </button>
 			 </div>
 		 </li>
-		 <div class="read__gallery hidden" id='read__gallery-${date}'>`;
+		 <div class="read__gallery ${readGalleryClass}" id='read__gallery-${date}'>`;
 }
 
 //функція відкриття/закриття випадаючого списку зі статтями
 function addEvtLisOnArrowBtn() {
   const showButtons = document.querySelectorAll('.show-btn');
-  const iconDown = document.querySelector('.read__icon--down');
-  const iconTop = document.querySelector('.read__icon--top');
+  
 
 
   showButtons.forEach(button => {
     const newsGallery = document.getElementById('read__gallery-' + button.id);
-
-	//  compareDates();
+	 const iconDown = document.querySelector('.show-btn .read__icon--down');
+  		const iconTop = document.querySelector('.show-btn .read__icon--top');
 
     button.addEventListener('click', event => {
 
@@ -145,23 +163,8 @@ function addEvtLisOnArrowBtn() {
   });
 }
 
-// function compareDates() {
-// 	const dateToCompare = currentDate.replaceAll('-', '');
-// 	console.log('dateToCompare', dateToCompare);
-// 	const dateFromCalendar = load('selectedDateKey');
-// 	console.log('dateFromCalen', dateFromCalendar);
 
-// 	if (dateFromCalendar !== dateToCompare) {
-// 		console.log('совпадений нет');
-// 	} else {
-// 		console.log('совпадение дат');
-// 		// newsGallery.classList.remove('hidden');
-// 		// iconTop.classList.remove('hidden');
-// 	}
-// }
-
-
-
+//функція, яка отримує номер сторінки пагінації
 function setCurrentPage(num, newsPerPage) {
 	arrayOffset = (num - 1) * newsPerPage;
 	// console.log("offset", arrayOffset);
