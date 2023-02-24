@@ -2,6 +2,7 @@ import { formatDate } from './markupUtils';
 import { save, load, remove } from './localStorageService';
 import { createCard, createCardPop, categoryCard } from './cardMarkup';
 import { readLinksStyling } from './readLinksStyling';
+import { withoutNews } from './withoutNews';
 
 const ARROW_DOWN_ICON =
   '<path d="M3.76 6.857 0 10.336l16 14.806 16-14.806-3.76-3.479L16 18.159 3.76 6.857z"/>';
@@ -29,9 +30,7 @@ function addEvtListOnReadMore(articles) {
       if (storageItems === undefined) {
         save(STORAGE_KEY, [article]);
       } else {
-        const itemIndex = storageItems.findIndex(
-          item => item.abstract === article.abstract
-        );
+        const itemIndex = storageItems.findIndex(item => item.abstract === article.abstract);
         //   console.log('itemIndex', itemIndex);
 
         if (itemIndex >= 0) {
@@ -67,9 +66,7 @@ function addAllReadOnPage() {
   if (storageItems !== undefined) {
     //сортуємо масив, отриманий з Local Storage по даті
 
-    const sortedStorageArr = storageItems.sort((a, b) =>
-      getDate(b).localeCompare(getDate(a))
-    );
+    const sortedStorageArr = storageItems.sort((a, b) => getDate(b).localeCompare(getDate(a)));
 
     //  console.log('sorted', sortedStorageArr);
 
@@ -99,6 +96,8 @@ function addAllReadOnPage() {
     markup += '</div>'; //close the title
     readList.insertAdjacentHTML('beforeend', markup);
   }
+
+  withoutNews();
 
   addEvtLisOnArrowBtn();
 
@@ -148,7 +147,7 @@ function addEvtLisOnArrowBtn() {
     const newsGallery = document.getElementById('read__gallery-' + button.id);
     const iconDown = button.firstElementChild;
     const iconTop = button.lastElementChild;
-   //  console.log(iconTop, iconDown);
+    //  console.log(iconTop, iconDown);
 
     button.addEventListener('click', event => {
       newsGallery.classList.toggle('hidden');

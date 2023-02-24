@@ -22,9 +22,7 @@ export function createCard({
             !multimedia[0]
               ? 'https://raw.githubusercontent.com/MaxF1996/NYTimesNews/main/src/images/The_New_York_Times.jpg'
               : 'https://www.nytimes.com/' + multimedia[0].url
-          }" loading="lazy" alt="${
-    !multimedia ? 'NYTimes' : snippet
-  }" class="news-img" />
+          }" loading="lazy" alt="${!multimedia ? 'NYTimes' : snippet}" class="news-img" />
           <p class="news-chip">${section_name}</p>
           <button type="button" class="add-news-favorite">
             <p class="favorite-btn-text">Add to favorite</p>
@@ -70,10 +68,10 @@ export function createCardPop({
             <img src="${
               !media[0]
                 ? 'https://raw.githubusercontent.com/MaxF1996/NYTimesNews/main/src/images/The_New_York_Times.jpg'
+                : !media
+                ? 'https://raw.githubusercontent.com/MaxF1996/NYTimesNews/main/src/images/The_New_York_Times.jpg'
                 : media[0]['media-metadata'][2].url
-            }" loading="lazy" alt="${
-    !media[0] ? 'NYTimes' : media[0].caption
-  }" class="news-img" />
+            }" loading="lazy" alt="${!media[0] ? 'NYTimes' : media[0].caption}" class="news-img" />
             <p class="news-chip">${section || subsection}</p>
             <span class="readable"
                     >Already read
@@ -107,15 +105,7 @@ export function createCardPop({
       </li> `;
 }
 
-
-export function categoryCard({
-  section,
-  url,
-  abstract,
-  title,
-  published_date,
-  multimedia,
-}) {
+export function categoryCard({ section, url, abstract, title, published_date, multimedia }) {
   return `
         <li class="news-item">
         <div class="overlay"></div>
@@ -131,11 +121,7 @@ export function categoryCard({
               ? 'https://raw.githubusercontent.com/MaxF1996/NYTimesNews/main/src/images/The_New_York_Times.jpg'
               : multimedia[2].url
           }" loading="lazy" alt="${
-    !multimedia
-      ? 'NYTimes'
-      : String(multimedia) === 'null'
-      ? 'NYTimes'
-      : multimedia[2].caption
+    !multimedia ? 'NYTimes' : String(multimedia) === 'null' ? 'NYTimes' : multimedia[2].caption
   }"
     class="news-img" />
           <p class="news-chip">${section}</p>
