@@ -13,6 +13,7 @@ import weatherTemplate from '../template/weatherTemplate';
 import { addEvtListOnReadMore, setCurrentPage } from './onReadLink';
 import { makeVisibleCategories } from './categories/isHidden';
 import { onError } from './renderPopularNews';
+import { readLinksStyling } from './readLinksStyling';
 const news = new NewsApiServes();
 
 export async function pagiantePopularNews() {
@@ -55,6 +56,7 @@ export async function pagiantePopularNews() {
       showCategorySectionOnError();
       makeVisibleCategories();
       addEvtListOnReadMore(articles);
+      readLinksStyling();
     }
 
     const countPage = Math.ceil(numResults / newsPerPage);
@@ -86,9 +88,7 @@ export async function pagiantePopularNews() {
         setCurrentPage(page, newsPerPage);
         randerNews(articles, newsPerPage, curentPage);
 
-        let currentActiveLi = document.querySelector(
-          '.pagination__item--active'
-        );
+        let currentActiveLi = document.querySelector('.pagination__item--active');
         currentActiveLi.classList.remove('pagination__item--active');
         liEl.classList.add('pagination__item--active');
       });

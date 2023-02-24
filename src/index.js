@@ -22,7 +22,7 @@ if (document.title === 'NYTimes News') {
   jsCalendar();
   makeHiddenCategories();
   categories(news);
-  readLinksStyling();
+  // readLinksStyling();
 }
 
 footerJs();
