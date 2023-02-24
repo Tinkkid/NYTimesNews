@@ -20,8 +20,21 @@
 
 .not-found-image {
   margin: 0 auto;
-  max-width: 601px;
-  width: 100%;
   height: auto;
   display: block;
+
+  @include mobile {
+    width: 248px;
+    margin-bottom: 50px;
+  }
+
+  @include tablet {
+    width: 560px;
+    margin-bottom: 50px;
+  }
+
+  @include desktop {
+    width: 601px;
+    margin-bottom: 50px;
+  }
 }

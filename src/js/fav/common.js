@@ -8,6 +8,7 @@ import {
   NEWS_CARD_CSS_CLASSES,
   WEATHER_CARD_CSS_CLASS,
 } from './constants';
+import { withoutNews } from '../withoutNews';
 
 function getPagesOffset(offsetsStruct) {
   if (window.matchMedia(`(max-width: ${MAX_WIDTH.mobile}px)`).matches) {
@@ -56,6 +57,8 @@ function isInStorage(localStorageKey, newsCardNode) {
 function removeCardFromFavorites(localStorageKey, idx, newsCardNode) {
   touchLocalStorageArr(localStorageKey, idx, removeFromArr);
   newsCardNode.remove();
+  withoutNews();
+
   // newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButtonText}`).textContent = 'Add to favorite';
   // newsCardNode.querySelector(`.${NEWS_CARD_CSS_CLASSES.favButtonIcon}`).innerHTML = FAV_BUTTON_ICON_EMPTY_HTML;
 }
