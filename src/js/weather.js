@@ -84,7 +84,7 @@ async function markupWeatherCard() {
   creatMarkupWeather();
   console.log(data);
   refs.weatherTemp.textContent = Math.floor(data.main.temp);
-  refs.weatherLocation.textContent = geo[0].name;
+  refs.weatherLocation.textContent = data.name;
   refs.weatherCondition.textContent = data.weather[0].main;
   refs.weatherIcon.setAttribute(
     'src',
