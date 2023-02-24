@@ -23,7 +23,7 @@ export function createCard({
               ? 'https://raw.githubusercontent.com/MaxF1996/NYTimesNews/main/src/images/The_New_York_Times.jpg'
               : 'https://www.nytimes.com/' + multimedia[0].url
           }" loading="lazy" alt="${
-    !multimedia[0].url ? 'NYTimes' : snippet
+    !multimedia ? 'NYTimes' : snippet
   }" class="news-img" />
           <p class="news-chip">${section_name}</p>
           <button type="button" class="add-news-favorite">

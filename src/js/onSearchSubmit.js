@@ -32,7 +32,7 @@ export default async function onSearchSubmit(e) {
       let numResults = articles.length;
       let newsPerPage = 4;
       let n = 0;
-      console.log('asda', numResults)
+      console.log('asda', articles)
       if (window.innerWidth > 768 && window.innerWidth < 1280) {
         newsPerPage = 7;
         n = 1;
