@@ -1,42 +1,44 @@
-import { FAV_BUTTON_ICON_FILLED_HTML, FAV_PAGES_KEY, NEWS_CARD_CSS_CLASSES, OFFSETS_FAVORITES, FAV_BUTTON_ICON_FILLED_HTML } from "./constants";
-import { resolveFavClick } from "./common";
-import StoragePagesController from "./storagePagesController";
-import throttle from "lodash.throttle";
+import {
+  FAV_BUTTON_ICON_FILLED_HTML,
+  FAV_PAGES_KEY,
+  NEWS_CARD_CSS_CLASSES,
+  OFFSETS_FAVORITES,
+  FAV_BUTTON_ICON_FILLED_HTML,
+} from './constants';
+import { resolveFavClick } from './common';
+import StoragePagesController from './storagePagesController';
+import throttle from 'lodash.throttle';
+import { withoutNews } from '../withoutNews';
 
 const newsCardsContainer = document.querySelector(`.${NEWS_CARD_CSS_CLASSES.container}`);
 newsCardsContainer.addEventListener('click', resolveFavClick);
 
 const storagePagesController = new StoragePagesController(FAV_PAGES_KEY, OFFSETS_FAVORITES);
-const firstPage = storagePagesController.getPageData().reduce((markup, article) => createFavCardPop(article) + markup, '');
+const firstPage = storagePagesController
+  .getPageData()
+  .reduce((markup, article) => createFavCardPop(article) + markup, '');
 newsCardsContainer.insertAdjacentHTML('beforeend', firstPage);
 
-window.addEventListener('scroll', throttle(() => {
+window.addEventListener(
+  'scroll',
+  throttle(() => {
     continuePage();
-}, 300));
-
+  }, 300)
+);
 
 function continuePage() {
-    if (window.innerHeight + window.scrollY < document.body.offsetHeight - 1) {
-        return;
-    }
-    const nextPageData = storagePagesController.getNextPageData();
-    if (nextPageData) {
-        const markup = nextPageData.reduce((markup, article) => createFavCardPop(article) + markup, '');
-        newsCardsContainer.insertAdjacentHTML('beforeend', markup);
-    }
+  if (window.innerHeight + window.scrollY < document.body.offsetHeight - 1) {
+    return;
+  }
+  const nextPageData = storagePagesController.getNextPageData();
+  if (nextPageData) {
+    const markup = nextPageData.reduce((markup, article) => createFavCardPop(article) + markup, '');
+    newsCardsContainer.insertAdjacentHTML('beforeend', markup);
+  }
 }
 
-
-function createFavCardPop({
-    media,
-    title,
-    section,
-    subsection,
-    abstract,
-    published_date,
-    url,
-  }) {
-    return `
+function createFavCardPop({ media, title, section, subsection, abstract, published_date, url }) {
+  return `
           <li class="news-item">
           <div class="overlay"></div>
           <div class="img-thumb">
@@ -49,9 +51,7 @@ function createFavCardPop({
               !media[0]
                 ? 'https://raw.githubusercontent.com/MaxF1996/NYTimesNews/main/src/images/The_New_York_Times.jpg'
                 : media[0].url
-            }" loading="lazy" alt="${
-      !media[0] ? 'NYTimes' : media[0].caption
-    }" class="news-img" />
+            }" loading="lazy" alt="${!media[0] ? 'NYTimes' : media[0].caption}" class="news-img" />
             <p class="news-chip">${section || subsection}</p>
             <button type="button" class="add-news-favorite">
               <p class="favorite-btn-text">Remove from favorite</p>
@@ -79,4 +79,6 @@ function createFavCardPop({
             </div>
           </div>
         </li> `;
-  }
+}
+
+withoutNews();
