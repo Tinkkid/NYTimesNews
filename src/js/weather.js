@@ -66,8 +66,22 @@ function getCurrentWeekDay(date) {
 }
 
 function getCurrentFullDate(date) {
-  let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  let fullDate = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+  let months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  let fullDate =
+    date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
   return fullDate;
 }
 
@@ -82,7 +96,6 @@ async function markupWeatherCard() {
   const data = await news.requestWeatherApi(latitude, longitude);
   const geo = await news.requestGeoApi(latitude, longitude);
   creatMarkupWeather();
-  console.log(data);
   refs.weatherTemp.textContent = Math.floor(data.main.temp);
   refs.weatherLocation.textContent = data.name;
   refs.weatherCondition.textContent = data.weather[0].main;
@@ -112,7 +125,10 @@ async function markupWeatherCardDefault() {
   );
   refs.weatherDay.textContent = getCurrentWeekDay(date);
   refs.weatherFullDate.textContent = getCurrentFullDate(date);
-  refs.weatherLinkSite.setAttribute('href', `https://www.wunderground.com/forecast/ua/Kyiv`);
+  refs.weatherLinkSite.setAttribute(
+    'href',
+    `https://www.wunderground.com/forecast/ua/Kyiv`
+  );
 }
 
 export { getWeatherWidget };

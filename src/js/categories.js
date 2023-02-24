@@ -3,6 +3,9 @@ import onDrop from './categories/onDrop';
 import onClikCategories from './categories/onClikCategories';
 import randomList from './categories/randomList';
 import { ref } from './categories/refCaregories';
+import { makeVisibleCategories } from './categories/isHidden';
+import { hidCategorySectionOnError } from './categories/isHidden';
+import { onError } from './renderPopularNews';
 
 export default function categores(news) {
   const bindOnClikCategories = onClikCategories.bind(this, news);
@@ -14,24 +17,24 @@ export default function categores(news) {
 }
 
 // doing for resize or reload
-function handlerCetegories(news) {
-  // format returning from localStorage: "item1,item2,..."
-  // const categList = localStorage.getItem('categList')?.split(',') || [];
-  // if (categList.length < CATEGORIES_LENGTH)
-  //   getCategories(news, categList).then(list =>
-  //     createListManager(list, ref.list)
-  //   );
-  // else createListManager(categList);
-
-  getCategories(news).then(list => createListManager(list));
+async function handlerCetegories(news) {
+  try {
+    await getCategories(news).then(list => createListManager(list));
+  } catch (error) {
+    hidCategorySectionOnError();
+    onError();
+  }
 }
 
 async function getCategories(news) {
-  const arrCategCommon = await news.categories;
-
-  return arrCategCommon.map(el => el.display_name);
-
-  // localStorage.setItem('categList', arrCateg);
+  try {
+    const arrCategCommon = await news.categories;
+    makeVisibleCategories();
+    return arrCategCommon.map(el => el.display_name);
+  } catch (error) {
+    hidCategorySectionOnError();
+    onError();
+  }
 }
 
 function createListManager(list) {
